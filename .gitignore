@@ -3,3 +3,9 @@
 .Rhistory
 .RData
 .Ruserdata
+.Renviron
+data
+modules
+dev
+/dev
+.Renviron

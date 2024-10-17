@@ -1,28 +1,58 @@
 wes_page <- fluidPage(
   # Page title
-  titlePanel('Whole Exome Sequencing Analysis'),
-  hr(),
+#  titlePanel('Whole Exome Sequencing Analysis'),
+#  hr(),
   fluidRow(
-    h1("Variant Analysis"),
-    column(6,h2('Column size 3')),
-    column(6,h2('Column size 6'))
+    h3("Sample Variant Information"),
+    column(12, 
+           dtUI("sample_variant_df")
+           )
   ),
   br(),
   hr(),
   br(),
   fluidRow(
-    h1("Mutational Signature Analysis"),
-    column(6,h2('Column size 3')),
-    column(6,h2('Column size 6'))
+    column(12, tags$h3("Mutational Signature Analysis")
+    )
+  ),
+  fluidRow(
+    column(6,
+           tags$h3("Mutations in each sample"),
+           tags$img(src = "img/mutational_sign_2.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    ),
+    column(6,
+           tags$h3("MSI levels in PTC tumors"),
+           tags$img(src = "img/mutational_signature_4.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    )
+  ),
+  fluidRow(
+    tags$h3("SBS Signatures"),
+    column(6,
+           tags$img(src = "img/mutational_sign_0.png", 
+                    style = "width: 90%; height: auto;"
+           )
+           ),
+    column(6,
+           tags$img(src = "img/mutational_sign_1.png", 
+                    style = "width: 90%; height: auto;"
+           )
+           )
   ),
   br(),
   hr(),
   br(),
   fluidRow(
-    h1("Clonal Analysis"),
-    column(6,h2('Column size 3')),
-    column(6,h2('Column size 6'))
+    tags$h3("Clonal Analysis"),
+    column(12,
+           tags$img(src = "img/clonal_analysis_1.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    )
   ),
   br(),
-  hr(),
+  hr()
 )
