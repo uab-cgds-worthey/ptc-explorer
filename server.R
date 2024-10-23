@@ -18,7 +18,7 @@ function(input, output, session) {
   #   
   # })
   # 
-  makeInteractiveComplexHeatmap(input, output, session, draw(oncoplot_rds),
+  makeInteractiveComplexHeatmap(input, output, session, oncoplot_rds,
                                 "ht")
   
   output$pca_cell_1 <- renderPlot({
@@ -100,30 +100,41 @@ function(input, output, session) {
   
   })
   
-  clean_sig_df <- function(sig_df, input_res = TRUE){
+  clean_sig_df <- function(sig_df, input_res = TRUE, addRownames = FALSE){
     
     sig_df <- sig_df[!is.na(sig_df$padj), ]
     if(input_res){
       sig_df <- subset(sig_df,
                        padj < 0.05 & abs(log2FoldChange) > 1.5 )
     }
+    if(addRownames){
+      sig_df <- sig_df[!duplicated(sig_df$gene_name), ]
+      row.names(sig_df) <- sig_df$gene_name
+    }
     
-    sig_1 <- round(as.data.frame(sig_df), 5)
-    sig_1$Genes <- row.names(sig_1)
-    sig_1 <- sig_1[,c(7,2,5,6)]
+    # sig_df[,c(4:6)] <- round(sig_df[,c(4:6)], 6)
+    # sig_1$Genes <- row.names(sig_1)
+    # sig_1 <- sig_1[,c(7,2,5,6)]
     
-    return(sig_1)
+    return(sig_df)
     
   }
   
-  dtServer("dds_all_deg", clean_sig_df(dds_noCounts))
-  dtServer("dds_subtype_deg", clean_sig_df(dds_group1_noCounts))
+  res.t_vs_n.sel <- dtServer("dds_all_deg", clean_sig_df(res.T_vs_N), returnRow = TRUE)
+  res.PTC_vs_FTC.sel <- dtServer("dds_subtype_deg", clean_sig_df(res.PTC_vs_FTC), returnRow = TRUE)
   
+  gene_infoServer("sel_gene_t_vs_n", res.t_vs_n.sel, clean_sig_df(res.T_vs_N), 2)
+  gene_infoServer("sel_gene_PTC_vs_FTC", res.PTC_vs_FTC.sel, clean_sig_df(res.PTC_vs_FTC), 2)
   
-  volcanoServer("vol_aff_unaff", res.aff.unaff, "Affected vs Unaffected Individuals")
+  volcanoServer("vol_aff_unaff", res.T_vs_N, "Affected vs Unaffected Samples")
+  volcanoServer("vol_ptc_vs_ftc", res.PTC_vs_FTC, "Tumor Samples in PTCPlusThy vs FTC")
   
-  
-  
+  gprofilerServer("go_t_vs_n", res.T_vs_N$gene_name)
+  gprofilerServer("go_PTC_vs_FTC", res.PTC_vs_FTC$gene_name)
+ 
+  enrichrServer("enrichr_t_vs_n",clean_sig_df(res.T_vs_N, addRownames = TRUE), enrichr_dbs)
+  enrichrServer("enrichr_PTC_vs_FTC",clean_sig_df(res.PTC_vs_FTC, addRownames = TRUE), enrichr_dbs)
+ 
   
   ### Genomics Analysis / WES page
   

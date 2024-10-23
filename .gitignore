@@ -9,3 +9,4 @@ modules
 dev
 /dev
 .Renviron
+*.RData
