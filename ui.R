@@ -89,8 +89,22 @@ rna_page <- fluidPage(
   # Page title
   #titlePanel('RNA-seq Analysis'),
   #hr(),
+ 
+  h4("PCA plots of samples in contrast"),
   fluidRow(
-    h3("Differentially Expressed Genes"),
+    column(6, add_busy_bar(),
+           h4('All Samples: Tumor Vs Normal'),
+           plotOutput("pca_cell_1")
+    ),
+    column(6,
+           h4('Tumor Samples: PTCPlusThy vs FTC'),
+           plotOutput("pca_cell_2")
+    )
+  ),
+  br(),
+  hr(),
+  fluidRow(
+    h4("Differentially Expressed Genes"),
     column(6, 
            h4('All Samples: Tumor Vs Normal'),
            dtUI("dds_all_deg"),
@@ -102,19 +116,6 @@ rna_page <- fluidPage(
            dtUI("dds_subtype_deg"),
            br(),
            gene_infoUI("sel_gene_PTC_vs_FTC")
-    )
-  ),
-  br(),
-  hr(),
-  h3("PCA plots of samples in contrast"),
-  fluidRow(
-    column(6, add_busy_bar(),
-           h4('All Samples: Tumor Vs Normal'),
-           plotOutput("pca_cell_1")
-    ),
-    column(6,
-           h4('Tumor Samples: PTCPlusThy vs FTC'),
-           plotOutput("pca_cell_2")
     )
   ),
   br(),
@@ -134,7 +135,7 @@ rna_page <- fluidPage(
     column(6,
            gprofilerUI("go_t_vs_n")),
     column(6,
-           gprofilerUI("go_PTC_vs_FTC")
+         #  gprofilerUI("go_PTC_vs_FTC")
            )
  
   ),
@@ -152,12 +153,72 @@ rna_page <- fluidPage(
   hr(),
   br()
 )
+
+wes_page <- fluidPage(
+  # Page title
+  #  titlePanel('Whole Exome Sequencing Analysis'),
+  #  hr(),
+  fluidRow(
+    h3("Sample Variant Information"),
+    column(6, 
+           dtUI("sample_variant_df")
+    )
+  ),
+  br(),
+  hr(),
+  br(),
+  fluidRow(
+    column(12, tags$h3("Mutational Signature Analysis")
+    )
+  ),
+  fluidRow(
+    column(6,
+           tags$h3("Mutations in each sample"),
+           tags$img(src = "img/mutational_sign_2.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    ),
+    column(6,
+           tags$h3("MSI levels in PTC tumors"),
+           tags$img(src = "img/mutational_signature_4.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    )
+  ),
+  fluidRow(
+    tags$h3("SBS Signatures"),
+    column(6,
+           tags$img(src = "img/mutational_sign_0.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    ),
+    column(6,
+           tags$img(src = "img/mutational_sign_1.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    )
+  ),
+  br(),
+  hr(),
+  br(),
+  fluidRow(
+    tags$h3("Clonal Analysis"),
+    column(12,
+           tags$img(src = "img/clonal_analysis_1.png", 
+                    style = "width: 90%; height: auto;"
+           )
+    )
+  ),
+  br(),
+  hr()
+)
+
 navbarPage(
      'Pediatric Thyroid Cancer Explorer',
 #     tabPanel('Home', home_page),
     # tabPanel('By Gene', geneSearch_page),
      # tabPanel('Oncoplot', onco_plot),
-     tabPanel('DEGs', rna_page),
+   #  tabPanel('DEGs', rna_page),
      # tabPanel('RNA Fusions', rnaFusion_page),
      tabPanel('Genomic Analysis', wes_page),
      tabPanel('DITTO', ditto_page),

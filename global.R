@@ -19,8 +19,8 @@ library(shiny)
 # Load data/connections
 
 sample_meta <- read.csv("data/csv/ptc_meta_summary_appVer1_oct17.csv")
-sample_variants <- read.csv("data/csv/ptc_df_onco_appVer1_oct17.csv")
-
+sample_variants <- read.csv("data/csv/ptc_df_onco_ditto_appVer1_oct23.csv")
+sample_variants <- sample_variants[,c(1:9,12)]
 oncoplot_rds <- readRDS("data/oncoplot_noExp_oct17.rds")
 
 

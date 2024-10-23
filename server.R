@@ -100,8 +100,10 @@ function(input, output, session) {
   
   })
   
-  clean_sig_df <- function(sig_df, input_res = TRUE, addRownames = FALSE){
+  clean_sig_df <- function(sig_df, input_res = FALSE, addRownames = FALSE){
     
+    # print("Entering clean_sig_df")
+    # print(nrow(sig_df))
     sig_df <- sig_df[!is.na(sig_df$padj), ]
     if(input_res){
       sig_df <- subset(sig_df,
@@ -130,7 +132,7 @@ function(input, output, session) {
   volcanoServer("vol_ptc_vs_ftc", res.PTC_vs_FTC, "Tumor Samples in PTCPlusThy vs FTC")
   
   gprofilerServer("go_t_vs_n", res.T_vs_N$gene_name)
-  gprofilerServer("go_PTC_vs_FTC", res.PTC_vs_FTC$gene_name)
+  #gprofilerServer("go_PTC_vs_FTC", res.PTC_vs_FTC$gene_name)
  
   enrichrServer("enrichr_t_vs_n",clean_sig_df(res.T_vs_N, addRownames = TRUE), enrichr_dbs)
   enrichrServer("enrichr_PTC_vs_FTC",clean_sig_df(res.PTC_vs_FTC, addRownames = TRUE), enrichr_dbs)
@@ -138,7 +140,7 @@ function(input, output, session) {
   
   ### Genomics Analysis / WES page
   
-  dtServer("sample_variant_df", sample_variants[,-1])
+  dtServer("sample_variant_df", sample_variants)
   
   # output$my.volcano <- renderPlot({
   #   req(res.aff.unaff)
