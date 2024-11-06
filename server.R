@@ -1,8 +1,11 @@
 # Shiny Server
 function(input, output, session) {
  
-  dtServer("sample_meta_df", sample_meta[,-1])
-  
+  #dtServer("sample_meta_df", sample_meta[,-1])
+  reactableServer("sample_meta_df", sample_meta[,-1],
+                  defaultColDef = colDef(
+                    na = "NA"
+                  ))
   output$sample_summary <-  renderPrint({
     
     sample_meta_edit <- sample_meta[,-1]
@@ -21,19 +24,23 @@ function(input, output, session) {
   makeInteractiveComplexHeatmap(input, output, session, oncoplot_rds,
                                 "ht")
   
-  output$pca_cell_1 <- renderPlot({
-    
-    DESeq2::plotPCA(vsd_after_swap,
-            intgroup = c("Phenotype")) + ggtitle("PCA by Phenotype")
-    
-  })
-  
-  output$pca_cell_2 <- renderPlot({
-    
-    DESeq2::plotPCA(vsd_group1,
-            intgroup = c("Phenotype_Subtypes")) + ggtitle("PCA by Phenotype Subtypes")
-    
-  })
+  # Remove static first
+  # output$pca_cell_1 <- renderPlot({
+  #   
+  #   DESeq2::plotPCA(vsd_after_swap,
+  #           intgroup = c("Phenotype")) + ggtitle("PCA by Phenotype")
+  #   
+  # })
+  # 
+  # output$pca_cell_2 <- renderPlot({
+  #   
+  #   DESeq2::plotPCA(vsd_group1,
+  #           intgroup = c("Phenotype_Subtypes")) + ggtitle("PCA by Phenotype Subtypes")
+  #   
+  # })
+  # 
+  # outputOptions(output, "pca_cell_1", suspendWhenHidden = FALSE)
+  # outputOptions(output, "pca_cell_2", suspendWhenHidden = FALSE)
   
   
   output$rna_fusion_1 <- renderPlot({
@@ -84,19 +91,21 @@ function(input, output, session) {
   #   
   # })
   
-  output$rna_fusion_4 <- renderPlot({
+  output$rna_fusion_4 <- renderPlotly({
     
-  ggplot(rna_fusion_df, aes(x = as.factor(Participant_id), y = Gene_Fusion)) +
+  p <- ggplot(rna_fusion_df, aes(x = Participant_id, y = Gene_Fusion)) +
     geom_point(aes(color = Phenotype_Subtype), size = 4) +
     labs(title = "Gene Fusions by Participant, Grouped by Phenotype Subtype",
          x = "Participant ID",
          y = "Gene Fusion") +
     scale_color_brewer(palette = "Set2") +  # Color based on phenotype subtype
     theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size=20),
-            axis.text.y = element_text(size = 20),
-            legend.title=element_text(size = 20),
-            legend.text=element_text(size = 20))
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size=18),
+            axis.text.y = element_text(size = 14),
+            legend.title=element_text(size = 16),
+            legend.text=element_text(size = 16))
+  
+  ggplotly(p)
   
   })
   
@@ -131,8 +140,11 @@ function(input, output, session) {
   volcanoServer("vol_aff_unaff", res.T_vs_N, "Affected vs Unaffected Samples")
   volcanoServer("vol_ptc_vs_ftc", res.PTC_vs_FTC, "Tumor Samples in PTCPlusThy vs FTC")
   
-  gprofilerServer("go_t_vs_n", res.T_vs_N$gene_name)
+  # gprofilerServer("go_t_vs_n", res.T_vs_N$gene_name)
   #gprofilerServer("go_PTC_vs_FTC", res.PTC_vs_FTC$gene_name)
+  
+  gprofilerServer("go_t_vs_n", gostres_T_Vs_N, input_gostres = TRUE)
+  gprofilerServer("go_PTC_vs_FTC", gostres_PTC_Vs_FTC, input_gostres = TRUE)
  
   enrichrServer("enrichr_t_vs_n",clean_sig_df(res.T_vs_N, addRownames = TRUE), enrichr_dbs)
   enrichrServer("enrichr_PTC_vs_FTC",clean_sig_df(res.PTC_vs_FTC, addRownames = TRUE), enrichr_dbs)
@@ -140,8 +152,33 @@ function(input, output, session) {
   
   ### Genomics Analysis / WES page
   
-  dtServer("sample_variant_df", sample_variants)
-  
+#  dtServer("sample_variant_df", sample_variants)
+  ditto_pal <- function(x) rgb(colorRamp(c("#e4b1ab", "#cc444b"))(x), maxColorValue = 255)
+  reactableServer("sample_variant_df", sample_variants,
+                  #groupBy = "Gene",
+                #  fullWidth = FALSE,
+                  columns = list(
+                    DITTO.Score = colDef(style = function(value) {
+                      normalized <- (value - min(sample_variants$DITTO.Score)) / (max(sample_variants$DITTO.Score) - min(sample_variants$DITTO.Score))
+                      color <- ditto_pal(normalized)
+                      list(fontWeight = 700, color = color)
+                    })
+                    ,
+                    Germline.Class = colDef(style = function(value) {
+                      color <- if(value == "P") {
+                        "#cc444b"
+                      } else if (value == "LP") {
+                        "#df7373"
+                      }  else if(value == "LB"){
+                        "#008000"
+                      } else if(value == "VUS"){
+                        "#e4b1ab"
+                      }
+                      list(fontWeight = 700, color = color)
+                    }
+                    )
+                  )
+                  )
   # output$my.volcano <- renderPlot({
   #   req(res.aff.unaff)
   #   v.mat <- na.omit(res.aff.unaff)

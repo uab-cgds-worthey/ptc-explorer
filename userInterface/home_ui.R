@@ -3,7 +3,7 @@ home_page <- fluidPage(
 #titlePanel('Home Page'),
 fluidRow(
   column(12,
-         tags$h3("Project Overview"),
+         tags$h3("Pediatric Thyroid Cancer Explorer"),
          includeMarkdown("desc/home_intro.Rmd")
   )
 ),
@@ -25,7 +25,8 @@ fluidRow(
 h3("Sample Metadata"),
 fluidRow(
   column(12, 
-         dtUI("sample_meta_df")
+         # dtUI("sample_meta_df")
+         reactableUI("sample_meta_df")
   )
 ),
 # br(),

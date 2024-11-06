@@ -10,3 +10,5 @@ dev
 /dev
 .Renviron
 *.RData
+*.pptx
+.DS_Store
