@@ -64,11 +64,17 @@ ditto_page <- fluidPage(
 
 download_page <- fluidPage(
   # Page title
-  titlePanel('Download'),
-  hr(),
-  fluidRow(
-    column(6,h2('Column size 3')),
-    column(6,h2('Column size 6'))
+  fluidRow(class = "text-center",
+    column(12,
+           h3("Download options for dataset:"),
+           br(),
+           div(
+             class = "text-center",
+             a(href="alldata.zip", "All dataset zip", download=NA, target="_blank"),
+             br(),
+             a(href="alldata.rds", "All dataset RDS", download=NA, target="_blank")
+           )
+           )
   )
 )
 
@@ -245,7 +251,7 @@ wes_page <- fluidPage(
     #                 style = "width: auto; height: 75%;"
     #        )
     # ),
-    column(12,
+    column(8,
           
            tabsetPanel(
              type = "tabs",
@@ -277,23 +283,23 @@ wes_page <- fluidPage(
   ),
   hr(),
   br(),
-  tags$h3("Tumor clonal evoluation"),
-  tags$p("Clonal analysis of somatic variation identified signatures of mutational processes in tumors from participant 2, 17 and 18."),
   fluidRow(
-    tags$h3("Clonal Analysis"),
-    column(12,
-           tags$img(src = "img/clonal_analysis_1.png",
+    column(6,
+           tags$h3("Tumor clonal evoluation"),
+           tags$p("Clonal analysis of somatic variation identified signatures of mutational processes in tumors from participant 2, 17 and 18."),
+           tags$img(src = "img/clonal_analysis.png",
                     style = "width: 90%; height: auto;"
            )
-    )
-  ),
-  hr(),
-  br(),
-  tags$h3("Nicrosatellite instability (MSI) analysis"),
+    ),
+  # ),
+  # hr(),
+  # br(),
+  column(6,
+  tags$h3("Microsatellite instability (MSI) analysis"),
   tags$p("Subtype-wise distribution of MSI levels among the tumor samples."),
-  fluidRow(
-    column(12,
-           tags$h3("MSI levels in PTC tumors"),
+ # fluidRow(
+    # column(12,
+          # tags$h3("MSI levels in PTC tumors"),
            tags$img(src = "img/mutational_signature_4.png",
                     style = "width: 90%; height: auto;"
            )
@@ -327,7 +333,7 @@ navbarPage(
      #  tabPanel('Variant Distribution', onco_plot),
         tabPanel('RNA-Seq', rna_page),
      #  tabPanel('RNA-Seq Fusions', rnaFusion_page),
-     # tabPanel('WES Additional Analysis', wes_page),
+     tabPanel('WES Additional Analysis', wes_page),
    #  tabPanel('DITTO', ditto_page),
      tabPanel('Download', download_page),
      tabPanel('User Metrics', userMetrics_page)
