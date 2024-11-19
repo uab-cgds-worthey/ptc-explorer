@@ -1,7 +1,9 @@
 geneSearch_page <- fluidPage(
   fluidRow(
     column(3,
-           h5("Gene Dropdown here")
+           h5("Gene Dropdown here"),
+           selectizeInput("gene_name", "Gene Names", 
+                          choices = c("BRCA1"))
     ),
     column(6, 
            h5("Gene Annotation here"),
@@ -60,6 +62,15 @@ ditto_page <- fluidPage(
   hr()
 )
 
+download_page <- fluidPage(
+  # Page title
+  titlePanel('Download'),
+  hr(),
+  fluidRow(
+    column(6,h2('Column size 3')),
+    column(6,h2('Column size 6'))
+  )
+)
 
 
 onco_plot <- fluidPage(
@@ -123,23 +134,23 @@ rna_page <- fluidPage(
   fluidRow(
     h4("Differentially Expressed Genes"),
     tags$p("Differential gene expression analysis identified the differentially expressed genes (DEGs) for the following two contrasts:"),
-    column(6, 
+    column(6,
            h4('All Samples: Tumor Vs Normal'),
            dtUI("dds_all_deg"),
            br(),
            gene_infoUI("sel_gene_t_vs_n")
     ),
-    column(6, 
+    column(6,
            h4('Tumor Samples: PTCPlusThy vs FTC'),
            dtUI("dds_subtype_deg"),
            br(),
            gene_infoUI("sel_gene_PTC_vs_FTC")
     )
   ),
-  br(),
+  #br(),
   hr(),
   fluidRow(
-    h5("DEG Analysis"),
+    #h5("DEG Analysis"),
     column(6, 
            h4('All Samples: Tumor Vs Normal'),
            volcanoUI("vol_aff_unaff")
@@ -148,9 +159,9 @@ rna_page <- fluidPage(
            h4('Tumor Samples: PTCPlusThy vs FTC'),
            volcanoUI("vol_ptc_vs_ftc"))
   ),
-  br(),
-  hr(),
-  h4("Enrichment Anlaysis using: gProfiler"),
+  # br(),
+  # hr(),
+  # h4("Enrichment Anlaysis using: gProfiler"),
   # fluidRow(
   #   column(6,
   #          gprofilerUI("go_t_vs_n")),
@@ -159,9 +170,9 @@ rna_page <- fluidPage(
   #          )
   # 
   # ),
-  br(),
-  hr(),
-  h4("Enrichment Anlaysis using: Enrichr databases"),
+  # br(),
+  # hr(),
+  # h4("Enrichment Anlaysis using: Enrichr databases"),
   # h3("Enrichment analysis using Enrichr databases"),
   # fluidRow(
   #   column(6,
@@ -311,12 +322,12 @@ wes_page <- fluidPage(
 
 navbarPage(
      'Pediatric Thyroid Cancer Explorer',
-      tabPanel('About', home_page),
+      # tabPanel('About', home_page),
       tabPanel('By Gene', geneSearch_page),
-      tabPanel('Variant Distribution', onco_plot),
-       tabPanel('RNA-Seq', rna_page),
-      tabPanel('RNA-Seq Fusions', rnaFusion_page),
-     tabPanel('WES Additional Analysis', wes_page),
+     #  tabPanel('Variant Distribution', onco_plot),
+        tabPanel('RNA-Seq', rna_page),
+     #  tabPanel('RNA-Seq Fusions', rnaFusion_page),
+     # tabPanel('WES Additional Analysis', wes_page),
    #  tabPanel('DITTO', ditto_page),
      tabPanel('Download', download_page),
      tabPanel('User Metrics', userMetrics_page)
