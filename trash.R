@@ -81,3 +81,14 @@
 #   return(b)
 #   
 # })
+
+
+# output$lineup1 <- renderLineup({
+#   vars <- sample_variants %>%
+#     mutate(across(all_of(c(2:4,6,8)),as.factor)) %>%
+#   lineup(vars, width = "100%",
+#          options = c(
+#            sidePanel = FALSE,
+#            hierarchyIndicator = FALSE
+#          ))
+# })

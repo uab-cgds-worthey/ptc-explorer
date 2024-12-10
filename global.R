@@ -12,7 +12,7 @@ library(ComplexHeatmap)
 library(InteractiveComplexHeatmap)
 library(httr)
 library(jsonlite)
-library(enrichR)
+# library(enrichR)
 library(gprofiler2)
 
 library(reactable)
@@ -21,8 +21,10 @@ library(shiny)
 library(promises)
 library(future)
 library(shinycssloaders)
+library(dplyr)
+library(shinyWidgets)
 
-plan(multisession)
+# plan(multisession)
 
 # Load data/connections
 

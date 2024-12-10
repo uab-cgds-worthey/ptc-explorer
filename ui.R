@@ -1,40 +1,74 @@
+home_page <- fluidPage(
+  fluidRow(
+    column(12,
+           tags$h3("Pediatric Thyroid Cancer Explorer"),
+           includeMarkdown("desc/home_intro.Rmd")
+    )
+  ),
+  hr(),
+  fluidRow(
+    column(6,
+           tags$h3("Study Design"),
+           tags$img(src = "img/workflow_fig1.png", 
+                    style = "width: 90%; height: auto;")
+    ),
+    column(6,
+           tags$h3("Sample Statistics"),
+           uiOutput("sample_meta"),
+           plotOutput("meta_plot")
+           # verbatimTextOutput("sample_summary")
+    )
+  ),
+  br(),
+  hr(),
+  # br(),
+  h3("Sample Metadata"),
+  fluidRow(
+    column(12, 
+           # dtUI("sample_meta_df")
+           reactableUI("sample_meta_df")
+    )
+  ),
+  br(),
+  hr()
+)
+
+
 geneSearch_page <- fluidPage(
   fluidRow(
-    column(3,
-           h5("Gene Dropdown here"),
-           selectizeInput("gene_name", "Gene Names", 
-                          choices = c("BRCA1"))
+    column(2,
+           uiOutput("gene_list_main")
     ),
-    column(6, 
-           h5("Gene Annotation here"),
-           p("Description, function, etc.")
-    ),
-    column(3,
-           h5("Some other high level information")
+    column(10,
+           uiOutput("gene_info_main")
+
     )
   ),
   br(),
   hr(),
   h4("Genomic Analysis"),
-  hr(),
-  br(),
   fluidRow(
     column(12,
-           
-    )
+           reactableUI("variant_df_by_gene"),
+           )
   ),
   br(),
   hr(),
-  h4("DEG Analysis"),
-  hr(),
-  br(),
+  h4("Differentially Expressed Genes"),
+  tags$p("Differential gene expression analysis identified the differentially expressed genes (DEGs) for the following two contrasts:"),
   fluidRow(
-    column(12,
-           
+
+    column(6,
+           h4('All Samples: Tumor Vs Normal'),
+           dtUI("dds_all_deg_by_gene")
+    ),
+    column(6,
+           h4('Tumor Samples: PTCPlusThy vs FTC'),
+           dtUI("dds_subtype_deg_by_gene")
     )
   ),
-  br(),
   hr(),
+  br(),
   h4("RNA-Fusion"),
   hr(),
   br(),
@@ -43,23 +77,6 @@ geneSearch_page <- fluidPage(
            
     )
   )
-)
-
-ditto_page <- fluidPage(
-  fluidRow(
-   h5("Variant Pathogenecity prediction by DITTO")
-  ),
-  br(),
-  hr(),
-  h4("DITTO scores and plot"),
-  hr(),
-  br(),
-  fluidRow(
-    column(12,
-           
-    )
-  ),
-  hr()
 )
 
 download_page <- fluidPage(
@@ -81,6 +98,19 @@ download_page <- fluidPage(
 
 onco_plot <- fluidPage(
   # Page title
+  h3("Sample Variant Information"),
+  fluidRow(
+    column(3,
+           uiOutput("variant_filters")
+           
+    ),
+    column(6, 
+           #dtUI("sample_variant_df")
+           reactableUI("sample_variant_df")
+    )
+  ),
+  br(),
+  hr(),
   h3("Interactive Oncoplot"),
   tags$p("A comprehensive analysis using whole exome sequencing identified 152 somatic and germline variants across 110 genes. These genetic alterations, derived from both tumor and normal samples, span six distinct subtypes, as illustrated in the interactive oncoplot below. On the right side, the box plots display the gene expression levels, contrasting tumor samples with normal ones. Variant information table follows the oncoplot that also include DITTO score for each variant. For more details on DITTO, please refer here."),
   fluidRow(
@@ -99,16 +129,8 @@ onco_plot <- fluidPage(
            )
   ),
   br(),
-  hr(),
-  fluidRow(
-    h3("Sample Variant Information"),
-    column(8, 
-           #dtUI("sample_variant_df")
-           reactableUI("sample_variant_df")
-    )
-  ),
-  br(),
   hr()
+ 
 )
 
 
@@ -165,28 +187,28 @@ rna_page <- fluidPage(
            h4('Tumor Samples: PTCPlusThy vs FTC'),
            volcanoUI("vol_ptc_vs_ftc"))
   ),
-  # br(),
-  # hr(),
-  # h4("Enrichment Anlaysis using: gProfiler"),
-  # fluidRow(
-  #   column(6,
-  #          gprofilerUI("go_t_vs_n")),
-  #   column(6,
-  #          gprofilerUI("go_PTC_vs_FTC")
-  #          )
-  # 
-  # ),
-  # br(),
-  # hr(),
-  # h4("Enrichment Anlaysis using: Enrichr databases"),
-  # h3("Enrichment analysis using Enrichr databases"),
-  # fluidRow(
-  #   column(6,
-  #          enrichrUI("enrichr_t_vs_n")),
-  #   column(6,
-  #          enrichrUI("enrichr_PTC_vs_FTC")
-  #          )
-  # ),
+  br(),
+  hr(),
+  h4("Enrichment Anlaysis using: gProfiler"),
+  fluidRow(
+    column(6,
+           gprofilerUI("go_t_vs_n")),
+    column(6,
+           gprofilerUI("go_PTC_vs_FTC")
+           )
+
+  ),
+  br(),
+  hr(),
+  h4("Enrichment Anlaysis using: Enrichr databases"),
+  h3("Enrichment analysis using Enrichr databases"),
+  fluidRow(
+    column(6,
+           enrichrUI("enrichr_t_vs_n")),
+    column(6,
+           enrichrUI("enrichr_PTC_vs_FTC")
+           )
+  ),
   br(),
   hr(),
   br()
@@ -257,7 +279,7 @@ wes_page <- fluidPage(
              type = "tabs",
              tabPanel(
                title = "Mutations in each Signature",
-               tags$img(src = "img/mutational_sign_2.png", 
+               tags$img(src = "img/fig_2c.png", 
                         style = "width: auto; height: 75%;"
                )
              ),
@@ -326,16 +348,23 @@ wes_page <- fluidPage(
   hr()
 )
 
+# test_page <- fluidPage(
+#   fluidRow(
+#     column(12,
+#            lineupOutput("lineup1")
+#            )
+#   )
+# )
+
 navbarPage(
      'Pediatric Thyroid Cancer Explorer',
       # tabPanel('About', home_page),
       tabPanel('By Gene', geneSearch_page),
-     #  tabPanel('Variant Distribution', onco_plot),
-        tabPanel('RNA-Seq', rna_page),
-     #  tabPanel('RNA-Seq Fusions', rnaFusion_page),
-     tabPanel('WES Additional Analysis', wes_page),
-   #  tabPanel('DITTO', ditto_page),
-     tabPanel('Download', download_page),
-     tabPanel('User Metrics', userMetrics_page)
-     #tabPanel('Docs', about_page),
+      tabPanel('Variant Distribution', onco_plot),
+      tabPanel('RNA-Seq', rna_page),
+      tabPanel('RNA-Seq Fusions', rnaFusion_page),
+      tabPanel('WES Additional Analysis', wes_page),
+     # tabPanel("lineup", test_page)
+     #tabPanel('Download', download_page),
+     #tabPanel('User Metrics', userMetrics_page)
 )
