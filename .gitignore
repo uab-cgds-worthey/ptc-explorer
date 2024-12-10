@@ -4,11 +4,11 @@
 .RData
 .Ruserdata
 .Renviron
+*.RData
+*.pptx
+.DS_Store
+trash.R
 data
 modules
 dev
 docs
-.Renviron
-*.RData
-*.pptx
-.DS_Store

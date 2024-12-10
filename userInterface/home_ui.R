@@ -3,7 +3,7 @@ home_page <- fluidPage(
     column(12,
            tags$h2("Pediatric Thyroid Cancer Explorer"),
            tags$h5("It is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19 years).")
-#           includeMarkdown("desc/home_intro.Rmd")
+
     )
   ),
   hr(),
@@ -15,9 +15,8 @@ home_page <- fluidPage(
     ),
     column(6,
            tags$h3("Sample Statistics"),
-           uiOutput("sample_meta"),
-           plotlyOutput("meta_plot",  height = "550px")
-           # verbatimTextOutput("sample_summary")
+           metaPlotsUI("sample_meta_stats")
+          
     )
   ),
   br(),
@@ -26,7 +25,6 @@ home_page <- fluidPage(
   h3("Sample Metadata"),
   fluidRow(
     column(12, 
-           # dtUI("sample_meta_df")
            reactableUI("sample_meta_df")
     )
   ),

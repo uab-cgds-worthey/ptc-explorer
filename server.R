@@ -1,139 +1,19 @@
 # Shiny Server
 function(input, output, session) {
-
   
-  ### Sample meta / home tab
-  output$sample_meta <- renderUI({
-    fluidRow(column(
-      12,
-      selectInput("meta_col", "Sample Features", choices = colnames(sample_meta)[-c(1,4)]),
-    ))
-    
-  })
-  
-  
-  observeEvent(input$meta_col, {
-    output$meta_plot <- renderPlotly({
-      fs_meta_plot <- 12
-      if (input$meta_col %in% meta_fact_cols)
-      {
-       p1 <-  ggplot(sample_meta, aes(fill = Subtypes, x = !!sym(input$meta_col))) +
-          geom_bar(position = "dodge") +
-          labs(
-            title = paste0("Counts of feature: ", str_replace_all(input$meta_col, "_", " ")),
-            x = str_replace_all(input$meta_col, "_", " "),
-            fill = "Subtypes",
-            y = "Counts"
-          ) +
-         scale_x_discrete(labels = function(x) str_wrap(str_replace_all(x, "_", " "),
-                                                                 width = 10)) +
-         theme_minimal() + 
-          theme(
-            plot.title = element_text(size = fs_meta_plot + 4, face = "bold"),
-            axis.title.x = element_text(size = fs_meta_plot + 2, margin = margin(t = 20), face = "bold"),             
-            axis.title.y = element_text(size = fs_meta_plot + 2, face = "bold"),           
-            axis.text.x = element_text(size = fs_meta_plot),#, angle = 20, hjust = 1),              
-            axis.text.y = element_text(size = fs_meta_plot),              
-            legend.title = element_text(size = fs_meta_plot + 2),         
-            legend.text = element_text(size = fs_meta_plot) 
-          ) + scale_fill_brewer(palette = "Set2")
-       
-       ggplotly(p1)
-       
-      }else if(input$meta_col %in% meta_num_cols){
-        
-        ggplot(sample_meta, aes(x = !!sym(input$meta_col))) +
-          geom_histogram(binwidth = 5, fill = "#ccd5ae", color = "black", alpha = 0.7) +
-          geom_density(aes(y = ..count..), color = "#132a13", size = 1, adjust = 1.5) + # Add density curve
-          labs(
-            title = paste0("Histogram of feature: ", str_replace_all(input$meta_col, "_", " ")),
-            x = "Values",
-            y = "Frequency"
-          ) +
-          theme_minimal() + 
-          theme(
-            plot.title = element_text(size = fs_meta_plot + 4, face = "bold"),
-            axis.title.x = element_text(size = fs_meta_plot + 2, margin = margin(t = 20), face = "bold"),             
-            axis.title.y = element_text(size = fs_meta_plot + 2, face = "bold"),           
-            axis.text.x = element_text(size = fs_meta_plot),#, angle = 20, hjust = 1),              
-            axis.text.y = element_text(size = fs_meta_plot),              
-            legend.title = element_text(size = fs_meta_plot + 2),         
-            legend.text = element_text(size = fs_meta_plot) 
-          ) 
-        
-      }
-      
-      
-      
-    })
-    
-  })
-  
-  
-  #dtServer("sample_meta_df", sample_meta[,-1])
+  #### Home tab/page
+  metaPlotsServer("sample_meta_stats", sample_meta, meta_fact_cols, meta_num_cols)
   reactableServer("sample_meta_df", sample_meta_display, defaultColDef = colDef(
     na = "NA"), defaultPageSize = 25, reactive_tbl = FALSE,  bordered = TRUE)
- 
 
-  
-  
-  
   #### By gene search page
-  
-  updateSelectizeInput(session, 'gene_name', choices = all_genes_main, server = TRUE)
-  
-  
-  # output$gene_list_main <- renderUI({
-  #   req(sample_variants)
-  #   
-  #   fluidRow(
-  #     column(12,
-  #            selectInput("gene_name", "Gene Symbol", 
-  #                           choices = all_genes_main)
-  #            )
-  #   )
-  #   
-  # })
-  
-  filtered_gene_df <- reactiveVal(sample_variants)
-  
-  observeEvent(input$gene_name,{
-    
-    temp_gene_df <- sample_variants[sample_variants$Gene %in% input$gene_name, ]
-    filtered_gene_df(temp_gene_df)
-    
-    reactableServer("dds_all_deg_by_gene",
-                    clean_sig_df(res.T_vs_N, renameCols = TRUE, gene = input$gene_name),
-                    reactive_tbl = FALSE)
-    reactableServer("dds_subtype_deg_by_gene",
-                    clean_sig_df(res.PTC_vs_FTC, renameCols = TRUE, gene = input$gene_name),
-                    reactive_tbl = FALSE)
-    
-    rna_fusion_df_filtered <- rna_fusion_df[rna_fusion_df$geneA %in% input$gene_name |
-                                              rna_fusion_df$geneB %in% input$gene_name,
-    ]
-    reactableServer("rnafusion_df_by_gene",
-                    rna_fusion_df_filtered,
-                    reactive_tbl = FALSE)
-    
-    
-  })
-  
-  reactableServer("variant_df_by_gene",
-                  filtered_gene_df)
-  
-  
-  
-  output$gene_info_main <- renderUI({
-    req(input$gene_name)
-    
-    gene_info(input$gene_name)
-    
-  })
-  
+  geneSearchServer("geneSearch_main", geneList = all_genes_main,
+                   var_table = sample_variants, 
+                   deg_t_vs_n = res.T_vs_N,
+                   deg_ptc_vs_ftc = res.PTC_vs_FTC,
+                   fusion_table = rna_fusion_df)
   
   #### Oncoplot and sample variant tab
-  
   output$variant_filters <- renderUI({
     req(sample_variants)
     
