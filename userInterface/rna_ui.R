@@ -61,7 +61,6 @@ rna_page <- fluidPage(
   br(),
   hr(),
   h4("Enrichment Anlaysis using: Enrichr databases"),
-  h3("Enrichment analysis using Enrichr databases"),
   fluidRow(
     column(6,
            enrichrUI("enrichr_t_vs_n")),

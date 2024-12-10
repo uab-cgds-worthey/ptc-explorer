@@ -36,7 +36,7 @@ wes_page <- fluidPage(
   br(),
   fluidRow(
     column(6,
-           tags$h3("Tumor clonal evoluation"),
+           tags$h3("Tumor clonal evolution"),
            tags$p("Clonal analysis of somatic variation identified signatures of mutational processes in tumors from participant 2, 17 and 18."),
            tags$img(src = "img/clonal_analysis.png",
                     style = "width: 90%; height: auto;"
@@ -45,6 +45,9 @@ wes_page <- fluidPage(
     # ),
     # hr(),
     # br(),
+  ),
+  hr(),
+    fluidRow(
     column(6,
            tags$h3("Microsatellite instability (MSI) analysis"),
            tags$p("Subtype-wise distribution of MSI levels among the tumor samples."),

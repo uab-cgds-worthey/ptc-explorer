@@ -1,8 +1,9 @@
 home_page <- fluidPage(
-  fluidRow(
+  fluidRow(class = "text-center",
     column(12,
-           tags$h3("Pediatric Thyroid Cancer Explorer"),
-           includeMarkdown("desc/home_intro.Rmd")
+           tags$h2("Pediatric Thyroid Cancer Explorer"),
+           tags$h5("It is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19 years).")
+#           includeMarkdown("desc/home_intro.Rmd")
     )
   ),
   hr(),
@@ -15,7 +16,7 @@ home_page <- fluidPage(
     column(6,
            tags$h3("Sample Statistics"),
            uiOutput("sample_meta"),
-           plotOutput("meta_plot")
+           plotlyOutput("meta_plot",  height = "550px")
            # verbatimTextOutput("sample_summary")
     )
   ),

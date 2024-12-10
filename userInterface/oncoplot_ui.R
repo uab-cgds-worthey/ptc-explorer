@@ -1,15 +1,26 @@
 onco_plot <- fluidPage(
   # Page title
   h3("Sample Variant Information"),
+  hr(),
   fluidRow(
     column(3,
+           br(),
+           br(),
            uiOutput("variant_filters")
            
     ),
-    column(6, 
+    column(8, 
            #dtUI("sample_variant_df")
            reactableUI("sample_variant_df")
-    )
+    ),
+    column(1,
+           br(),
+           br(),
+           br(),
+           br(),
+           tags$p('
+                  "DITTO (inspired by pokemon) is an explainable Neural network tool that can make pathogenicity predictions for any type of small genetic variants and their predicted functional impact on transcript(s). DITTO score ranges from (0-1), where higher scores translates to the variant being likely pathogenic.
+"'))
   ),
   br(),
   hr(),

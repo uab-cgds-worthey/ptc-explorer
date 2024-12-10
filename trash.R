@@ -192,3 +192,52 @@
 
 # Preprocess small data
 
+# gostres_T_Vs_N <- readRDS("data/gostres_T_vs_N.rds")
+# gostres_PTC_Vs_FTC <- readRDS("data/gostres_PTC_vs_FTC.rds")
+
+
+##### server dec 10
+# gprofilerServer("go_t_vs_n", res.T_vs_N$gene_name)
+#gprofilerServer("go_PTC_vs_FTC", res.PTC_vs_FTC$gene_name)
+
+
+# enrichrServer("enrichr_t_vs_n",clean_sig_df(res.T_vs_N, addRownames = TRUE), enrichr_dbs)
+# enrichrServer("enrichr_PTC_vs_FTC",clean_sig_df(res.PTC_vs_FTC, addRownames = TRUE), enrichr_dbs)
+#
+
+
+# output$rna_fusion_1 <- renderPlot({
+#   ggplot(rna_fusion_df,
+#          aes(x = Phenotype_Subtype, fill = Known_Fusion)) +
+#     geom_bar(position = "stack") +
+#     labs(title = "Known vs. Novel Fusions by Phenotype Subtype", x = "Phenotype Subtype", y = "Count") +
+#     scale_fill_manual(values = c("Yes" = "green", "No" = "red")) +
+#     theme_minimal() +
+#     theme(
+#       axis.text.x = element_text(size = 20),
+#       axis.text.y = element_text(size = 20),
+#       legend.title = element_text(size = 20),
+#       legend.text = element_text(size = 20)
+#     )
+# })
+# 
+# output$rna_fusion_2 <- renderPlot({
+#   fusion_matrix <- dcast(rna_fusion_df, Phenotype_Subtype ~ Gene_Fusion, length)
+#   
+#   pheatmap(
+#     as.matrix(fusion_matrix[, -1]),
+#     labels_row = fusion_matrix[, 1],
+#     cluster_rows = TRUE,
+#     cluster_cols = TRUE,
+#     main = "Heatmap of Gene Fusions Across Phenotypes",
+#     fontsize = 14
+#   )
+# })
+# 
+#  output$sample_summary <-  renderPrint({
+#   sample_meta_edit <- sample_meta[, -1]
+#   colnames(sample_meta_edit)[1] <- "Participant ID (P_ID)"
+#   skimr::skim(sample_meta_edit)
+#   
+# })
+# 
