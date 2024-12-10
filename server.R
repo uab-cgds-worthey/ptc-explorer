@@ -1,17 +1,28 @@
 # Shiny Server
 function(input, output, session) {
-  
   #### Home tab/page
-  metaPlotsServer("sample_meta_stats", sample_meta, meta_fact_cols, meta_num_cols)
-  reactableServer("sample_meta_df", sample_meta_display, defaultColDef = colDef(
-    na = "NA"), defaultPageSize = 25, reactive_tbl = FALSE,  bordered = TRUE)
-
+  metaPlotsServer("sample_meta_stats",
+                  sample_meta,
+                  meta_fact_cols,
+                  meta_num_cols)
+  reactableServer(
+    "sample_meta_df",
+    sample_meta_display,
+    defaultColDef = colDef(na = "NA"),
+    defaultPageSize = 25,
+    reactive_tbl = FALSE,
+    bordered = TRUE
+  )
+  
   #### By gene search page
-  geneSearchServer("geneSearch_main", geneList = all_genes_main,
-                   var_table = sample_variants, 
-                   deg_t_vs_n = res.T_vs_N,
-                   deg_ptc_vs_ftc = res.PTC_vs_FTC,
-                   fusion_table = rna_fusion_df)
+  geneSearchServer(
+    "geneSearch_main",
+    geneList = all_genes_main,
+    var_table = sample_variants,
+    deg_t_vs_n = res.T_vs_N,
+    deg_ptc_vs_ftc = res.PTC_vs_FTC,
+    fusion_table = rna_fusion_df
+  )
   
   #### Oncoplot and sample variant tab
   variantFilterServer("variant_table_with_filters", sample_variants)
@@ -20,9 +31,6 @@ function(input, output, session) {
   
   
   #### RNA-seq tab
-  
-  byGene_deg <- dtServer("dds_all_deg", clean_sig_df(res.T_vs_N), returnRow = TRUE)
-
   res.t_vs_n.sel <- dtServer("dds_all_deg",
                              clean_sig_df(res.T_vs_N, renameCols = TRUE),
                              returnRow = TRUE)
@@ -55,20 +63,28 @@ function(input, output, session) {
     res.PTC_vs_FTC.sel,
     2
   )
-
+  
   gprofilerServer("go_t_vs_n", gostres_T_vs_N, input_gostres = TRUE)
   gprofilerServer("go_PTC_vs_FTC", gostres_PTC_vs_FTC, input_gostres = TRUE)
   
-  enrichrServer("enrichr_t_vs_n",enrichr_T_vs_N, enrichr_dbs, precalculate = TRUE)
-  enrichrServer("enrichr_PTC_vs_FTC",enrichr_PTC_vs_FTC, enrichr_dbs, precalculate = TRUE)
+  enrichrServer("enrichr_t_vs_n",
+                enrichr_T_vs_N,
+                enrichr_dbs,
+                precalculate = TRUE)
+  enrichrServer("enrichr_PTC_vs_FTC",
+                enrichr_PTC_vs_FTC,
+                enrichr_dbs,
+                precalculate = TRUE)
   
   
   #### RNA-fusion tab
-  
   output$rna_fusion_4 <- renderPlotly({
     p <- ggplot(rna_fusion_df, aes(x = Participant_id, y = Gene_Fusion)) +
       geom_point(aes(color = Phenotype_Subtype), size = 4) +
-      labs(title = "Gene Fusions by Participant, Grouped by Phenotype Subtype", x = "Participant ID", y = "Gene Fusion") +
+      labs(title = "Gene Fusions by Participant,
+           Grouped by Phenotype Subtype",
+           x = "Participant ID",
+           y = "Gene Fusion") +
       scale_color_brewer(palette = "Set2") +  # Color based on phenotype subtype
       theme_minimal() +
       theme(

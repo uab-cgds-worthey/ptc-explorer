@@ -364,3 +364,4 @@
 #   gene_info(input$gene_name)
 #   
 # })
+# byGene_deg <- dtServer("dds_all_deg", clean_sig_df(res.T_vs_N), returnRow = TRUE)
