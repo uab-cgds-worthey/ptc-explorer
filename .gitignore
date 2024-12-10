@@ -7,7 +7,7 @@
 data
 modules
 dev
-/dev
+docs
 .Renviron
 *.RData
 *.pptx
