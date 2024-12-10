@@ -6,6 +6,6 @@ navbarPage(
       tabPanel('RNA-Seq', rna_page),
       tabPanel('RNA-Seq Fusions', rnaFusion_page),
       tabPanel('WES Additional Analysis', wes_page),
-     #tabPanel('Download', download_page),
+      tabPanel('Download', download_page),
      #tabPanel('User Metrics', userMetrics_page)
 )

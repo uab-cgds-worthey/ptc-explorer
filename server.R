@@ -76,7 +76,8 @@ function(input, output, session) {
   
   
   #dtServer("sample_meta_df", sample_meta[,-1])
-  reactableServer("sample_meta_df", sample_meta[, -1], defaultColDef = colDef(na = "NA"))
+  reactableServer("sample_meta_df", sample_meta[, -1], defaultColDef = colDef(na = "NA"),
+                  reactive_tbl = FALSE)
   output$sample_summary <-  renderPrint({
     sample_meta_edit <- sample_meta[, -1]
     colnames(sample_meta_edit)[1] <- "Participant ID (P_ID)"

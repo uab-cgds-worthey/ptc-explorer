@@ -36,6 +36,7 @@ colnames(sample_variants) <- c("Participant ID","Phenotype",
                                "Variant", "Germline.Class",
                                "Allelic Balance", "Chromosome",
                                "Position", "DITTO.Score")
+categorical_features <- c(colnames(sample_meta[,c(3:12,14:17)]))
 
 sample_variants[,"DITTO.Score"] <- round(sample_variants[,"DITTO.Score"], 4)
 
