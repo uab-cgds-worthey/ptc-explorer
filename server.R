@@ -5,14 +5,9 @@ function(input, output, session) {
                            addRownames = FALSE,
                            renameCols = FALSE,
                            gene = NULL) {
+    
     # print("Entering clean_sig_df")
     # print(nrow(sig_df))
-    sig_df <- sig_df[!is.na(sig_df$padj), ]
-    
-    sig_df$pvalue <- signif(sig_df$pvalue, digits = 3)
-    sig_df$padj <- signif(sig_df$padj, digits = 3)
-    
-    sig_df$log2FoldChange <- round(sig_df$log2FoldChange, digits = 3)
     
     if (input_res) {
       sig_df <- subset(sig_df, padj < 0.05 & abs(log2FoldChange) > 1.5)
@@ -29,17 +24,10 @@ function(input, output, session) {
                             "P-Value",
                             "Adj. P-Value")
     }
-    
     print(gene)
     if(!is.null(gene)){
-      
       sig_df <- sig_df[sig_df$SYMBOL %in% gene, ]
-      
     }
-    
-    # sig_df[,c(4:6)] <- round(sig_df[,c(4:6)], 6)
-    # sig_1$Genes <- row.names(sig_1)
-    # sig_1 <- sig_1[,c(7,2,5,6)]
     
     return(sig_df)
     
@@ -57,14 +45,14 @@ function(input, output, session) {
   
   observeEvent(input$meta_col, {
     output$meta_plot <- renderPlot({
-      if (input$meta_col %in% categorical_features)
+      if (input$meta_col %in% meta_fact_cols)
       {
-        ggplot(sample_meta, aes(fill = Pathology, x = sample_meta[, input$meta_col])) +
+        ggplot(sample_meta, aes(fill = Pathology_Subtype, x = !!sym(input$meta_col))) +
           geom_bar(position = "dodge") +
           labs(
             title = "Title",
             x = input$meta_col,
-            fill = "Pathology",
+            fill = "Pathology_Subtype",
             y = "Counts"
           ) +
           theme_minimal()
@@ -243,8 +231,8 @@ function(input, output, session) {
         pickerInput(
           "germ_var",
           "Germline Class",
-          choices = c(unique(sample_variants$Germline.Class)),
-          selected = c(unique(sample_variants$Germline.Class)),
+          choices = c(unique(sample_variants$`Germline Class`)),
+          selected = c(unique(sample_variants$`Germline Class`)),
           multiple = TRUE
         )#,
         # pickerInput("ditto_var",
@@ -280,9 +268,12 @@ function(input, output, session) {
     ),
     {
       temp_var_df <- sample_variants
+      
+      colnames(sample_variants)
+      
       temp_var_df <- temp_var_df[temp_var_df$Phenotype %in% input$pheno_var, ]
       temp_var_df <- temp_var_df[temp_var_df$`Variant Type` %in% input$type_var, ]
-      temp_var_df <- temp_var_df[temp_var_df$Germline.Class %in% input$germ_var, ]
+      temp_var_df <- temp_var_df[temp_var_df$`Germline Class` %in% input$germ_var, ]
       
       
       temp_var_df <- temp_var_df[temp_var_df$Chromosome %in% paste0("chr", input$chr_var) , ]
@@ -322,15 +313,15 @@ function(input, output, session) {
     #groupBy = "Gene",
     #  fullWidth = FALSE,
     columns = list(
-      DITTO.Score = colDef(
+      `DITTO Score` = colDef(
         style = function(value) {
-          normalized <- (value - min(sample_variants$DITTO.Score)) / (max(sample_variants$DITTO.Score) - min(sample_variants$DITTO.Score))
+          normalized <- (value - min(sample_variants$`DITTO Score`)) / (max(sample_variants$`DITTO Score`) - min(sample_variants$`DITTO Score`))
           color <- ditto_pal(normalized)
           list(fontWeight = 700, color = color)
         }
       )
       ,
-      Germline.Class = colDef(
+      `Germline Class` = colDef(
         style = function(value) {
           color <- if (value == "P") {
             "#cc444b"
@@ -350,17 +341,20 @@ function(input, output, session) {
   
   ######## By gene search page
   
-  output$gene_list_main <- renderUI({
-    req(sample_variants)
-    
-    fluidRow(
-      column(12,
-             selectizeInput("gene_name", "Gene Symbol", 
-                            choices = sort(unique(sample_variants$Gene)))
-             )
-    )
-    
-  })
+  updateSelectizeInput(session, 'gene_name', choices = all_genes_main, server = TRUE)
+  
+  
+  # output$gene_list_main <- renderUI({
+  #   req(sample_variants)
+  #   
+  #   fluidRow(
+  #     column(12,
+  #            selectInput("gene_name", "Gene Symbol", 
+  #                           choices = all_genes_main)
+  #            )
+  #   )
+  #   
+  # })
   
   filtered_gene_df <- reactiveVal(sample_variants)
   
@@ -369,12 +363,20 @@ function(input, output, session) {
     temp_gene_df <- sample_variants[sample_variants$Gene %in% input$gene_name, ]
     filtered_gene_df(temp_gene_df)
     
-    dtServer("dds_all_deg_by_gene",
+    reactableServer("dds_all_deg_by_gene",
              clean_sig_df(res.T_vs_N, renameCols = TRUE, gene = input$gene_name),
-             returnRow = FALSE)
-    dtServer("dds_subtype_deg_by_gene",
+             reactive_tbl = FALSE)
+    reactableServer("dds_subtype_deg_by_gene",
              clean_sig_df(res.PTC_vs_FTC, renameCols = TRUE, gene = input$gene_name),
-             returnRow = FALSE)
+             reactive_tbl = FALSE)
+    
+    rna_fusion_df_filtered <- rna_fusion_df[rna_fusion_df$geneA %in% input$gene_name |
+                                              rna_fusion_df$geneB %in% input$gene_name,
+                                            ]
+    reactableServer("rnafusion_df_by_gene",
+                    rna_fusion_df_filtered,
+    reactive_tbl = FALSE)
+    
     
   })
   
@@ -389,6 +391,8 @@ function(input, output, session) {
     gene_info(input$gene_name)
     
   })
+  
+  
   
 
 

@@ -1,7 +1,8 @@
 geneSearch_page <- fluidPage(
   fluidRow(
     column(2,
-           uiOutput("gene_list_main")
+           selectizeInput('gene_name',  "Gene Symbol",  choices = NULL)
+          # uiOutput("gene_list_main")
     ),
     column(10,
            uiOutput("gene_info_main")
@@ -24,21 +25,22 @@ geneSearch_page <- fluidPage(
     
     column(6,
            h4('All Samples: Tumor Vs Normal'),
-           dtUI("dds_all_deg_by_gene")
+           reactableUI("dds_all_deg_by_gene")
     ),
     column(6,
            h4('Tumor Samples: PTCPlusThy vs FTC'),
-           dtUI("dds_subtype_deg_by_gene")
+           reactableUI("dds_subtype_deg_by_gene")
     )
   ),
   hr(),
   br(),
   h4("RNA-Fusion"),
-  hr(),
-  br(),
   fluidRow(
     column(12,
+           reactableUI("rnafusion_df_by_gene")
            
     )
-  )
+  ),
+  hr(),
+  br()
 )

@@ -27,43 +27,25 @@ library(shinyWidgets)
 # plan(multisession)
 
 # Load data/connections
+app_data_main <- readRDS("data/app_data_pack_dec8.rds")
 
-sample_meta <- read.csv("data/csv/ptc_meta_summary_appVer1_oct17.csv")
-sample_variants <- read.csv("data/csv/ptc_df_onco_ditto_appVer1_oct23.csv")
-sample_variants <- sample_variants[,c(1:9,12)]
-colnames(sample_variants) <- c("Participant ID","Phenotype",
-                               "Variant Type", "Gene", 
-                               "Variant", "Germline.Class",
-                               "Allelic Balance", "Chromosome",
-                               "Position", "DITTO.Score")
-categorical_features <- c(colnames(sample_meta[,c(3:12,14:17)]))
+sample_meta <- app_data_main$meta
+sample_variants <- app_data_main$variant
 
-sample_variants[,"DITTO.Score"] <- round(sample_variants[,"DITTO.Score"], 4)
+rna_fusion_df <- app_data_main$fusion
+
+res.T_vs_N <- app_data_main$t_vs_n
+res.PTC_vs_FTC <- app_data_main$ptc_vs_ftc
+
+meta_fact_cols <- app_data_main$meta_fact_col
+meta_num_cols <- app_data_main$meta_num_col
+
+all_genes_main <- app_data_main$all_genes
 
 oncoplot_rds <- readRDS("data/oncoplot_noExp_oct17.rds")
 
-#sample_variants$Genes
-
-# dds_noCounts <- readRDS("data/rna_seq/res_dds_T_N.rds")
-# dds_group1_noCounts <- readRDS("data/rna_seq/res_dds_group1_PTC_FTC.rds")
-
-
-res.T_vs_N <- read.csv("data/csv/res_t_vs_n.csv")
-res.PTC_vs_FTC <- read.csv("data/csv/res_PTC_vs_FTC.csv")
-
-vsd_after_swap <- readRDS("data/rna_seq/vsd_limma_after_swap.rds")
-vsd_group1 <- readRDS("data/rna_seq/vsd_sub_limma_after_swap_group1.rds")
-
 gostres_T_Vs_N <- readRDS("data/gostres_T_vs_N.rds")
 gostres_PTC_Vs_FTC <- readRDS("data/gostres_PTC_vs_FTC.rds")
-
-rna_fusion_df <- read.csv("data/rna_seq/RNA_fusions_updated.csv")
-rna_fusion_df$Participant_id <- as.factor(rna_fusion_df$Participant_id)
-
-res.aff.unaff <- read.csv("data/csv/res.aff.unaff_mod.csv", row.names = 1)
-
-# Preprocess small data
- 
 
 enrichr_dbs <- c(
   "KEGG_2019_Human",

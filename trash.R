@@ -101,3 +101,94 @@
 #            )
 #   )
 # )
+
+
+# 
+# 
+# clean_sig_df <- function(sig_df,
+#                          input_res = FALSE,
+#                          addRownames = FALSE,
+#                          renameCols = FALSE,
+#                          gene = NULL) {
+#   # print("Entering clean_sig_df")
+#   # print(nrow(sig_df))
+#   sig_df <- sig_df[!is.na(sig_df$padj), ]
+#   
+#   sig_df$pvalue <- signif(sig_df$pvalue, digits = 3)
+#   sig_df$padj <- signif(sig_df$padj, digits = 3)
+#   
+#   sig_df$log2FoldChange <- round(sig_df$log2FoldChange, digits = 3)
+#   
+#   if (input_res) {
+#     sig_df <- subset(sig_df, padj < 0.05 & abs(log2FoldChange) > 1.5)
+#   }
+#   if (addRownames) {
+#     sig_df <- sig_df[!duplicated(sig_df$gene_name), ]
+#     row.names(sig_df) <- sig_df$gene_name
+#   }
+#   if (renameCols) {
+#     colnames(sig_df) <- c("ENTREZ ID",
+#                           "SYMBOL",
+#                           "ENSEMBL",
+#                           "Log2FC",
+#                           "P-Value",
+#                           "Adj. P-Value")
+#   }
+#   
+#   print(gene)
+#   if(!is.null(gene)){
+#     
+#     sig_df <- sig_df[sig_df$SYMBOL %in% gene, ]
+#     
+#   }
+#   
+#   # sig_df[,c(4:6)] <- round(sig_df[,c(4:6)], 6)
+#   # sig_1$Genes <- row.names(sig_1)
+#   # sig_1 <- sig_1[,c(7,2,5,6)]
+#   
+#   return(sig_df)
+#   
+# }
+
+
+
+
+########## Global.r dec 10
+
+# sample_variant <- sample_variant[,c(1:9,12)]
+# colnames(sample_variant)
+# 
+# # sample_meta <- read.csv("data/csv/ptc_meta_summary_appVer1_oct17.csv")
+# # sample_variants <- read.csv("data/csv/ptc_df_onco_ditto_appVer1_oct23.csv")
+# # sample_variants <- sample_variants[,c(1:9,12)]
+# colnames(sample_variants) <- c("Participant ID","Phenotype",
+#                                "Variant Type", "Gene", 
+#                                "Variant", "Germline.Class",
+#                                "Allelic Balance", "Chromosome",
+#                                "Position", "DITTO.Score")
+# categorical_features <- c(colnames(sample_meta[,c(3:12,14:17)]))
+# 
+# sample_variants[,"DITTO.Score"] <- round(sample_variants[,"DITTO.Score"], 4)
+
+
+
+#sample_variants$Genes
+
+# dds_noCounts <- readRDS("data/rna_seq/res_dds_T_N.rds")
+# dds_group1_noCounts <- readRDS("data/rna_seq/res_dds_group1_PTC_FTC.rds")
+
+
+# res.T_vs_N <- read.csv("data/csv/res_t_vs_n.csv")
+# res.PTC_vs_FTC <- read.csv("data/csv/res_PTC_vs_FTC.csv")
+# # 
+# vsd_after_swap <- readRDS("data/rna_seq/vsd_limma_after_swap.rds")
+# vsd_group1 <- readRDS("data/rna_seq/vsd_sub_limma_after_swap_group1.rds")
+
+# 
+# rna_fusion_df <- read.csv("data/rna_seq/RNA_fusions_updated.csv")
+# rna_fusion_df$Participant_id <- as.factor(rna_fusion_df$Participant_id)
+
+# res.aff.unaff <- read.csv("data/csv/res.aff.unaff_mod.csv", row.names = 1)
+
+# Preprocess small data
+

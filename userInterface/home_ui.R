@@ -7,12 +7,12 @@ home_page <- fluidPage(
   ),
   hr(),
   fluidRow(
-    column(8,
+    column(6,
            tags$h3("Study Design"),
            tags$img(src = "img/workflow_fig1.png", 
                     style = "width: 90%; height: auto;")
     ),
-    column(4,
+    column(6,
            tags$h3("Sample Statistics"),
            uiOutput("sample_meta"),
            plotOutput("meta_plot")
