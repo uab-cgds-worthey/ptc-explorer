@@ -92,3 +92,12 @@
 #            hierarchyIndicator = FALSE
 #          ))
 # })
+
+
+# test_page <- fluidPage(
+#   fluidRow(
+#     column(12,
+#            lineupOutput("lineup1")
+#            )
+#   )
+# )
