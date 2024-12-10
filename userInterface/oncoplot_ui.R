@@ -3,16 +3,9 @@ onco_plot <- fluidPage(
   h3("Sample Variant Information"),
   hr(),
   fluidRow(
-    column(3,
-           br(),
-           br(),
-           uiOutput("variant_filters")
-           
-    ),
-    column(8, 
-           #dtUI("sample_variant_df")
-           reactableUI("sample_variant_df")
-    ),
+    column(11,
+           variantFilterUI("variant_table_with_filters")
+          ),
     column(1,
            br(),
            br(),

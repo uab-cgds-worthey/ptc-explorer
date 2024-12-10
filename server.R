@@ -14,176 +14,15 @@ function(input, output, session) {
                    fusion_table = rna_fusion_df)
   
   #### Oncoplot and sample variant tab
-  output$variant_filters <- renderUI({
-    req(sample_variants)
-    
-    fluidRow(
-      column(6,
-             selectizeInput(
-               "gene_var",
-               "Gene",
-               choices = c("All", unique(sample_variants$Gene)),
-               selected = "All",
-               multiple = TRUE
-             ),
-             selectizeInput(
-               "chr_var",
-               "Chromosome",
-               choices = c(substr(
-                 unique(sample_variants$Chromosome), 4, 5
-               )),
-               selected = c(substr(
-                 unique(sample_variants$Chromosome), 4, 5
-               )),
-               multiple = TRUE
-             )
-      ),
-      column(
-        6,
-        pickerInput(
-          "pheno_var",
-          "Phenotype",
-          choices = c(unique(sample_variants$Phenotype)),
-          selected =  c(unique(sample_variants$Phenotype)),
-          multiple = TRUE
-        ),
-        pickerInput(
-          "type_var",
-          "Variant Type",
-          choices = c(unique(sample_variants$`Variant Type`)),
-          selected = c(unique(sample_variants$`Variant Type`)),
-          multiple = TRUE
-        ),
-        pickerInput(
-          "germ_var",
-          "Germline Class",
-          choices = c(unique(sample_variants$`Germline Class`)),
-          selected = c(unique(sample_variants$`Germline Class`)),
-          multiple = TRUE
-        )#,
-        # pickerInput("ditto_var",
-        #                "DITTO Score",
-        #                choices = c("More Pathogenic: > 0.88",
-        #                            "More Benign: < 0.20"
-        #                            ),
-        #                selected = c("More Pathogenic: > 0.88",
-        #                             "More Benign: < 0.20"
-        #                ),
-        #                multiple = TRUE
-        # )
-        #
-        
-      )
-      
-    )
-    
-    
-    
-  })
+  variantFilterServer("variant_table_with_filters", sample_variants)
   
-  
-  filtered_sample_variants <- reactiveVal(sample_variants)
-  
-  observeEvent(
-    c(
-      input$pheno_var,
-      input$type_var,
-      input$germ_var,
-      input$chr_var,
-      input$gene_var,
-      input$ditto_var
-    ),
-    {
-      temp_var_df <- sample_variants
-      
-      colnames(sample_variants)
-      
-      temp_var_df <- temp_var_df[temp_var_df$Phenotype %in% input$pheno_var, ]
-      temp_var_df <- temp_var_df[temp_var_df$`Variant Type` %in% input$type_var, ]
-      temp_var_df <- temp_var_df[temp_var_df$`Germline Class` %in% input$germ_var, ]
-      
-      
-      temp_var_df <- temp_var_df[temp_var_df$Chromosome %in% paste0("chr", input$chr_var) , ]
-      
-      # print(length(input$gene_var))
-      
-      if (length(input$gene_var) > 1 &&
-          !("All" %in% input$gene_var)) {
-        temp_var_df <- temp_var_df[temp_var_df$Gene %in% input$gene_var, ]
-        
-      }
-      
-      # print(input$ditto_var)
-      #
-      # if(!("More  Benign: < 0.20" %in% input$ditto_var)){
-      #   temp_var_df <- temp_var_df[temp_var_df$DITTO.Score >= 0.88, ]
-      # }else if(!("More Pathogenic: > 0.88" %in% input$ditto_var)){
-      #   temp_var_df <- temp_var_df[temp_var_df$DITTO.Score <= 0.20, ]
-      #
-      # }
-      
-      
-      
-      
-      # print(head(temp_var_df))
-      # temp_var_df <- temp_var_df[temp_var_df$Phenotype %in% input$pheno_var,  ]
-      
-      filtered_sample_variants(temp_var_df)
-      
-    }
-  )
-  
-  ditto_pal <- function(x)
-    rgb(colorRamp(c("#e4b1ab", "#cc444b"))(x), maxColorValue = 255)
-  
-  reactableServer(
-    "sample_variant_df",
-    filtered_sample_variants,
-    #groupBy = "Gene",
-    #  fullWidth = FALSE,
-    bordered = TRUE,
-    columns = list(
-      `DITTO Score` = colDef(
-        style = function(value) {
-          normalized <- (value - min(sample_variants$`DITTO Score`)) / (max(sample_variants$`DITTO Score`) - min(sample_variants$`DITTO Score`))
-          color <- ditto_pal(normalized)
-          list(fontWeight = 700, color = color)
-        }
-      )
-      ,
-      `Germline Class` = colDef(
-        style = function(value) {
-          color <- if (value == "P") {
-            "#cc444b"
-          } else if (value == "LP") {
-            "#df7373"
-          }  else if (value == "LB") {
-            "#008000"
-          } else if (value == "VUS") {
-            "#e4b1ab"
-          }
-          list(fontWeight = 700, color = color)
-        }
-      )
-    )
-  )
-  
-  
-  
-  
+  makeInteractiveComplexHeatmap(input, output, session, oncoplot_rds, "ht")
   
   
   #### RNA-seq tab
   
   byGene_deg <- dtServer("dds_all_deg", clean_sig_df(res.T_vs_N), returnRow = TRUE)
-  
-  
-  
-  makeInteractiveComplexHeatmap(input, output, session, oncoplot_rds, "ht")
-  
-  
- 
-  
+
   res.t_vs_n.sel <- dtServer("dds_all_deg",
                              clean_sig_df(res.T_vs_N, renameCols = TRUE),
                              returnRow = TRUE)
@@ -216,8 +55,7 @@ function(input, output, session) {
     res.PTC_vs_FTC.sel,
     2
   )
-  
-  
+
   gprofilerServer("go_t_vs_n", gostres_T_vs_N, input_gostres = TRUE)
   gprofilerServer("go_PTC_vs_FTC", gostres_PTC_vs_FTC, input_gostres = TRUE)
   
