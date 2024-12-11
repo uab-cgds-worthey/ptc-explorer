@@ -1,7 +1,14 @@
 rna_page <- fluidPage(
-  h4("Prinical Component Analysis (PCA)"),
+  fluidRow(class = "text-center",
+           column(2,),
+           column(8,
+  h3("Prinical Component Analysis (PCA)"),
   tags$p("An unsupervised linear transformation technique, for dimensionality reduction to uncover interesting patterns and find any technical biases while preserving the biological variation in the dataset. First, we used phenotype (tumor and normal), batch and sex as factors which revealed distinctive clusters for tumor and normal samples (left PCA plot). Additionally, we also used six phenotype_subtypes, batch and sex as factors showing clustering of normal and tumor samples by subtypes (right PCA plot)."),
-  fluidRow(
+  column(2,)
+  )
+  ),
+  hr(),
+  fluidRow(class = "text-center",
     column(6, add_busy_bar(),
            h4('All Samples: Tumor Vs Normal'),
            tags$img(src = "img/pca_label_batch-corr_b&w_pid.png", 
@@ -19,9 +26,13 @@ rna_page <- fluidPage(
   ),
   br(),
   hr(),
+  fluidRow(class = "text-center",
+           column(12,
+  h3("Differentially Expressed Genes"),
+  tags$p("Differential gene expression analysis identified the differentially expressed genes (DEGs) for the following two contrasts:")  )
+  ),
+  hr(),
   fluidRow(
-    h4("Differentially Expressed Genes"),
-    tags$p("Differential gene expression analysis identified the differentially expressed genes (DEGs) for the following two contrasts:"),
     column(6,
            h4('All Samples: Tumor Vs Normal'),
            dtUI("dds_all_deg"),
@@ -38,7 +49,6 @@ rna_page <- fluidPage(
   #br(),
   hr(),
   fluidRow(
-    #h5("DEG Analysis"),
     column(6, 
            h4('All Samples: Tumor Vs Normal'),
            volcanoUI("vol_aff_unaff")
@@ -49,7 +59,12 @@ rna_page <- fluidPage(
   ),
   br(),
   hr(),
-  h4("Enrichment Anlaysis using: gProfiler"),
+  fluidRow(class = "text-center",
+           column(12,
+  h3("Enrichment Anlaysis using: gProfiler")
+  )
+  ),
+  hr(),
   fluidRow(
     column(6,
            gprofilerUI("go_t_vs_n")),
@@ -60,7 +75,12 @@ rna_page <- fluidPage(
   ),
   br(),
   hr(),
-  h4("Enrichment Anlaysis using: Enrichr databases"),
+  fluidRow(class = "text-center",
+           column(12,
+  h3("Enrichment Anlaysis using: Enrichr databases")
+  )
+  ),
+  hr(),
   fluidRow(
     column(6,
            enrichrUI("enrichr_t_vs_n")),

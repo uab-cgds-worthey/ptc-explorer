@@ -46,7 +46,8 @@ meta_num_cols <- app_data_main$meta_num_col
 
 all_genes_main <- app_data_main$all_genes
 
-oncoplot_rds <- readRDS("data/oncoplot_noExp_oct17.rds")
+oncoplot_rds <- readRDS("data/oncoplot_boxplot_2024-12-11.rds")
+oncoplot_rds = draw(oncoplot_rds)
 
 gostres_T_vs_N <- app_data_main$t_vs_n_gp
 gostres_PTC_vs_FTC <- app_data_main$ptc_vs_ftc_gp

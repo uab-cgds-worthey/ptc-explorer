@@ -1,6 +1,10 @@
 onco_plot <- fluidPage(
   # Page title
-  h3("Sample Variant Information"),
+  fluidRow(class = "text-center",
+           column(12,
+  h3("Sample Variant Information")
+  )
+  ),
   hr(),
   fluidRow(
     column(11,
@@ -17,21 +21,29 @@ onco_plot <- fluidPage(
   ),
   br(),
   hr(),
+  fluidRow(class = "text-center",
+           column(2,),
+           column(8,
   h3("Interactive Oncoplot"),
   tags$p("A comprehensive analysis using whole exome sequencing identified 152 somatic and germline variants across 110 genes. These genetic alterations, derived from both tumor and normal samples, span six distinct subtypes, as illustrated in the interactive oncoplot below. On the right side, the box plots display the gene expression levels, contrasting tumor samples with normal ones. Variant information table follows the oncoplot that also include DITTO score for each variant. For more details on DITTO, please refer here."),
+  column(2,)
+  )
+  ),
+  hr(),
+  br(),
   fluidRow(
     column(8, 
-           # plotOutput("oncoplot_main", height = "1400px")
+          
            originalHeatmapOutput("ht", 
-                                 width = 1100,
-                                 height = 950,
-                                 title = NULL)
+                                 width = 1550,
+                                 height = 2000,
+                                 title = "Interactive Oncoplot: Select area to zoom")
     ),
     column(4,
            subHeatmapOutput("ht", 
-                            width = 550,
+                            width = 750,
                             height = 950,
-                            title = NULL)
+                            title = "Sub-heatmap for selected area.")
     )
   ),
   br(),

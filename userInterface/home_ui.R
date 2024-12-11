@@ -7,7 +7,7 @@ home_page <- fluidPage(
     )
   ),
   hr(),
-  fluidRow(
+  fluidRow(class = "text-center",
     column(6,
            tags$h3("Study Design"),
            tags$img(src = "img/workflow_fig1.png", 
@@ -22,7 +22,12 @@ home_page <- fluidPage(
   br(),
   hr(),
   # br(),
-  h3("Sample Metadata"),
+  fluidRow(class = "text-center",
+           column(12,
+  h3("Sample Metadata")
+  )
+  ),
+  hr(),
   fluidRow(
     column(12, 
            reactableUI("sample_meta_df")
