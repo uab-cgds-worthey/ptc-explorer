@@ -32,7 +32,144 @@ clean_sig_df <- function(sig_df,
 }
 
 
-gene_info <- function(gene, species = NULL){
+############## Gene Annotation by Entrez or Ensembl
+gene_annotated <- function(gene, 
+                           species = "human",
+                           ...){
+  
+  
+  base_url <- "https://mygene.info/v3/gene/"
+  gene <- gene
+  
+  fields <- paste("fields=name",
+                  "symbol",
+                  "entrezgene",
+                  "ensembl.gene",
+                  "summary",
+                  sep = ",")
+  
+  
+  api_url <- paste0(base_url,gene,"?",fields)
+  
+  tryCatch({
+    response <- httr::GET(api_url)
+    
+    # Check if the request was successful (status code 200)
+    if (status_code(response) == 200) {
+      
+      # Parse the JSON response
+      response_content <- httr::content(response, as = "text", encoding = "UTF-8")
+      parsed_data <- fromJSON(response_content)
+      
+      # Extract relevant fields from the response
+      
+      gene_symbol <- parsed_data[["symbol"]]
+      gene_name   <- parsed_data[["name"]]
+      gene_entrezgene   <- ifelse(parsed_data[["entrezgene"]],
+                                  "NA", parsed_data[["entrezgene"]])
+      gene_ensembl   <- ifelse(is.null(parsed_data$ensembl[["gene"]]),
+                               "NA", parsed_data$ensembl[["gene"]])
+      gene_summary <- ifelse(is.null(parsed_data[["summary"]]),
+                             "NA", parsed_data[["summary"]])
+      
+      result <- paste0(
+        "<strong>Gene Symbol:</strong> ",
+        gene_symbol, "</br>",
+        "<strong>Name:</strong> ",
+        gene_name, "</br>",
+        "<strong>Entrez Id:</strong> ",
+        gene_entrezgene, "</br>",
+        "<strong>Ensembl Id:</strong> ",
+        gene_ensembl, "</br>",
+        "<strong>Summary:</strong> ",
+        gene_summary
+      )
+      
+      return(HTML(result))
+      
+    } else {
+      # If the request failed, return the status code and message
+      return(
+        "No information found. Please use google."
+        #paste("Error:", status_code(response))
+      )
+    }
+    
+  })
+}
+
+
+############### Gene query by symbol
+gene_query <- function(gene, 
+                       species = "human",
+                       hit = 1,
+                       ...){
+  
+  base_url <- "https://mygene.info/v3/query?"
+  size <- paste0("size=", hit)
+  q.symbol <- paste0("symbol:",gene)
+  q.species <- paste0("species=",species)
+  q.fields <- paste("fields=name",
+                    "symbol",
+                    "entrezgene",
+                    "ensembl.gene",
+                    "summary",
+                    sep = ",")
+  q <- paste(q.symbol,size,q.species,q.fields, sep = "&")
+  
+  api_url <- paste0(base_url,"q=",q)
+  
+  tryCatch({
+    response <- httr::GET(api_url)
+    
+    # Check if the request was successful (status code 200)
+    if (status_code(response) == 200) {
+      
+      # Parse the JSON response
+      response_content <- httr::content(response, as = "text", encoding = "UTF-8")
+      parsed_data <- fromJSON(response_content)
+      
+      # Extract relevant fields from the response
+      
+      gene_symbol <- parsed_data$hits[["symbol"]]
+      gene_name   <- parsed_data$hits[["name"]]
+      gene_entrezgene   <- ifelse(parsed_data$hits[["entrezgene"]],
+                                  "NA", parsed_data$hits[["entrezgene"]])
+      gene_ensembl   <- ifelse(is.null(parsed_data$hits[["ensembl"]]),
+                               "NA", parsed_data$hits[["ensembl"]])
+      gene_summary <- ifelse(is.null(parsed_data$hits[["summary"]]),
+                             "NA", parsed_data$hits[["summary"]])
+      
+      result <- paste0(
+        "<strong>Gene Symbol:</strong> ",
+        gene_symbol, "</br>",
+        "<strong>Name:</strong> ",
+        gene_name, "</br>",
+        "<strong>Entrez Id:</strong> ",
+        gene_entrezgene, "</br>",
+        "<strong>Ensembl Id:</strong> ",
+        gene_ensembl, "</br>",
+        "<strong>Summary:</strong> ",
+        gene_summary
+      )
+      
+      return(HTML(result))
+      
+    } else {
+      # If the request failed, return the status code and message
+      return(
+        "No information found. Please use google."
+        #paste("Error:", status_code(response))
+      )
+    }
+    
+  })
+}
+
+
+
+
+gene_info_rgd <- function(gene, species = NULL){
   
   
   tryCatch({
