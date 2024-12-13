@@ -40,6 +40,7 @@ gene_annotated <- function(gene,
   
   base_url <- "https://mygene.info/v3/gene/"
   gene <- gene
+  species <- paste0("species=",species)
   
   fields <- paste("fields=name",
                   "symbol",
@@ -49,7 +50,7 @@ gene_annotated <- function(gene,
                   sep = ",")
   
   
-  api_url <- paste0(base_url,gene,"?",fields)
+  api_url <- paste0(base_url,gene,"?",species,"&",fields)
   
   tryCatch({
     response <- httr::GET(api_url)
