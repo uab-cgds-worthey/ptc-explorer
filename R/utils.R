@@ -64,9 +64,11 @@ gene_annotated <- function(gene,
       
       # Extract relevant fields from the response
       
-      gene_symbol <- parsed_data[["symbol"]]
-      gene_name   <- parsed_data[["name"]]
-      gene_entrezgene   <- ifelse(parsed_data[["entrezgene"]],
+      gene_symbol <- ifelse(is.null(parsed_data[["symbol"]]),
+                            "NA", parsed_data[["symbol"]])
+      gene_name   <- ifelse(is.null(parsed_data[["name"]]),
+                                    "NA", parsed_data[["name"]])
+      gene_entrezgene   <- ifelse(is.null(parsed_data[["entrezgene"]]),
                                   "NA", parsed_data[["entrezgene"]])
       gene_ensembl   <- ifelse(is.null(parsed_data$ensembl[["gene"]]),
                                "NA", parsed_data$ensembl[["gene"]])
@@ -130,34 +132,46 @@ gene_query <- function(gene,
       response_content <- httr::content(response, as = "text", encoding = "UTF-8")
       parsed_data <- fromJSON(response_content)
       
-      # Extract relevant fields from the response
+      if(length(parsed_data$hits) == 0){
+        gene_annotated(gene)
+      }
+      else{
+        # Extract relevant fields from the response
+        
+        gene_symbol <- ifelse(is.null(parsed_data$hits[["symbol"]]),
+                                      "NA", parsed_data$hits[["symbol"]])
+        gene_name   <- ifelse(is.null(parsed_data$hits[["name"]]),
+                                      "NA", parsed_data$hits[["name"]])
+        gene_entrezgene   <- ifelse(is.null(parsed_data$hits[["entrezgene"]]),
+                                    "NA", parsed_data$hits[["entrezgene"]])
+        gene_ensembl   <- ifelse(is.null(parsed_data$hits[["ensembl"]]),
+                                 "NA", parsed_data$hits[["ensembl"]])
+        gene_summary <- ifelse(is.null(parsed_data$hits[["summary"]]),
+                               "NA", parsed_data$hits[["summary"]])
+        
+        result <- paste0(
+          "<strong>Gene Symbol:</strong> ",
+          gene_symbol, "</br>",
+          "<strong>Name:</strong> ",
+          gene_name, "</br>",
+          "<strong>Entrez Id:</strong> ",
+          gene_entrezgene, "</br>",
+          "<strong>Ensembl Id:</strong> ",
+          gene_ensembl, "</br>",
+          "<strong>Summary:</strong> ",
+          gene_summary
+        )
+        
+        return(HTML(result))
+        
+      }
+    
       
-      gene_symbol <- parsed_data$hits[["symbol"]]
-      gene_name   <- parsed_data$hits[["name"]]
-      gene_entrezgene   <- ifelse(parsed_data$hits[["entrezgene"]],
-                                  "NA", parsed_data$hits[["entrezgene"]])
-      gene_ensembl   <- ifelse(is.null(parsed_data$hits[["ensembl"]]),
-                               "NA", parsed_data$hits[["ensembl"]])
-      gene_summary <- ifelse(is.null(parsed_data$hits[["summary"]]),
-                             "NA", parsed_data$hits[["summary"]])
-      
-      result <- paste0(
-        "<strong>Gene Symbol:</strong> ",
-        gene_symbol, "</br>",
-        "<strong>Name:</strong> ",
-        gene_name, "</br>",
-        "<strong>Entrez Id:</strong> ",
-        gene_entrezgene, "</br>",
-        "<strong>Ensembl Id:</strong> ",
-        gene_ensembl, "</br>",
-        "<strong>Summary:</strong> ",
-        gene_summary
-      )
-      
-      return(HTML(result))
-      
-    } else {
+    }
+    else {
       # If the request failed, return the status code and message
+      
+     
       return(
         "No information found. Please use google."
         #paste("Error:", status_code(response))

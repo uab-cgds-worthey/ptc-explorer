@@ -44,11 +44,11 @@ function(input, output, session) {
   gene_infoServer("sel_gene_t_vs_n",
                   res.t_vs_n.sel,
                   clean_sig_df(res.T_vs_N),
-                  1)
+                  2)
   gene_infoServer("sel_gene_PTC_vs_FTC",
                   res.PTC_vs_FTC.sel,
                   clean_sig_df(res.PTC_vs_FTC),
-                  1)
+                  2)
   
   volcanoServer(
     "vol_aff_unaff",

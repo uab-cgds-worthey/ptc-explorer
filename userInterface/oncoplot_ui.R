@@ -35,8 +35,8 @@ onco_plot <- fluidPage(
     column(8, 
           
            originalHeatmapOutput("ht", 
-                                 width = 1550,
-                                 height = 2000,
+                                 width = 1400,
+                                 height = 2150,
                                  title = "Interactive Oncoplot: Select area to zoom")
     ),
     column(4,
