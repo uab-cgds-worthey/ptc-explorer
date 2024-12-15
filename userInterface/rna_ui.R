@@ -14,11 +14,9 @@ rna_page <- fluidPage(
            tags$img(src = "img/pca_label_batch-corr_b&w_pid.png", 
                     style = "width: 90%; height: auto;"
            )
-           # plotOutput("pca_cell_1")
     ),
     column(6,
            h4('Tumor Samples: PTCPlusThy vs FTC'),
-           # plotOutput("pca_cell_2")
            tags$img(src = "img/pca_label_batch-corr_subtypes_pid.png", 
                     style = "width: 90%; height: auto;"
            )
@@ -46,7 +44,6 @@ rna_page <- fluidPage(
            gene_infoUI("sel_gene_PTC_vs_FTC")
     )
   ),
-  #br(),
   hr(),
   fluidRow(
     column(6, 
@@ -71,7 +68,6 @@ rna_page <- fluidPage(
     column(6,
            gprofilerUI("go_PTC_vs_FTC")
     )
-    
   ),
   br(),
   hr(),
