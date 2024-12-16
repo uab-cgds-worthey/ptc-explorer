@@ -1,32 +1,41 @@
 # Load libraries/ Source Files
 library(shiny)
-library(plotly)
-library(EnhancedVolcano)
-library(data.table)
-library(DT)
-library(rmarkdown)
+# library(data.table)
 library(shinybusy)
+library(shinycssloaders)
+library(shinyWidgets)
+
+# library(rmarkdown)
+## Plots and data manipulation
+library(dplyr)
 library(reshape2)
-library(pheatmap)
+library(scales) 
+library(stringr)
+library(RColorBrewer)
+library(plotly)
+
+# Tables
+library(DT)
+library(reactable)
+
+# Oncoplot
 library(ComplexHeatmap)
 library(InteractiveComplexHeatmap)
+
+# API calls
 library(httr)
 library(jsonlite)
+
+## Special plotting
+# library(pheatmap)
+library(EnhancedVolcano)
 library(enrichR)
 library(gprofiler2)
 
-library(reactable)
 detach("package:shiny", unload = TRUE)
 library(shiny)
 # library(promises)
 # library(future)
-library(shinycssloaders)
-library(dplyr)
-library(shinyWidgets)
-library(scales) 
-library(stringr)
-library(RColorBrewer)
-
 
 # plan(multisession)
 
