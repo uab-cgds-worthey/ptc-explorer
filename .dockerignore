@@ -1,0 +1,26 @@
+# Excluding directories
+dev
+docs
+/archive
+data/
+dev/
+.github/
+.git
+
+# Excluding files
+*.Rproj
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rbuildignore
+*.tar.gz
+.Renviron
+*.pptx
+.gitignore
+.DS_Store
+*.txt
+.DS_Store
+README.md
+trash.R
+

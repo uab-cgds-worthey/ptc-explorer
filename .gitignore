@@ -1,5 +1,15 @@
 *.Rproj
+*.RData
 .Rproj.user
 .Rhistory
-.RData
 .Ruserdata
+.Renviron
+*.pptx
+.DS_Store
+*.tar.gz
+trash.R
+data
+modules
+dev
+docs
+/archive
