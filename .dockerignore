@@ -9,9 +9,9 @@
 .gitignore
 .DS_Store
 .git
+README.md
 trash.R
-data
-modules
 dev
 docs
+data
 /archive
