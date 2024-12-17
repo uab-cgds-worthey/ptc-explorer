@@ -7,13 +7,15 @@ RUN R -e 'install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocM
 
 Run R -e 'BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))'
 
-RUN R -e 'install.packages(c("enrichR"))'
+RUN R -e 'install.packages("devtools")'
+
+RUN R -e 'devtools::install_github("wjawaid/enrichR")'
 
 RUN mkdir /home/PTC
- 
+
 # Copy the Shiny app code
 COPY . /home/PTC
- 
+
 # Expose the application port
 EXPOSE 3838
 

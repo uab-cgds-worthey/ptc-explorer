@@ -1,12 +1,12 @@
 *.Rproj
+*.RData
 .Rproj.user
 .Rhistory
-.RData
 .Ruserdata
 .Renviron
-*.RData
 *.pptx
 .DS_Store
+*.tar.gz
 trash.R
 data
 modules

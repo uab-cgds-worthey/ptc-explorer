@@ -1,17 +1,27 @@
+# Excluding directories
+dev
+docs
+/archive
+data/
+trash/
+dev/
+.github/
+.git
+
+# Excluding files
 *.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.Rbuildignore
+*.tar.gz
 .Renviron
-*.RData
 *.pptx
 .gitignore
 .DS_Store
-.git
+*.txt
+.DS_Store
 README.md
 trash.R
-dev
-docs
-data
-/archive
+
