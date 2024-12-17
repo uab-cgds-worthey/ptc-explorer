@@ -1,0 +1,17 @@
+*.Rproj
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+*.RData
+*.pptx
+.gitignore
+.DS_Store
+.git
+trash.R
+data
+modules
+dev
+docs
+/archive
