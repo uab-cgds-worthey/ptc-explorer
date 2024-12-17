@@ -84,8 +84,7 @@ function(input, output, session) {
   output$rna_fusion_4 <- renderPlotly({
     p <- ggplot(rna_fusion_df, aes(x = Participant_id, y = Gene_Fusion)) +
       geom_point(aes(color = Phenotype_Subtype), size = 4) +
-      labs(title = "Gene Fusions by Participant,
-           Grouped by Phenotype Subtype",
+      labs(title = "Gene Fusions by Participant; Grouped by Phenotype Subtype",
            x = "Participant ID",
            y = "Gene Fusion") +
       scale_color_brewer(palette = "Set2") +  # Color based on phenotype subtype
@@ -104,6 +103,14 @@ function(input, output, session) {
     ggplotly(p)
     
   })
+  
+  reactableServer("rna_fusion_tbl",
+                  rna_fusion_df[, c(1,2,6,7,4,5)],
+                  defaultColDef = colDef(na = "NA"),
+                  defaultPageSize = 25,
+                  reactive_tbl = FALSE,
+                  bordered = TRUE)
+  
   
   #### Genomics Analysis / WES page
   

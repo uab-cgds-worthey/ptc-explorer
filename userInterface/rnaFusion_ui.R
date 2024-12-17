@@ -11,5 +11,11 @@ rnaFusion_page <- fluidPage(
     plotlyOutput("rna_fusion_4",  height = "1200px")
   )),
   hr(),
-  br()
+  fluidRow(
+    column(12, 
+           reactableUI("rna_fusion_tbl")
+    )
+  ),
+  br(),
+  hr()
 )

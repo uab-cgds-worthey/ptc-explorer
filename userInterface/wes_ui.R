@@ -7,7 +7,8 @@ wes_page <- fluidPage(
   ),
   hr(),
   fluidRow(
-    column(12,
+    column(4,),
+    column(8,
            
            tabsetPanel(
              type = "tabs",
@@ -18,13 +19,13 @@ wes_page <- fluidPage(
                )
              ),
              tabPanel(
-               title = "SBS Signature Image 1",
+               title = "SBS Signature Group 1",
                tags$img(src = "img/mutational_sign_0.png", 
                         style = "width: auto; height: 90%;"
                )
              ),
              tabPanel(
-               title = "SBS Signature Image 2",
+               title = "SBS Signature Group 2",
                tags$img(src = "img/mutational_sign_1.png", 
                         style = "width: auto; height: 90%;"
                )

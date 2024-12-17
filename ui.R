@@ -1,5 +1,9 @@
+
 navbarPage(
-     'Pediatric Thyroid Cancer Explorer',
+     title = 'Pediatric Thyroid Cancer Explorer',
+     tags$head(
+        tags$link(rel = "stylesheet", type = "text/css", href = "css/style.css")
+     ),
       tabPanel('About', home_page),
       tabPanel('By Gene', geneSearch_page),
       tabPanel('Variant Distribution', onco_plot),
