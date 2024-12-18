@@ -2,7 +2,7 @@
 
 Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (\<19 years).
 
-## Current analysis included:
+## Current analysis includes:
 -   Sample Feature Exploration
 -   Variant Analysis
 -   Interactive Variant-Expression Oncoplot
