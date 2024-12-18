@@ -9,7 +9,6 @@
 *.tar.gz
 trash.R
 data
-modules
 dev
 docs
 /archive
