@@ -178,4 +178,3 @@ gene_query <- function(gene,
     
   })
 }
-}
