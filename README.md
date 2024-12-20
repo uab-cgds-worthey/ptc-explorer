@@ -35,7 +35,13 @@ git clone "https://github.com/uab-cgds-worthey/ptc-app.git"
 cd ptc-app
 ```
 
-Step 2: Install R packages
+Step 2: Run R in terminal or skip this step if using R Studio
+
+``` bash
+R
+```
+
+Step 3: Install R packages
 
 ``` r
 install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2","scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
