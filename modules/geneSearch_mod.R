@@ -45,18 +45,26 @@ geneSearchUI <- function(id) {
            #          )),
            # hr(),
            fluidRow(class = "text-center",
-             column(6, style = "border-right: 2px solid #ccc; padding-right: 10px;", 
+             column(2,),
+             column(8, style = "padding-right: 10px;", #border-right: 2px solid #ccc; 
                     h3("Variant Analysis",
                        style = "color: darkgreen; font-weight: 900;"),
                     hr(),
                     reactableUI(ns("variant_df_by_gene")),
              ),
-             column(6,
-                    h3("RNA-Fusion Analysis",
-                       style = "color: darkgreen; font-weight: 900;"),
-                    hr(),
-                    reactableUI(ns("rnafusion_df_by_gene")))
+             column(2,)
            ),
+           hr(),
+           fluidRow(class = "text-center",
+                  column(2,),
+                   column(8,
+                          h3("RNA-Fusion Analysis",
+                             style = "color: darkgreen; font-weight: 900;"),
+                          hr(),
+                          reactableUI(ns("rnafusion_df_by_gene"))),
+                  column(2,)
+           ),
+                    
            # br(),
            hr(),
            # fluidRow(class = "text-center",
@@ -65,16 +73,20 @@ geneSearchUI <- function(id) {
            #          )),
            # hr(),
            fluidRow(class = "text-center",
+                    column(12,
+                           h3("Differentially Expressed Genes",
+                              style = "color: darkgreen; font-weight: 900;"),
+                           )
+           ),
+           fluidRow(class = "text-center",
              column(6, style = "border-right: 2px solid #ccc; padding-right: 10px;", 
-                    h3("Differentially Expressed Genes",
-                       style = "color: darkgreen; font-weight: 900;"),
+                    # h3("Differentially Expressed Genes",
+                    #    style = "color: darkgreen; font-weight: 900;"),
                     hr(),
                     h4('All Samples: Tumor Vs Normal'),
                     reactableUI(ns("dds_all_deg_by_gene"))
              ),
              column(6,
-                    h3("Differentially Expressed Genes",
-                       style = "color: darkgreen; font-weight: 900;"),
                     hr(),
                     h4('Tumor Samples: PTCPlusThy vs FTC'),
                     reactableUI(ns("dds_subtype_deg_by_gene"))
@@ -146,7 +158,7 @@ geneSearchServer <- function(id, geneList, var_table, deg_t_vs_n,
       
       reactableServer("variant_df_by_gene",
                       filtered_gene_df,
-                      null_msg = "This gene is not found to be significantly participating in our variant analysis.", fullWidth = FALSE)
+                      null_msg = "This gene is not found to be significantly participating in our variant analysis.")
       
       
       
