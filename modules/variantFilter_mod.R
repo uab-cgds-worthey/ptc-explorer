@@ -107,8 +107,7 @@ variantFilterServer <- function(id, variant_table) {
           temp_var_df <- temp_var_df[temp_var_df$Chromosome %in% paste0("chr", input$chr_var), ]
           
  
-          if (length(input$gene_var) > 1 &&
-              !("All" %in% input$gene_var)) {
+          if (!("All" %in% input$gene_var)) {
             temp_var_df <- temp_var_df[temp_var_df$Gene %in% input$gene_var, ]
             
           }
