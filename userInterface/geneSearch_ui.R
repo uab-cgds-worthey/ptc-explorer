@@ -1,3 +1,3 @@
-geneSearch_page <- fluidPage(
-  geneSearchUI("geneSearch_main")
+gene_search_page <- fluidPage(
+  gene_search_ui("geneSearch_main")
 )
