@@ -30,13 +30,12 @@ function(input, output, session) {
                                 res = 110)
   #### RNA-seq tab
   res_ptc_vs_ftc_sel <- dt_server("dds_all_deg",
-                                      clean_sig_df(res_t_vs_n,
-                                                   rename_cols = TRUE),
-                                      return_row = TRUE)
+                                  clean_sig_df(res_t_vs_n, rename_cols = TRUE),
+                                  return_row = TRUE)
   res_ptc_vs_ftc_sel <- dt_server("dds_subtype_deg",
-                                      clean_sig_df(res_ptc_vs_ftc,
-                                                   rename_cols = TRUE),
-                                      return_row = TRUE)
+                                  clean_sig_df(res_ptc_vs_ftc,
+                                               rename_cols = TRUE),
+                                  return_row = TRUE)
   gene_info_server("sel_gene_t_vs_n",
                    res_ptc_vs_ftc_sel,
                    clean_sig_df(res_t_vs_n),

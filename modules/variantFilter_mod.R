@@ -1,16 +1,10 @@
 variant_filter_ui <- function(id) {
   ns <- NS(id)
-  tagList(fluidRow(
-    column(3,
-            br(),
-            br(),
-            uiOutput(
-              ns("variant_filters")
-            )),
-     column(9,
-            reactable_ui(
-              ns("sample_variant_df")
-            ))))
+  tagList(fluidRow(column(3, br(), br(), uiOutput(
+    ns("variant_filters")
+  )), column(9, reactable_ui(
+    ns("sample_variant_df")
+  ))))
 }
 
 variant_filter_server <- function(id, variant_table) {
@@ -94,7 +88,7 @@ variant_filter_server <- function(id, variant_table) {
                      }
                      if (!("All" %in% input$gene_var)) {
                        temp_var_df <- temp_var_df[temp_var_df$Gene %in%
-                                                  input$gene_var, ]
+                                                    input$gene_var, ]
                      }
                      filtered_sample_variants(temp_var_df)
                    }
@@ -110,12 +104,12 @@ variant_filter_server <- function(id, variant_table) {
                    columns = list(
                      `DITTO Score` = colDef(
                        style = function(value) {
-                        normalized <-
-                             (value - min(variant_table$`DITTO Score`)) /
-                             (max(variant_table$`DITTO Score`) -
-                                min(variant_table$`DITTO Score`))
-                           color <- ditto_pal(normalized)
-                           list(fontWeight = 700, color = color)
+                         normalized <-
+                           (value - min(variant_table$`DITTO Score`)) /
+                           (max(variant_table$`DITTO Score`) -
+                            min(variant_table$`DITTO Score`))
+                         color <- ditto_pal(normalized)
+                         list(fontWeight = 700, color = color)
                        }
                      ),
                      `Germline Class` = colDef(
