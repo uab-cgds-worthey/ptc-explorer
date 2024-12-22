@@ -8,10 +8,10 @@ Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exp
 
 ## Requirements
 
--   R (4.4.2)
--   R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
--   R Packages listed in global.R
--   Minimum 1GB RAM
+- R (4.4.2)
+- R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
+- R Packages listed in global.R
+- Minimum 1GB RAM
 
 ## How to run
 
@@ -75,17 +75,12 @@ $ tree -a ptc-app/
 ├── R/                  <-  Utility functions
 │
 ├── Dockerfile          <-  For containerization
-│
-├── .github
-│   ├── ISSUE_TEMPLATE            <- Github issue templates
-│   │   ├── bug_report.md
-│   │   └── feature_request.md
-│   ├── PULL_REQUEST_TEMPLATE     <- Github PR templates
-│   │   └── pull_request_template.md
-│   └── workflows                 <- Github actions workflows for automated processes (eg. linting, etc)
-│       └── linting.yml
 ```
 
 ## Contributing
 
 We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
+
+## Author
+
+Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
