@@ -7,9 +7,37 @@ function(input, output, session) {
                     meta_num_cols)
   reactable_server(
     "sample_meta_df",
-    sample_meta_display,
-    defaultColDef = colDef(na = "NA"),
+    sample_meta_display %>% 
+      mutate(across(where(is.factor), ~ gsub("_", " ", .))),
+#    sample_meta_display,
+    defaultColDef = colDef(na = "NA", minWidth = 95),
+    columns = list(
+      `Participant id` = colDef(
+        minWidth = 85,
+      ),
+      `TI RADS Score` = colDef(
+        minWidth = 60,
+      ),
+      `Age at diagnosis` = colDef(
+      minWidth = 120,
+      name = "Age at diagnosis / Sex",
+      # Show species under character names
+      cell = function(value, index) {
+        Sex <- sample_meta_display$Sex[index]
+        Sex <- if (!is.na(Sex)) Sex else "Unknown"
+        div(
+          div(style = list(fontWeight = 600),
+              value),
+          div(style = list(#fontSize = "1rem"
+            ),
+              Sex)
+        )
+      }
+    ),
+      Sex = colDef(show = FALSE)
+    ),
     defaultPageSize = 25,
+    fullWidth = TRUE,
     reactive_tbl = FALSE,
     bordered = TRUE
   )
@@ -60,8 +88,8 @@ function(input, output, session) {
     res_ptc_vs_ftc_sel,
     2
   )
-  gprofiler_server("go_t_vs_n", gostres_t_vs_n, input_gostres = TRUE)
-  gprofiler_server("go_PTC_vs_FTC", gostres_ptc_vs_ftc, input_gostres = TRUE)
+  # gprofiler_server("go_t_vs_n", gostres_t_vs_n, input_gostres = TRUE)
+  # gprofiler_server("go_PTC_vs_FTC", gostres_ptc_vs_ftc, input_gostres = TRUE)
   enrichr_server_mod("enrichr_t_vs_n",
                      enrichr_t_vs_n,
                      enrichr_dbs,
@@ -92,13 +120,17 @@ function(input, output, session) {
       )
     ggplotly(p)
   })
-  reactable_server(
-    "rna_fusion_tbl",
-    rna_fusion_df[, c(1, 2, 6, 7, 4, 5)],
-    defaultColDef = colDef(na = "NA"),
-    defaultPageSize = 25,
-    reactive_tbl = FALSE,
-    bordered = TRUE
-  )
+  
+  fusion_filter_server("rna_fusion_tbl",
+                       rna_fusion_df)
+  
+  # reactable_server(
+  #   "rna_fusion_tbl",
+  #   rna_fusion_df[, c(1, 2, 6, 7, 4, 5)],
+  #   defaultColDef = colDef(na = "NA"),
+  #   defaultPageSize = 100,
+  #   reactive_tbl = FALSE,
+  #   bordered = TRUE
+  # )
   #### Genomics Analysis / WES page
 }

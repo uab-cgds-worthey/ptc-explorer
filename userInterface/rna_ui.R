@@ -24,13 +24,13 @@ rna_page <- fluidPage(
     column(
       6,
       add_busy_bar(),
-      h4("All Samples: Tumor Vs Normal"),
+      h4("Sample-wise PCA"),
       tags$img(src = "img/pca_label_batch-corr_b&w_pid.png",
                style = "width: 90%; height: auto;")
     ),
     column(
       6,
-      h4("Tumor Samples: PTCPlusThy vs FTC"),
+      h4("Subtype-wise PCA"),
       tags$img(src = "img/pca_label_batch-corr_subtypes_pid.png",
                style = "width: 90%; height: auto;")
     )
@@ -40,7 +40,7 @@ rna_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,
-             h3("Differentially Expressed Genes"),
+             h3("Differential Genes Expression Analysis"),
              tags$p(
                "Differential gene expression analysis identified the 
                differentially expressed genes (DEGs) for the 
@@ -75,24 +75,24 @@ rna_page <- fluidPage(
     h4("Tumor Samples: PTCPlusThy vs FTC"),
     volcano_ui("vol_ptc_vs_ftc")
   )),
+  # br(),
+  # hr(),
+  # fluidRow(class = "text-center",
+  #          column(
+  #            12,
+  #            h3("Enrichment Anlaysis using: gProfiler")
+  #          )),
+  # hr(),
+  # fluidRow(column(6,
+  #                 gprofiler_ui("go_t_vs_n")),
+  #          column(6,
+  #                 gprofiler_ui("go_PTC_vs_FTC"))),
   br(),
   hr(),
   fluidRow(class = "text-center",
            column(
              12,
-             h3("Enrichment Anlaysis using: gProfiler")
-           )),
-  hr(),
-  fluidRow(column(6,
-                  gprofiler_ui("go_t_vs_n")),
-           column(6,
-                  gprofiler_ui("go_PTC_vs_FTC"))),
-  br(),
-  hr(),
-  fluidRow(class = "text-center",
-           column(
-             12,
-             h3("Enrichment Anlaysis using: Enrichr databases")
+             h3("Enrichment Anlaysis")
            )),
   hr(),
   fluidRow(column(6,

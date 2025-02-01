@@ -5,66 +5,122 @@ gene_search_ui <- function(id) {
     column(
       12,
       fluidRow(
-        column(
-          12,
-          style = "display: flex; flex-direction: column;
-          justify-content: center; 
-          align-items: center; height: 100%;",
-          selectizeInput(
-            ns("gene_name"),
-            "Select a gene symbol",
-            choices = NULL,
-            width = "550px"
+        column(6,
+               style = "display: flex; flex-direction: column;
+          justify-content: left; 
+          align-items: left; height: 100%;",
+               fluidRow(
+                 column(6,
+                        selectizeInput(
+                          ns("gene_type"),
+                          "Select a gene category",
+                          choices = c("All Genes","Candidate Genes"),
+                          width = "550px"
+                        ),
+                        ),
+                 column(6,
+                   selectizeInput(
+                     ns("gene_name"),
+                     "Select a gene symbol",
+                     choices = NULL,
+                     width = "550px"
+                   )
+                 )
+               ),
+               h4(
+                 "'All Genes' - This is an aggregated list of significant genes in our 
+          whole exome, bulk RNA-seq and downstream analysis."
+               ),
+               h4(
+                 "'Candidate Genes' - This is an aggregated list of candidate genes (genes of interest) in our 
+          whole exome, bulk RNA-seq and downstream analysis."
+               ),
+               h4(
+                 "Select or search a gene to display gene annotation and it's participation in our dataset."
+               )
           ),
-          h4(
-            "This is an aggregated list of significant genes in our 
-            whole exome, bulk RNA-seq and downstream analysis. Select or 
-            search a gene to display gene annotation and it's 
-            participation in our dataset."
-          )
+        column(
+          6,
+          h3("Gene Information", class = "text-center",
+             style = "color: darkgreen; font-weight: 900;"),
+          hr(),
+          uiOutput(ns("gene_info_main"))
         ),
       ),
+      # hr(),
+      # fluidRow(
+      #   column(
+      #     12,
+      #     style = "display: flex; flex-direction: column;
+      #     justify-content: center; 
+      #     align-items: center; height: 100%;",
+      #     selectizeInput(
+      #       ns("gene_name"),
+      #       "Select a gene symbol",
+      #       choices = NULL,
+      #       width = "550px"
+      #     ),
+      #     h4(
+      #       "This is an aggregated list of significant genes in our 
+      #       whole exome, bulk RNA-seq and downstream analysis. Select or 
+      #       search a gene to display gene annotation and it's 
+      #       participation in our dataset."
+      #     )
+      #   ),
+      # ),
       br(),
       hr(),
+      # fluidRow(column(
+      #   12,
+      # )),
+      # hr(),
       fluidRow(column(
         12,
-        h3("Gene Information", class = "text-center",
+        h3("Gene Expression Distribution", class = "text-center",
            style = "color: darkgreen; font-weight: 900;"),
         hr(),
-        uiOutput(ns("gene_info_main"))
+        #uiOutput(ns("gene_exp_dist"))
       )),
+      # hr(),
+      # fluidRow(column(
+      #   12,
+      #   h3("Gene Expression Distribution", class = "text-center",
+      #      style = "color: darkgreen; font-weight: 900;"),
+      #   hr(),
+      #   #uiOutput(ns("gene_exp_dist"))
+      # )),
       hr(),
       fluidRow(
         class = "text-center",
-        column(2, ),
+        column(1, ),
         column(
-          8,
+          10,
           style = "padding-right: 10px;",
           h3("Variant Analysis",
              style = "color: darkgreen; font-weight: 900;"),
           hr(),
           reactable_ui(ns("variant_df_by_gene")),
         ),
-        column(2, )
+        column(1, )
       ),
       hr(),
       fluidRow(
         class = "text-center",
-        column(2, ),
+        column(1, ),
         column(
-          8,
+          10,
           h3("RNA-Fusion Analysis",
              style = "color: darkgreen; font-weight: 900;"),
           hr(),
           reactable_ui(ns("rnafusion_df_by_gene"))
         ),
-        column(2, )
+        column(1, )
       ),
       hr(),
       fluidRow(class = "text-center",
                column(
                  12,
-                 h3("Differentially Expressed Genes",
+                 h3("Differential Gene Expression Analysis",
                     style = "color: darkgreen; font-weight: 900;"),
                )),
       fluidRow(
@@ -91,21 +147,34 @@ gene_search_ui <- function(id) {
 
 gene_search_server <- function(id,
                                gene_list,
+                               candidate_gene_list,
                                var_table,
                                deg_t_vs_n,
                                deg_ptc_vs_ftc,
                                fusion_table) {
   moduleServer(id,
                function(input, output, session) {
-                 updateSelectizeInput(
-                   session,
-                   "gene_name",
-                   choices = gene_list,
-                   selected = "BRAF",
-                   server = TRUE
-                 )
+                 
+                 observeEvent(input$gene_type, {
+                   if(input$gene_type == "All Genes"){
+                     gene_list_in <- gene_list
+                   } else {
+                     gene_list_in <- "BRAF"
+                   }
+                   
+                   updateSelectizeInput(
+                     session,
+                     "gene_name",
+                     choices = gene_list_in,
+                     selected = "BRAF",
+                     server = TRUE
+                   )
+                   
+                 })
+                 
                  filtered_gene_df <- reactiveVal(var_table)
                  observeEvent(input$gene_name, {
+                   
                    validate(need(!is.null(input$gene_name),
                                  "Please select a gene"))
                    temp_gene_df <-
