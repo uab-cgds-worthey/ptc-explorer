@@ -33,7 +33,7 @@ detach("package:shiny", unload = TRUE)
 library(shiny)
 
 # Load data/connections
-app_data_main <- readRDS("data/app_data_pack_dec10.rds")
+app_data_main <- readRDS("data/app_data_pack_feb1_2025.rds")
 
 sample_meta <- app_data_main$meta
 sample_variants <- app_data_main$variant
@@ -47,6 +47,7 @@ meta_fact_cols <- app_data_main$meta_fact_col
 meta_num_cols <- app_data_main$meta_num_col
 
 all_genes_main <- app_data_main$all_genes
+candidate_genes_main <- app_data_main$candidate_gens
 
 oncoplot_rds <- readRDS("data/oncoplot_boxplot_2024-12-20.rds")
 

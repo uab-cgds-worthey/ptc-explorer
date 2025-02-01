@@ -165,8 +165,8 @@ gene_search_server <- function(id,
                    updateSelectizeInput(
                      session,
                      "gene_name",
-                     choices = gene_list_in,
-                     selected = "BRAF",
+                     choices = candidate_gene_list,
+                     selected = candidate_gene_list[1],
                      server = TRUE
                    )
                    

@@ -81,7 +81,7 @@ fusion_filter_server <- function(id, fusion_table) {
                      print(nrow(fusion_table))
                      temp_var_df <-  fusion_table
                      temp_var_df <-
-                       temp_var_df[temp_var_df$Known_Fusion %in%
+                       temp_var_df[temp_var_df$Known %in%
                                      input$known_var, ]
                  #     temp_var_df <-
                  #       temp_var_df[temp_var_df$`fusion Type` %in%

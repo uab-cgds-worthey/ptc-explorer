@@ -41,15 +41,7 @@ function(input, output, session) {
     reactive_tbl = FALSE,
     bordered = TRUE
   )
-  #### By gene search page
-  gene_search_server(
-    "geneSearch_main",
-    gene_list = all_genes_main,
-    var_table = sample_variants,
-    deg_t_vs_n = res_t_vs_n,
-    deg_ptc_vs_ftc = res_ptc_vs_ftc,
-    fusion_table = rna_fusion_df
-  )
+ 
   #### Oncoplot and sample variant tab
   variant_filter_server("variant_table_with_filters", sample_variants)
   makeInteractiveComplexHeatmap(input, output, session,
@@ -57,7 +49,7 @@ function(input, output, session) {
                                 "ht",
                                 res = 110)
   #### RNA-seq tab
-  res_ptc_vs_ftc_sel <- dt_server("dds_all_deg",
+  res_t_vs_n_sel <- dt_server("dds_all_deg",
                                   clean_sig_df(res_t_vs_n, rename_cols = TRUE),
                                   return_row = TRUE)
   res_ptc_vs_ftc_sel <- dt_server("dds_subtype_deg",
@@ -65,7 +57,7 @@ function(input, output, session) {
                                                rename_cols = TRUE),
                                   return_row = TRUE)
   gene_info_server("sel_gene_t_vs_n",
-                   res_ptc_vs_ftc_sel,
+                   res_t_vs_n_sel,
                    clean_sig_df(res_t_vs_n),
                    2)
   gene_info_server("sel_gene_PTC_vs_FTC",
@@ -77,7 +69,7 @@ function(input, output, session) {
     res_t_vs_n,
     "Affected vs Unaffected Samples",
     clean_sig_df(res_t_vs_n),
-    res_ptc_vs_ftc_sel,
+    res_t_vs_n_sel,
     2
   )
   volcano_server(
@@ -122,7 +114,7 @@ function(input, output, session) {
   })
   
   fusion_filter_server("rna_fusion_tbl",
-                       rna_fusion_df)
+                       rna_fusion_df[, -12])
   
   # reactable_server(
   #   "rna_fusion_tbl",
@@ -133,4 +125,16 @@ function(input, output, session) {
   #   bordered = TRUE
   # )
   #### Genomics Analysis / WES page
+  
+  
+  #### Gene search page
+  gene_search_server(
+    "geneSearch_main",
+    gene_list = all_genes_main,
+    var_table = sample_variants,
+    deg_t_vs_n = res_t_vs_n,
+    deg_ptc_vs_ftc = res_ptc_vs_ftc,
+    fusion_table = rna_fusion_df,
+    candidate_gene_list = candidate_genes_main
+  )
 }

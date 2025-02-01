@@ -5,6 +5,7 @@ clean_sig_df <- function(sig_df,
                          rename_cols = FALSE,
                          gene = NULL) {
   padj <- log2FoldChange <- NULL
+  
   if (input_res) {
     sig_df <- subset(sig_df, padj < 0.05 & abs(log2FoldChange) > 1.5)
   }
@@ -12,13 +13,18 @@ clean_sig_df <- function(sig_df,
     sig_df <- sig_df[!duplicated(sig_df$gene_name), ]
     row.names(sig_df) <- sig_df$gene_name
   }
+  # sig_df <- sig_df[, c("gene_name", 
+  #                      "Ensembl_ID")]
   if (rename_cols) {
     colnames(sig_df) <- c("ENTREZ ID",
                           "SYMBOL",
                           "ENSEMBL",
                           "Log2FC",
                           "P-Value",
-                          "Adj. P-Value")
+                          "Adj. P-Value"
+                          # "Gene Type",
+                          # "Synonyms"
+                          )
   }
   if (!is.null(gene)) {
     sig_df <- sig_df[sig_df$SYMBOL %in% gene, ]
