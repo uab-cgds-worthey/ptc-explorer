@@ -22,73 +22,61 @@ fusion_filter_server <- function(id, fusion_table) {
                          choices = c("All", sort(union(rna_fusion_df$geneA,
                                                        rna_fusion_df$geneB))),
                          selected = "All",
+                         width = "100%",
                          multiple = TRUE
                        ),
-                       selectizeInput(
+                       pickerInput(
                          ns("pheno_var"),
                          "Subtypes",
                          choices = c("All", 
                                      unique(fusion_table$Phenotype_Subtype)),
-                         selected = "All",
+                         selected = unique(fusion_table$Phenotype_Subtype),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
                          multiple = TRUE
                        ),
-                       selectizeInput(
+                       pickerInput(
                          ns("known_var"),
                          "Known Fusion Status",
                          choices = c("Yes","No"),
                          selected = c("Yes","No"),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
+                         multiple = TRUE
+                       ),
+                       pickerInput(
+                         ns("classification_var"),
+                         "Classification",
+                         choices = unique(fusion_table$Classification),
+                         selected = unique(fusion_table$Classification),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
                          multiple = TRUE
                        )
                      ),
-                 #     column(
-                 #       6,
-                 #       pickerInput(
-                 #         ns("pheno_var"),
-                 #         "Phenotype",
-                 #         choices = c(unique(fusion_table$Phenotype)),
-                 #         selected =  c(unique(fusion_table$Phenotype)),
-                 #         multiple = TRUE
-                 #       ),
-                 #       pickerInput(
-                 #         ns("type_var"),
-                 #         "fusion Type",
-                 #         choices = c(unique(fusion_table$`fusion Type`)),
-                 #         selected = c(unique(fusion_table$`fusion Type`)),
-                 #         multiple = TRUE
-                 #       ),
-                 #       pickerInput(
-                 #         ns("germ_var"),
-                 #         "Germline Class",
-                 #         choices = c(unique(fusion_table$`Germline Class`)),
-                 #         selected = c(unique(fusion_table$`Germline Class`)),
-                 #         multiple = TRUE
-                 #       )
-                 #     )
                    )
                  })
                  filtered_sample_fusions <- reactiveVal(fusion_table)
                  observeEvent(
                    c(
                      input$pheno_var,
-                     # input$type_var,
-                     # input$germ_var,
-                     # input$chr_var,
+                     input$classification_var,
                      input$gene_var,
                      input$known_var
                    ),
                    {
-                     # print(input$pheno_var)
-                     print(nrow(fusion_table))
+                    # print(nrow(fusion_table))
                      temp_var_df <-  fusion_table
                      temp_var_df <-
                        temp_var_df[temp_var_df$Known %in%
                                      input$known_var, ]
-                 #     temp_var_df <-
-                 #       temp_var_df[temp_var_df$`fusion Type` %in%
-                 #                     input$type_var, ]
-                 #     temp_var_df <-
-                 #       temp_var_df[temp_var_df$`Germline Class` %in%
-                 #                     input$germ_var, ]
+                     
+                     temp_var_df <-
+                       temp_var_df[temp_var_df$Classification %in%
+                                     input$classification_var, ]
                      if (!("All" %in% input$pheno_var)) {
                        temp_var_df <-
                          temp_var_df[temp_var_df$Phenotype_Subtype %in% 
@@ -100,18 +88,30 @@ fusion_filter_server <- function(id, fusion_table) {
                                                     temp_var_df$geneB %in%
                                                     input$gene_var, ]
                      }
-                     print(nrow(temp_var_df))
+                     # print(nrow(temp_var_df))
+                     # print(ncol(temp_var_df))
+                     temp_var_df <- temp_var_df[, c(4,5,2,13,14,1,3,6:12)]
                      filtered_sample_fusions(temp_var_df)
                    }
                  )
-                 # ditto_pal <- function(x) {
-                 #   rgb(colorRamp(c("#e4b1ab", "#cc444b"))(x),
-                 #       maxColorValue = 255)
-                 # }
                  reactable_server(
                    "sample_fusion_df",
-                   filtered_sample_fusions, #[, c(1, 2, 6, 7, 4, 5)],
+                   filtered_sample_fusions,
                    defaultColDef = colDef(na = "NA"),
+                   columns = list(
+                     Classification = colDef(
+                             style = function(value) {
+                               color <- if (value == "Low") {
+                                 "#e0e1dd"
+                               } else if (value == "Moderate") {
+                                 "#fcbf49"
+                               }  else if (value == "High") {
+                                 "#a7c957"
+                               }
+                               list(fontWeight = 700, background = color)
+                             }
+                           )
+                   ),
                    defaultPageSize = 100,
                    reactive_tbl = TRUE,
                    bordered = TRUE

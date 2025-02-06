@@ -11,12 +11,18 @@ gene_search_ui <- function(id) {
           align-items: left; height: 100%;",
                fluidRow(
                  column(6,
-                        selectizeInput(
-                          ns("gene_type"),
-                          "Select a gene category",
+                        radioGroupButtons(
+                          inputId = ns("gene_type"),
+                          label = "Select a gene category",
                           choices = c("All Genes","Candidate Genes"),
-                          width = "550px"
-                        ),
+                          justified = TRUE
+                        )
+                        # selectizeInput(
+                        #   ns("gene_type"),
+                        #   "Select a gene category",
+                        #   choices = c("All Genes","Candidate Genes"),
+                        #   width = "550px"
+                        # ),
                         ),
                  column(6,
                    selectizeInput(
@@ -78,6 +84,9 @@ gene_search_ui <- function(id) {
         12,
         h3("Gene Expression Distribution", class = "text-center",
            style = "color: darkgreen; font-weight: 900;"),
+        div(class = "text-center",
+            uiOutput(ns("ualcan_redirect"))
+        ),
         hr(),
         #uiOutput(ns("gene_exp_dist"))
       )),
@@ -159,14 +168,14 @@ gene_search_server <- function(id,
                    if(input$gene_type == "All Genes"){
                      gene_list_in <- gene_list
                    } else {
-                     gene_list_in <- "BRAF"
+                     gene_list_in <- candidate_gene_list
                    }
                    
                    updateSelectizeInput(
                      session,
                      "gene_name",
-                     choices = candidate_gene_list,
-                     selected = candidate_gene_list[1],
+                     choices = gene_list_in,
+                     selected = gene_list_in[1],
                      server = TRUE
                    )
                    
@@ -177,6 +186,25 @@ gene_search_server <- function(id,
                    
                    validate(need(!is.null(input$gene_name),
                                  "Please select a gene"))
+                   
+                   output$ualcan_redirect <- renderUI({
+                     fluidRow(
+                       column(
+                         12,
+                         tags$h4("UALCAN"),
+                         p(paste0("Exression of ", input$gene_name, " in THCA based on tumor histology subtype")),
+                         tags$a(href = paste0(
+                           "https://ualcan.path.uab.edu/cgi-bin/TCGAExResultNew2.pl?genenam=",
+                           input$gene_name,
+                           "&ctype=THCA&add=1"
+                         ), "Click here to view on UALCAN",
+                         target = "_blank")
+                         )
+                     )
+
+                     
+                   })
+                   
                    temp_gene_df <-
                      var_table[var_table$Gene %in% input$gene_name, ]
                    filtered_gene_df(temp_gene_df)

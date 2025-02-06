@@ -2,15 +2,15 @@ home_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,
-             tags$h2("Pediatric Thyroid Cancer Explorer"),
-             tags$h5(
-               "It is an open-access resource for interactive exploration of 
-               rare pediatric differentiated thyroid cancer. 
-               It characterizes the whole-exome and transcriptome from 
+             #tags$h2("Pediatric Thyroid Cancer Explorer"),
+             tags$p(
+               "Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of 
+               rare pediatric differentiated thyroid cancer."
+             ),
+             tags$p("It characterizes the whole-exome and transcriptome from 
                45 formalin-fixed paraffin-embedded (FFPE) surgical 
                samples (tumor-normal) from pediatric patients with 
-               female predominance (<19 years)."
-             )
+               female predominance (<19 years).")
            )),
   hr(),
   fluidRow(

@@ -66,19 +66,19 @@ function(input, output, session) {
                    2)
   volcano_server(
     "vol_aff_unaff",
-    res_t_vs_n,
+    res_t_vs_n[, -c(1,7,8)],
     "Affected vs Unaffected Samples",
-    clean_sig_df(res_t_vs_n),
+    res_t_vs_n[, -c(1,7,8)],
     res_t_vs_n_sel,
-    2
+    1
   )
   volcano_server(
     "vol_ptc_vs_ftc",
-    res_ptc_vs_ftc,
+    res_ptc_vs_ftc[, -c(1,7,8)],
     "Tumor Samples in PTCPlusThy vs FTC",
-    clean_sig_df(res_ptc_vs_ftc),
+    res_ptc_vs_ftc[, -c(1,7,8)],
     res_ptc_vs_ftc_sel,
-    2
+    1
   )
   # gprofiler_server("go_t_vs_n", gostres_t_vs_n, input_gostres = TRUE)
   # gprofiler_server("go_PTC_vs_FTC", gostres_ptc_vs_ftc, input_gostres = TRUE)

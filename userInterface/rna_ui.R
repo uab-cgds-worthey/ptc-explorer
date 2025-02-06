@@ -42,10 +42,10 @@ rna_page <- fluidPage(
              12,
              h3("Differential Genes Expression Analysis"),
              tags$p(
-               "Differential gene expression analysis identified the 
-               differentially expressed genes (DEGs) for the 
+               "List of differentially expressed genes (DEGs) for the 
                following two contrasts:"
-             )
+             ),
+             tags$p(style = "color:red;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
            )),
   hr(),
   fluidRow(

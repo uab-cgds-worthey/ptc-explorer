@@ -3,7 +3,7 @@ onco_plot <- fluidPage(
   fluidRow(class = "text-center",
            column(12,
                   h3(
-                    "Sample Variant Information"
+                    "Variants Table"
                   ))),
   hr(),
   fluidRow(
@@ -46,6 +46,7 @@ onco_plot <- fluidPage(
   hr(),
   br(),
   fluidRow(
+    id ="high_res",
     column(
       8,
       originalHeatmapOutput(
@@ -63,6 +64,14 @@ onco_plot <- fluidPage(
         height = 850,
         title = "Sub-heatmap for selected area."
       )
+    )
+  ),
+  fluidRow(
+    id ="low_res",
+    column(
+      12,
+      h2("Your screen resolution is too small"),
+      p("Please use a larger screen resolution to view this section.")
     )
   ),
   br(),

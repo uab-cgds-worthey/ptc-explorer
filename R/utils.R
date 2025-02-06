@@ -21,9 +21,9 @@ clean_sig_df <- function(sig_df,
                           "ENSEMBL",
                           "Log2FC",
                           "P-Value",
-                          "Adj. P-Value"
-                          # "Gene Type",
-                          # "Synonyms"
+                          "Adj. P-Value",
+                          "Gene Type",
+                          "Synonyms"
                           )
   }
   if (!is.null(gene)) {

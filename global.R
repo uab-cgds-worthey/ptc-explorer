@@ -33,7 +33,7 @@ detach("package:shiny", unload = TRUE)
 library(shiny)
 
 # Load data/connections
-app_data_main <- readRDS("data/app_data_pack_feb1_2025.rds")
+app_data_main <- readRDS("data/app_data_pack_feb4_2025_dge_new.rds")
 
 sample_meta <- app_data_main$meta
 sample_variants <- app_data_main$variant

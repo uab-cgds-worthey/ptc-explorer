@@ -63,7 +63,11 @@ volcano_server <-
                      )
                      highlight_gene <- tbl[selected_row(), gene_symbol_col]
                      # print(highlight_gene)
-                     # print(v_mat[, "gene_name"])
+                     # print(highlight_gene)
+                     # print(nrow(v_mat))
+                     # #print(v_mat[,"gene_name"])
+                     # print(colnames(v_mat))
+                     # #print(rownames(v_mat))
                      b <- EnhancedVolcano(
                        v_mat,
                        lab = v_mat[, "gene_name"],

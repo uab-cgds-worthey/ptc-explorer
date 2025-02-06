@@ -1,4 +1,29 @@
-h3{
+h3 {
   color: darkgreen !important; 
   font-weight: 800 !important;
+}
+
+p {
+  font-size: 1.8rem !important;
+}
+
+/* Show high-resolution content by default */
+#high_res {
+  display: block;
+}
+
+#low_res {
+  display: none;
+}
+
+/* If screen width is below 1920px, hide high-res section and show text */
+@media screen and (max-width: 1919px) {
+  #high_res {
+    display: none;
+  }
+
+  #low_res {
+    display: block;
+    color: darkred;
+  }
 }
