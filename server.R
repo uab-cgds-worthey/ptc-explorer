@@ -80,8 +80,6 @@ function(input, output, session) {
     res_ptc_vs_ftc_sel,
     1
   )
-  # gprofiler_server("go_t_vs_n", gostres_t_vs_n, input_gostres = TRUE)
-  # gprofiler_server("go_PTC_vs_FTC", gostres_ptc_vs_ftc, input_gostres = TRUE)
   enrichr_server_mod("enrichr_t_vs_n",
                      enrichr_t_vs_n,
                      enrichr_dbs,
@@ -90,40 +88,11 @@ function(input, output, session) {
                      enrichr_ptc_vs_ftc,
                      enrichr_dbs,
                      precalculate = TRUE)
-  #### RNA-fusion tab
-  output$rna_fusion_4 <- renderPlotly({
-    p <-
-      ggplot(rna_fusion_df, aes(x = Participant_id, y = Gene_Fusion)) +
-      geom_point(aes(color = Phenotype_Subtype), size = 4) +
-      labs(title = "Gene Fusions by Participant; Grouped by Phenotype Subtype",
-           x = "Participant ID",
-           y = "Gene Fusion") +
-      scale_color_brewer(palette = "Set2") +
-      theme_minimal() +
-      theme(
-        axis.text.x = element_text(
-          angle = 45,
-          hjust = 1,
-          size = 18
-        ),
-        axis.text.y = element_text(size = 14),
-        legend.title = element_text(size = 16),
-        legend.text = element_text(size = 16)
-      )
-    ggplotly(p)
-  })
   
+  #### RNA-fusion tab
   fusion_filter_server("rna_fusion_tbl",
                        rna_fusion_df[, -12])
   
-  # reactable_server(
-  #   "rna_fusion_tbl",
-  #   rna_fusion_df[, c(1, 2, 6, 7, 4, 5)],
-  #   defaultColDef = colDef(na = "NA"),
-  #   defaultPageSize = 100,
-  #   reactive_tbl = FALSE,
-  #   bordered = TRUE
-  # )
   #### Genomics Analysis / WES page
   
   

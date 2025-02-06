@@ -45,7 +45,7 @@ rna_page <- fluidPage(
                "List of differentially expressed genes (DEGs) for the 
                following two contrasts:"
              ),
-             tags$p(style = "color:red;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
+             tags$p(style = "color:darkred;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
            )),
   hr(),
   fluidRow(
@@ -75,18 +75,6 @@ rna_page <- fluidPage(
     h4("Tumor Samples: PTCPlusThy vs FTC"),
     volcano_ui("vol_ptc_vs_ftc")
   )),
-  # br(),
-  # hr(),
-  # fluidRow(class = "text-center",
-  #          column(
-  #            12,
-  #            h3("Enrichment Anlaysis using: gProfiler")
-  #          )),
-  # hr(),
-  # fluidRow(column(6,
-  #                 gprofiler_ui("go_t_vs_n")),
-  #          column(6,
-  #                 gprofiler_ui("go_PTC_vs_FTC"))),
   br(),
   hr(),
   fluidRow(class = "text-center",

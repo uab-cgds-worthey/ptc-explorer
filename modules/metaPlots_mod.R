@@ -19,7 +19,7 @@ meta_plots_server <-
                        12,
                        selectInput(ns("meta_col"),
                                    "Sample Features",
-                                   choices = colnames(sample_df)[-c(1, 4)]),
+                                   choices = sort(colnames(sample_df)[-c(1, 4)])),
                      ))
                    })
                    observeEvent(input$meta_col, {
@@ -31,7 +31,7 @@ meta_plots_server <-
                          p1 <- ggplot(sample_df,
                                       aes(fill = Subtypes,
                                           x = !!sym(input$meta_col))) +
-                           geom_bar(position = "dodge") +
+                           geom_bar(position = "dodge",color = "black") +
                            labs(
                              title = paste0(
                                "Counts of feature: ",
@@ -70,7 +70,7 @@ meta_plots_server <-
                          ggplot(sample_df, aes(x = !!sym(input$meta_col))) +
                            geom_histogram(
                              binwidth = 5,
-                             fill = "#ccd5ae",
+                             fill = "#00a5cf",#ccd5ae
                              color = "black",
                              alpha = 0.7
                            ) +
