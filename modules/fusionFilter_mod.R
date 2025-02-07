@@ -102,7 +102,7 @@ fusion_filter_server <- function(id, fusion_table) {
                  reactable_server(
                    "sample_fusion_df",
                    filtered_sample_fusions,
-                   defaultColDef = colDef(na = "NA"),
+                   defaultColDef = colDef(na = "NA", align = "left"),
                    columns = list(
                      Phenotype_Subtype = colDef(
                        style = function(value) {

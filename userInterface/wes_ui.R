@@ -3,11 +3,11 @@ wes_page <- fluidPage(
            column(
              12,
              tags$h3("Mutational Signature Analysis"),
-             tags$p(
-               "A summary of the signatures identified in this study is
-                  reported below. For details about the specific single
-                  base substitution (SBS), click on the respective tabs
-                  on the right."
+             tags$p(style = "color:darkred;",
+               "A summary of the signatures identified 
+               in this study is shown below.
+               For details about the specific single base substitution (SBS),
+               click on the respective tabs on the right."
              )
            )),
   hr(),
@@ -38,11 +38,11 @@ wes_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,
-             tags$h3("Tumor clonal evolution"),
-             tags$p(
-               "Clonal analysis of somatic variation identified
-                         signatures of mutational processes in tumors from
-                         participant 2, 17 and 18."
+             tags$h3("Tumor Clonal Evolution Analysis"),
+             tags$p(style = "color:darkred;",
+               "Clonal analysis of somatic variation identified 
+               signatures of mutational processes in tumors from 
+               participant 2, 17 and 18."
              )
            )),
   hr(),
@@ -60,9 +60,9 @@ wes_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,
-             tags$h3("Microsatellite instability (MSI) analysis"),
-             tags$p("Subtype-wise distribution of MSI levels among
-                         the tumor samples.")
+             tags$h3("Microsatellite Instability (MSI) Analysis"),
+             tags$p(style = "color:darkred;",
+             "Subtype-wise distribution of MSI levels among the tumor samples.")
            )),
   hr(),
   fluidRow(column(4, ),

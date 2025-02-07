@@ -125,7 +125,8 @@ variant_filter_server <- function(id, variant_table) {
                    "sample_variant_df",
                    filtered_sample_variants,
                    bordered = TRUE,
-                   defaultColDef = colDef(na = "NA", minWidth = 95),
+                   defaultColDef = colDef(na = "NA", minWidth = 95,
+                                          align = "left"),
                    defaultPageSize = 15,
                    columns = list(
                      `Participant id` = colDef(

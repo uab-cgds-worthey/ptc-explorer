@@ -9,7 +9,7 @@ gene_search_ui <- function(id) {
                style = "display: flex; flex-direction: column;
           justify-content: left; 
           align-items: left; height: 100%;",
-               h4(style = "justify-content: center !important;",
+               h4(style = "color:darkred; justify-content: center !important;",
                   "Select or search a gene to display gene annotation and it's participation in our dataset."
                ),
                # fluidRow(
@@ -50,15 +50,6 @@ gene_search_ui <- function(id) {
       ),
       br(),
       hr(),
-      fluidRow(column(
-        12,
-        h3("Gene Expression Distribution", class = "text-center",
-           style = "color: darkgreen; font-weight: 900;"),
-        div(class = "text-center",
-            uiOutput(ns("ualcan_redirect"))
-        ),
-      )),
-      hr(),
       fluidRow(
         class = "text-center",
         column(1, ),
@@ -72,19 +63,7 @@ gene_search_ui <- function(id) {
         ),
         column(1, )
       ),
-      hr(),
-      fluidRow(
-        class = "text-center",
-        column(1, ),
-        column(
-          10,
-          h3("RNA-Fusion Analysis",
-             style = "color: darkgreen; font-weight: 900;"),
-          hr(),
-          reactable_ui(ns("rnafusion_df_by_gene"))
-        ),
-        column(1, )
-      ),
+      br(),
       hr(),
       fluidRow(class = "text-center",
                column(
@@ -107,6 +86,30 @@ gene_search_ui <- function(id) {
           h4("Tumor Samples: PTCPlusThy vs FTC"),
           reactable_ui(ns("dds_subtype_deg_by_gene"))
         )
+      ),
+      br(),
+      hr(),
+      fluidRow(column(
+        12,
+        h3("Gene Expression from TCGA", class = "text-center",
+           style = "color: darkgreen; font-weight: 900;"),
+        div(class = "text-center",
+            uiOutput(ns("ualcan_redirect"))
+        ),
+      )),
+      br(),
+      hr(),
+      fluidRow(
+        class = "text-center",
+        column(1, ),
+        column(
+          10,
+          h3("RNA-Fusion Analysis",
+             style = "color: darkgreen; font-weight: 900;"),
+          hr(),
+          reactable_ui(ns("rnafusion_df_by_gene"))
+        ),
+        column(1, )
       ),
       hr(),
       br()
@@ -151,9 +154,10 @@ gene_search_server <- function(id,
                      fluidRow(
                        column(
                          12,
-                         p(paste0("UALCAN: Exression of gene ",
+                         p(paste0("Expression of gene ",
                                   input$gene_name,
-                                  " in THCA based on tumor histology subtype")),
+                                  "in THCA cohort based on tumor histology 
+                                  subtype via UALCAN cancer data portal")),
                          tags$a(href = paste0(
                            "https://ualcan.path.uab.edu/cgi-bin/TCGAExResultNew2.pl?genenam=",
                            input$gene_name,
@@ -204,9 +208,8 @@ gene_search_server <- function(id,
                  })
                  reactable_server("variant_df_by_gene",
                                   filtered_gene_df,
-                                  null_msg = "This gene is not found to be 
-                                  significantly participating in our 
-                                  variant analysis.")
+                                  null_msg = "No variant of interest was found
+                                  in this gene.")
                  output$gene_info_main <- renderUI({
                    req(input$gene_name)
                    gene_query(input$gene_name)

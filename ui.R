@@ -1,7 +1,7 @@
 navbarPage(
   title = "Pediatric Thyroid Cancer Explorer",
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/style.css?v=1"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/style.css"),
     tags$script(src = "js/script.js")
   ),
   inverse = FALSE,
@@ -9,7 +9,7 @@ navbarPage(
   tabPanel("Home", home_page),
   navbarMenu("WES Analysis",
              tabPanel("Variants Distribution", onco_plot),
-             tabPanel("Tertiary Analysis", wes_page),
+             tabPanel("Additional Analysis", wes_page),
   ),
   navbarMenu("RNA-Seq Analysis",
              tabPanel("DGE Analysis", rna_page),
@@ -18,5 +18,5 @@ navbarPage(
   tabPanel("Gene Search", gene_search_page),
   tabPanel("Download", download_page),
   tabPanel("Docs", docs_page),
-  tabPanel("Contact", contact_page)
+  tabPanel("Team", contact_page)
 )

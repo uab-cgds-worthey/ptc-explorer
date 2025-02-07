@@ -16,6 +16,9 @@ meta_plots_server <-
                  function(input, output, session) {
                    ns <- session$ns
                    Subtypes <- NULL
+                   Subtypes_color = c("FA" = "#E31A1C", "FTC" = "#FDBF6F",
+                                "NIFTP" = "#FF7F00", "PTC" = "#CAB2D6",
+                                "PTCplusTHY" = "#6A3D9A", "THY" = "#FFFF99")
                    output$sample_meta_cols <- renderUI({
                      req(sample_df)
                      fluidRow(column(
@@ -67,7 +70,8 @@ meta_plots_server <-
                              axis.text.y = element_text(size = fs_meta_plot),
                              legend.title = element_text(size = fs_meta_plot + 2),
                              legend.text = element_text(size = fs_meta_plot)
-                           ) + scale_fill_brewer(palette = "Set2")
+                           ) + scale_fill_manual(values = Subtypes_color)
+                           #scale_fill_brewer(palette = "Set2")
                          ggplotly(p1)
                        } else if (input$meta_col %in% num_cols) {
                          ggplot(sample_df, aes(x = !!sym(input$meta_col))) +

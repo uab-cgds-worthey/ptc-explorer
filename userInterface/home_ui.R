@@ -19,18 +19,18 @@ home_page <- fluidPage(
       6,
       tags$h3("Study Design"),
       tags$p(style = "color:darkred;",
-             "A workflow figure to show our study design and methods."
+             "Flowchart showing RNA-Seq and WES study design and analytical steps performed."
       ),br(),
       tags$img(src = "img/workflow_fig1.png",
-               style = "width: 90%; height: auto;
-               padding: 4px;
-               border: 2.5px solid darkgrey")
+               style = "width: 90%; height: auto;")
+               #padding: 4px;
+               #border: 2.5px solid darkgrey")
     ),
     column(
       6,
-      tags$h3("Sample Statistics"),
+      tags$h3("Sample Clinical Feature"),
       tags$p(style = "color:darkred;",
-             "Select a patient feature from the dropdown to show in summary plot."
+             "Select a patient’s clinical feature from the below dropdown to visualize as a histogram plot."
              ),
       meta_plots_ui("sample_meta_stats")
     )
@@ -41,7 +41,7 @@ home_page <- fluidPage(
            column(12,
                   h3("Sample Metadata"),
                   tags$p(style = "color:darkred;",
-                         "Table showing patient features in our study cohort."
+                         "Table showing patients clinical features in our study cohort."
                   ))
            ),
   hr(),

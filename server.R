@@ -10,7 +10,7 @@ function(input, output, session) {
     sample_meta_display %>% 
       mutate(across(where(is.factor), ~ gsub("_", " ", .))),
 #    sample_meta_display,
-    defaultColDef = colDef(na = "NA", minWidth = 95),
+    defaultColDef = colDef(na = "NA", minWidth = 95, align = "left"),
     columns = list(
       `Participant id` = colDef(
         minWidth = 85,
@@ -77,13 +77,6 @@ function(input, output, session) {
           } else if (value == "Low risk") {
             "#3CB371"
           } 
-          # fontcolor <- if (value == "High risk") {
-          #   "white"
-          # } else if (value == "Intermediate risk") {
-          #   "white"
-          # } else if (value == "Low risk") {
-          #   "white"
-          # } 
           list(fontWeight = 700,
                background = color#,
                #color = fontcolor
@@ -160,5 +153,39 @@ function(input, output, session) {
     deg_ptc_vs_ftc = res_ptc_vs_ftc,
     fusion_table = rna_fusion_df,
     candidate_gene_list = candidate_genes_main
+  )
+  
+  
+  ######## Contact us
+  profiledivServer(
+    "gk",
+    name = "Gurpreet Kaur, Ph.D.",
+    img_url = "gurpreet_kaur.jpg",
+    title = "Project lead, App Ideation and Planning",
+    email = "gurpreetkaur@uabmc.edu",
+    linkedin_url = "https://www.linkedin.com/in/gurpreet-bioin4/",
+    x_url = "https://x.com/gurpreet_bioin4"
+  )
+  
+  profiledivServer(
+    "sb",
+    name = "Samuel Bharti",
+    img_url = "samuel_bharti.jpg",
+    title = "App Development, Testing and Deployment",
+    email = "sbharti@uab.edu",
+    linkedin_url = "https://www.linkedin.com/in/samuelbharti/",
+    x_url = "#",
+    img_style = "width:100%;"
+  )
+  
+  profiledivServer(
+    "lw",
+    name = "Elizabeth Worthey, Ph.D.",
+    img_url = "liz_worthey.jpg",
+    title = "Funding and Principal Investigator",
+    email = "eaworthey@uabmc.edu",
+    linkedin_url = "https://www.linkedin.com/in/lizworthey/",
+    x_url = "https://x.com/lizworthey",
+    img_style = "width:100%;"
   )
 }
