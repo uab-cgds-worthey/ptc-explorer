@@ -27,7 +27,6 @@ library(jsonlite)
 ## Special plotting
 library(EnhancedVolcano)
 library(enrichR)
-library(gprofiler2)
 
 detach("package:shiny", unload = TRUE)
 library(shiny)

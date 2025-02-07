@@ -2,6 +2,9 @@ meta_plots_ui <- function(id) {
   ns <- NS(id)
   tagList(fluidRow(column(
     12,
+    # style = "display: flex; flex-direction: column;
+    #       justify-content: center; 
+    #       align-items: center; height: 100%;",
     uiOutput(ns("sample_meta_cols")),
     plotlyOutput(ns("meta_plot"),  height = "550px")
   )))

@@ -1,8 +1,8 @@
 variant_filter_ui <- function(id) {
   ns <- NS(id)
-  tagList(fluidRow(column(3, br(), br(), uiOutput(
+  tagList(fluidRow(column(2, br(), br(), uiOutput(
     ns("variant_filters")
-  )), column(9, reactable_ui(
+  )), column(10, reactable_ui(
     ns("sample_variant_df")
   ))))
 }
@@ -15,31 +15,38 @@ variant_filter_server <- function(id, variant_table) {
                    req(variant_table)
                    fluidRow(
                      column(
-                       6,
+                       12,
+                       tags$p(style = "color:darkred;",
+                              "Filter the variants by:"),
                        selectizeInput(
                          ns("gene_var"),
-                         "Gene",
+                         "Gene *",
                          choices = c("All", unique(variant_table$Gene)),
                          selected = "All",
+                         width = "100%",
                          multiple = TRUE
                        ),
                        selectizeInput(
                          ns("chr_var"),
-                         "Chromosome",
+                         "Chromosome *",
                          choices = c("All", substr(
                            unique(variant_table$Chromosome), 4, 5
                          )),
                          selected = "All",
+                         width = "100%",
                          multiple = TRUE
-                       )
-                     ),
-                     column(
-                       6,
+                       ),
+                     # ),
+                     # column(
+                     #   6,
                        pickerInput(
                          ns("pheno_var"),
                          "Phenotype",
                          choices = c(unique(variant_table$Phenotype)),
                          selected =  c(unique(variant_table$Phenotype)),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
                          multiple = TRUE
                        ),
                        pickerInput(
@@ -47,6 +54,9 @@ variant_filter_server <- function(id, variant_table) {
                          "Variant Type",
                          choices = c(unique(variant_table$`Variant Type`)),
                          selected = c(unique(variant_table$`Variant Type`)),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
                          multiple = TRUE
                        ),
                        pickerInput(
@@ -54,8 +64,22 @@ variant_filter_server <- function(id, variant_table) {
                          "Germline Class",
                          choices = c(unique(variant_table$`Germline Class`)),
                          selected = c(unique(variant_table$`Germline Class`)),
+                         options = pickerOptions(container = "body", 
+                                                 actionsBox = TRUE),
+                         width = "100%",
                          multiple = TRUE
-                       )
+                       ),
+                     br(),
+                     tags$p(style = "font-size: 85% !important; color:grey;",
+                            "* To filter by 'Gene' and 'Chromosome' delete 'All' 
+                            and select one or more options."),
+                     tags$p(style = "font-size: 80% !important; color:grey;",
+                     "DITTO Score: DITTO (inspired by pokemon) is an explainable Neural network tool
+      that can make pathogenicity predictions for any type of small genetic 
+      variants and their predicted functional impact on transcript(s). 
+      DITTO score ranges from (0-1), where higher scores translates to the
+      variant being likely pathogenic. For more details on DITTO, please refer here."
+                     )
                      )
                    )
                  })
@@ -101,8 +125,25 @@ variant_filter_server <- function(id, variant_table) {
                    "sample_variant_df",
                    filtered_sample_variants,
                    bordered = TRUE,
+                   defaultColDef = colDef(na = "NA", minWidth = 95),
+                   defaultPageSize = 15,
                    columns = list(
+                     `Participant id` = colDef(
+                       minWidth = 85,
+                     ),
+                     # Phenotype  = colDef(
+                     #   style = function(value) {
+                     #     color <- if (value == "Tumor") {
+                     #       "grey40"
+                     #     } else if (value == "Normal") {
+                     #       "grey90"
+                     #     }
+                     #     list(background = color,
+                     #          color = c("white","black"))
+                     #   }
+                     # ),
                      `DITTO Score` = colDef(
+                       minWidth = 85,
                        style = function(value) {
                          normalized <-
                            (value - min(variant_table$`DITTO Score`)) /

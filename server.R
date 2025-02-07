@@ -33,8 +33,63 @@ function(input, output, session) {
               Sex)
         )
       }
-    ),
-      Sex = colDef(show = FALSE)
+      ),
+      Sex = colDef(show = FALSE),
+      Subtypes = colDef(
+        style = function(value) {
+          color <- if (value == "FA") {
+            "#E31A1C"
+          } else if (value == "FTC") {
+            "#FDBF6F"
+          } else if (value == "NIFTP") {
+            "#FF7F00"
+          } else if (value == "PTC") {
+            "#CAB2D6"
+          } else if (value == "PTCplusTHY") {
+            "#6A3D9A"
+          } else if (value == "THY") {
+            "#FFFF99"
+          }
+          fontcolor <- if (value == "FA") {
+            "white"
+          } else if (value == "FTC") {
+            "#000"
+          } else if (value == "NIFTP") {
+            "#000"
+          } else if (value == "PTC") {
+            "#000"
+          } else if (value == "PTCplusTHY") {
+            "white"
+          } else if (value == "THY") {
+            "#000"
+          }
+          list(fontWeight = 700,
+               background = color,
+               color = fontcolor)
+        }
+      ),
+      `ATA Pediatric Risk Level` =  colDef(
+        style = function(value) {
+          color <- if (value == "High risk") {
+            "#FF0000"
+          } else if (value == "Intermediate risk") {
+            "#FF8C00"
+          } else if (value == "Low risk") {
+            "#3CB371"
+          } 
+          # fontcolor <- if (value == "High risk") {
+          #   "white"
+          # } else if (value == "Intermediate risk") {
+          #   "white"
+          # } else if (value == "Low risk") {
+          #   "white"
+          # } 
+          list(fontWeight = 700,
+               background = color#,
+               #color = fontcolor
+               )
+        }
+      )
     ),
     defaultPageSize = 25,
     fullWidth = TRUE,

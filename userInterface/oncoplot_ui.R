@@ -2,26 +2,24 @@ onco_plot <- fluidPage(
   # Page title
   fluidRow(class = "text-center",
            column(12,
-                  h3(
-                    "Variants Table"
-                  ))),
+                  h3("Variants Table"),
+                  tags$p(style = "color:darkred;",
+                         "Variant information table is visualized using the oncoplot 
+                         shown below.")
+                  )
+           ), 
   hr(),
   fluidRow(
-    column(11,
-           variant_filter_ui("variant_table_with_filters")),
-    column(
-      1,
-      br(),
-      br(),
-      br(),
-      br(),
-      tags$p("DITTO (inspired by pokemon) is an explainable Neural network tool
-      that can make pathogenicity predictions for any type of small genetic 
-      variants and their predicted functional impact on transcript(s). 
-      DITTO score ranges from (0-1), where higher scores translates to the
-      variant being likely pathogenic."
-      )
-    )
+    column(12,
+           variant_filter_ui("variant_table_with_filters"))#,
+    # column(
+    #   1,
+    #   br(),
+    #   br(),
+    #   br(),
+    #   br(),
+    #  
+    # )
   ),
   br(),
   hr(),
@@ -30,16 +28,14 @@ onco_plot <- fluidPage(
            column(
              8,
              h3("Interactive Oncoplot"),
-             tags$p(
+             tags$p(style = "color:darkred;",
                "A comprehensive analysis using whole exome sequencing 
                identified 132 somatic and germline variants across 110 genes. 
                These genetic alterations, derived from both tumor and normal 
                samples, span six distinct subtypes, as illustrated in the 
                interactive oncoplot below. On the right side, the box plots 
                display the gene expression levels, contrasting tumor samples 
-               with normal ones. Variant information table follows the oncoplot
-               that also include DITTO score for each variant. For more 
-               details on DITTO, please refer here."
+               with normal ones."
              ),
              column(2, )
            )),

@@ -20,9 +20,11 @@ home_page <- fluidPage(
       tags$h3("Study Design"),
       tags$p(style = "color:darkred;",
              "A workflow figure to show our study design and methods."
-      ),
+      ),br(),
       tags$img(src = "img/workflow_fig1.png",
-               style = "width: 90%; height: auto;")
+               style = "width: 90%; height: auto;
+               padding: 4px;
+               border: 2.5px solid darkgrey")
     ),
     column(
       6,
@@ -37,7 +39,11 @@ home_page <- fluidPage(
   hr(),
   fluidRow(class = "text-center",
            column(12,
-                  h3("Sample Metadata"))),
+                  h3("Sample Metadata"),
+                  tags$p(style = "color:darkred;",
+                         "Table showing patient features in our study cohort."
+                  ))
+           ),
   hr(),
   fluidRow(column(12,
                   reactable_ui("sample_meta_df"))),

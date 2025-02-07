@@ -3,6 +3,9 @@ rna_fusion_page <- fluidPage(
            column(
              12,
              h3("RNA-Fusion Analysis"),
+             tags$p(style = "color:darkred;",
+                    "Table showing RNA-fusions in our study cohort."
+             )
            )),
   hr(),
   fluidRow(column(12,

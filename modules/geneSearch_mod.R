@@ -5,81 +5,51 @@ gene_search_ui <- function(id) {
     column(
       12,
       fluidRow(
-        column(6,
+        column(4,
                style = "display: flex; flex-direction: column;
           justify-content: left; 
           align-items: left; height: 100%;",
-               fluidRow(
-                 column(6,
+               h4(style = "justify-content: center !important;",
+                  "Select or search a gene to display gene annotation and it's participation in our dataset."
+               ),
+               # fluidRow(
+               #   column(12,
                         radioGroupButtons(
                           inputId = ns("gene_type"),
                           label = "Select a gene category",
                           choices = c("All Genes","Candidate Genes"),
+                          selected = "Candidate Genes",
                           justified = TRUE
-                        )
-                        # selectizeInput(
-                        #   ns("gene_type"),
-                        #   "Select a gene category",
-                        #   choices = c("All Genes","Candidate Genes"),
-                        #   width = "550px"
-                        # ),
                         ),
-                 column(6,
-                   selectizeInput(
-                     ns("gene_name"),
-                     "Select a gene symbol",
-                     choices = NULL,
-                     width = "550px"
-                   )
-                 )
-               ),
-               h4(
+                        selectizeInput(
+                          ns("gene_name"),
+                          "Select a gene symbol",
+                          choices = NULL,
+                          width = "550px"
+                        ),
+               #          )
+               # ),
+               tags$p(style = "font-size: 95% !important; color:grey;",
                  "'All Genes' - This is an aggregated list of significant genes in our 
           whole exome, bulk RNA-seq and downstream analysis."
                ),
-               h4(
+               tags$p(style = "font-size: 95% !important; color:grey;",
                  "'Candidate Genes' - This is an aggregated list of candidate genes (genes of interest) in our 
           whole exome, bulk RNA-seq and downstream analysis."
                ),
-               h4(
-                 "Select or search a gene to display gene annotation and it's participation in our dataset."
-               )
           ),
         column(
-          6,
+          8,
           h3("Gene Information", class = "text-center",
              style = "color: darkgreen; font-weight: 900;"),
           hr(),
-          uiOutput(ns("gene_info_main"))
+          div(style = "font-size: 110% !important;",
+              uiOutput(ns("gene_info_main"))
+          )
         ),
       ),
-      # hr(),
-      # fluidRow(
-      #   column(
-      #     12,
-      #     style = "display: flex; flex-direction: column;
-      #     justify-content: center; 
-      #     align-items: center; height: 100%;",
-      #     selectizeInput(
-      #       ns("gene_name"),
-      #       "Select a gene symbol",
-      #       choices = NULL,
-      #       width = "550px"
-      #     ),
-      #     h4(
-      #       "This is an aggregated list of significant genes in our 
-      #       whole exome, bulk RNA-seq and downstream analysis. Select or 
-      #       search a gene to display gene annotation and it's 
-      #       participation in our dataset."
-      #     )
-      #   ),
-      # ),
       br(),
       hr(),
-      # fluidRow(column(
-      #   12,
-      # )),
-      # hr(),
       fluidRow(column(
         12,
         h3("Gene Expression Distribution", class = "text-center",
@@ -87,17 +57,7 @@ gene_search_ui <- function(id) {
         div(class = "text-center",
             uiOutput(ns("ualcan_redirect"))
         ),
-        hr(),
-        #uiOutput(ns("gene_exp_dist"))
       )),
-      # hr(),
-      # fluidRow(column(
-      #   12,
-      #   h3("Gene Expression Distribution", class = "text-center",
-      #      style = "color: darkgreen; font-weight: 900;"),
-      #   hr(),
-      #   #uiOutput(ns("gene_exp_dist"))
-      # )),
       hr(),
       fluidRow(
         class = "text-center",
@@ -191,8 +151,9 @@ gene_search_server <- function(id,
                      fluidRow(
                        column(
                          12,
-                         tags$h4("UALCAN"),
-                         p(paste0("Exression of ", input$gene_name, " in THCA based on tumor histology subtype")),
+                         p(paste0("UALCAN: Exression of gene ",
+                                  input$gene_name,
+                                  " in THCA based on tumor histology subtype")),
                          tags$a(href = paste0(
                            "https://ualcan.path.uab.edu/cgi-bin/TCGAExResultNew2.pl?genenam=",
                            input$gene_name,

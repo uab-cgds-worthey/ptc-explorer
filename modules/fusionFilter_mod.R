@@ -16,9 +16,11 @@ fusion_filter_server <- function(id, fusion_table) {
                    fluidRow(
                      column(
                        12,
+                       tags$p(style = "color:darkred;",
+                              "Filter the RNA-fusions by:"),
                        selectizeInput(
                          ns("gene_var"),
-                         "Genes",
+                         "Gene *",
                          choices = c("All", sort(union(rna_fusion_df$geneA,
                                                        rna_fusion_df$geneB))),
                          selected = "All",
@@ -28,8 +30,7 @@ fusion_filter_server <- function(id, fusion_table) {
                        pickerInput(
                          ns("pheno_var"),
                          "Subtypes",
-                         choices = c("All", 
-                                     unique(fusion_table$Phenotype_Subtype)),
+                         choices = c(unique(fusion_table$Phenotype_Subtype)),
                          selected = unique(fusion_table$Phenotype_Subtype),
                          options = pickerOptions(container = "body", 
                                                  actionsBox = TRUE),
@@ -55,8 +56,12 @@ fusion_filter_server <- function(id, fusion_table) {
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
-                       )
-                     ),
+                       ),
+                       br(),
+                       tags$p(style = "font-size: 85% !important; color:grey;",
+                              "* To filter by 'Gene' delete 'All' 
+                            and select one or more options."),
+                     )
                    )
                  })
                  filtered_sample_fusions <- reactiveVal(fusion_table)
@@ -99,6 +104,49 @@ fusion_filter_server <- function(id, fusion_table) {
                    filtered_sample_fusions,
                    defaultColDef = colDef(na = "NA"),
                    columns = list(
+                     Phenotype_Subtype = colDef(
+                       style = function(value) {
+                         color <- if (value == "FA") {
+                           "#E31A1C"
+                         } else if (value == "FTC") {
+                           "#FDBF6F"
+                         } else if (value == "NIFTP") {
+                           "#FF7F00"
+                         } else if (value == "PTC") {
+                           "#CAB2D6"
+                         } else if (value == "PTCplusTHY") {
+                           "#6A3D9A"
+                         } else if (value == "THY") {
+                           "#FFFF99"
+                         }
+                         fontcolor <- if (value == "FA") {
+                           "white"
+                         } else if (value == "FTC") {
+                           "#000"
+                         } else if (value == "NIFTP") {
+                           "#000"
+                         } else if (value == "PTC") {
+                           "#000"
+                         } else if (value == "PTCplusTHY") {
+                           "white"
+                         } else if (value == "THY") {
+                           "#000"
+                         }
+                         list(fontWeight = 700,
+                              background = color,
+                              color = fontcolor)
+                       }
+                     ),
+                     Known = colDef(
+                       style = function(value) {
+                         color <- if (value == "Yes") {
+                           "darkgrey"
+                         } else if (value == "No") {
+                           "darkred"
+                         }
+                         list(fontWeight = 700, color = color)
+                       }
+                     ),
                      Classification = colDef(
                              style = function(value) {
                                color <- if (value == "Low") {

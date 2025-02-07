@@ -13,7 +13,7 @@ navbarPage(
   ),
   navbarMenu("RNA-Seq Analysis",
              tabPanel("DGE Analysis", rna_page),
-             tabPanel("Fusions Analysis", rna_fusion_page),
+             tabPanel("RNA-Fusions Analysis", rna_fusion_page),
   ),
   tabPanel("Gene Search", gene_search_page),
   tabPanel("Download", download_page),
