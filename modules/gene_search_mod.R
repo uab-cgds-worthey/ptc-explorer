@@ -52,16 +52,16 @@ gene_search_ui <- function(id) {
       hr(),
       fluidRow(
         class = "text-center",
-        column(1, ),
+        #column(1, ),
         column(
-          10,
+          12,
           style = "padding-right: 10px;",
           h3("Variant Analysis",
              style = "color: darkgreen; font-weight: 900;"),
           hr(),
           reactable_ui(ns("variant_df_by_gene")),
         ),
-        column(1, )
+        #column(1, )
       ),
       br(),
       hr(),
@@ -75,7 +75,7 @@ gene_search_ui <- function(id) {
         class = "text-center",
         column(
           6,
-          style = "border-right: 2px solid #ccc; padding-right: 10px;",
+          style = "border-right: 1px solid #ccc; padding-right: 5px;",
           hr(),
           h4("All Samples: Tumor Vs Normal"),
           reactable_ui(ns("dds_all_deg_by_gene"))
@@ -101,15 +101,15 @@ gene_search_ui <- function(id) {
       hr(),
       fluidRow(
         class = "text-center",
-        column(1, ),
+        #column(1, ),
         column(
-          10,
+          12,
           h3("RNA-Fusion Analysis",
              style = "color: darkgreen; font-weight: 900;"),
           hr(),
           reactable_ui(ns("rnafusion_df_by_gene"))
         ),
-        column(1, )
+        #column(1, )
       ),
       hr(),
       br()
@@ -156,8 +156,8 @@ gene_search_server <- function(id,
                          12,
                          p(paste0("Expression of gene ",
                                   input$gene_name,
-                                  "in THCA cohort based on tumor histology 
-                                  subtype via UALCAN cancer data portal")),
+                                  " in THCA cohort based on tumor histology 
+                                  subtype via UALCAN cancer data portal.")),
                          tags$a(href = paste0(
                            "https://ualcan.path.uab.edu/cgi-bin/TCGAExResultNew2.pl?genenam=",
                            input$gene_name,
@@ -180,6 +180,7 @@ gene_search_server <- function(id,
                        rename_cols = TRUE,
                        gene = input$gene_name
                      ),
+                     defaultColDef = colDef(align = "left"),
                      reactive_tbl = FALSE,
                      null_msg = "This gene is not found to be differentially 
                      expressed between our Tumor Vs Normal samples."
@@ -191,6 +192,7 @@ gene_search_server <- function(id,
                        rename_cols = TRUE,
                        gene = input$gene_name
                      ),
+                     defaultColDef = colDef(align = "left"),
                      reactive_tbl = FALSE,
                      null_msg = "This gene is not found to be differentially 
                      expressed between our PTCPlusThy vs FTC samples."
@@ -201,6 +203,7 @@ gene_search_server <- function(id,
                    reactable_server(
                      "rnafusion_df_by_gene",
                      rna_fusion_df_filtered,
+                     defaultColDef = colDef( minWidth = 95, align = "left"),
                      reactive_tbl = FALSE,
                      null_msg = "This gene is not found to be significantly 
                      participating in our RNA-fusion analysis."
@@ -208,6 +211,7 @@ gene_search_server <- function(id,
                  })
                  reactable_server("variant_df_by_gene",
                                   filtered_gene_df,
+                                  defaultColDef = colDef(align = "left"),
                                   null_msg = "No variant of interest was found
                                   in this gene.")
                  output$gene_info_main <- renderUI({

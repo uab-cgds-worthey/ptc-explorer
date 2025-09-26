@@ -29,14 +29,16 @@ onco_plot <- fluidPage(
              8,
              h3("Interactive Oncoplot"),
              tags$p(style = "color:darkred;",
-               "A comprehensive analysis using whole exome sequencing 
-               identified 132 somatic and germline variants across 110 genes. 
+               paste0("A comprehensive analysis using whole exome sequencing 
+               identified ",
+               sample_variants_n,
+               " somatic and germline variants across 110 genes. 
                These genetic alterations, derived from both tumor and normal 
                samples, span six distinct subtypes, as illustrated in the 
                interactive oncoplot below. On the right side, the box plots 
                display the gene expression levels, contrasting tumor samples 
                with normal ones."
-             ),
+             )),
              column(2, )
            )),
   hr(),

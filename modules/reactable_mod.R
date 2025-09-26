@@ -22,6 +22,9 @@ reactable_server <- function(id,
                        showPageSizeOptions = TRUE,
                        searchable = TRUE,
                        compact = TRUE,
+                       resizable = TRUE,
+                       highlight = TRUE,
+                       outlined = TRUE,
                        ...
                      )
                    } else {
@@ -30,6 +33,9 @@ reactable_server <- function(id,
                        showPageSizeOptions = TRUE,
                        searchable = TRUE,
                        compact = TRUE,
+                       resizable = TRUE,
+                       highlight = TRUE,
+                       outlined = TRUE,
                        ...
                      )
                    }

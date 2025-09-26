@@ -25,13 +25,13 @@ rna_page <- fluidPage(
       6,
       add_busy_bar(),
       h4("Sample-wise PCA"),
-      tags$img(src = "img/pca_label_batch-corr_b&w_pid.png",
+      tags$img(src = "img/pca_label_batch-corr_b&w_pid_col.png",
                style = "width: 90%; height: auto;")
     ),
     column(
       6,
       h4("Subtype-wise PCA"),
-      tags$img(src = "img/pca_label_batch-corr_subtypes_pid.png",
+      tags$img(src = "img/pca_label_batch-corr_subtypes_pid_font.png",
                style = "width: 90%; height: auto;")
     )
   ),

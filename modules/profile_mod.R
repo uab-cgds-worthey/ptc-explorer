@@ -44,11 +44,11 @@ profiledivServer <- function(id,
                      icon("square-envelope",  "fa-2x"),
                      target = "_blank"
                    ),
-                   tags$a(
-                     href = linkedin_url,
-                     icon("linkedin",  "fa-2x"),
-                     target = "_blank"
-                   ),
+                   # tags$a(
+                   #   href = linkedin_url,
+                   #   icon("linkedin",  "fa-2x"),
+                   #   target = "_blank"
+                   # ),
                    tags$a(style = "color:black;",
                           href = x_url,
                           icon("square-x-twitter",  "fa-2x"),

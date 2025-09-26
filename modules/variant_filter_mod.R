@@ -117,7 +117,15 @@ variant_filter_server <- function(id, variant_table) {
                      filtered_sample_variants(temp_var_df)
                    }
                  )
-                 ditto_pal <- function(x) {
+                 ditto_pal <- function(x, na_color = "transparent") {
+                 #   cols <- grDevices::rgb(
+                 #     grDevices::colorRamp(
+                 #       c("#e4b1ab", "#cc444b")) (pmin(pmax(x,0),1)),
+                 #     maxColorValue = 255
+                 #     )
+                 #   cols[is.na(x)] <- na_color
+                 #   cols
+                 if(is.na(x)) x <- 0
                    rgb(colorRamp(c("#e4b1ab", "#cc444b"))(x),
                        maxColorValue = 255)
                  }
@@ -150,8 +158,8 @@ variant_filter_server <- function(id, variant_table) {
                            (value - min(variant_table$`DITTO Score`)) /
                            (max(variant_table$`DITTO Score`) -
                             min(variant_table$`DITTO Score`))
-                         color <- ditto_pal(normalized)
-                         list(fontWeight = 700, color = color)
+                         #color <- ditto_pal(normalized)
+                         #list(fontWeight = 700), color = color)
                        }
                      ),
                      `Germline Class` = colDef(

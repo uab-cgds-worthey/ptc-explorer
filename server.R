@@ -162,7 +162,7 @@ function(input, output, session) {
     name = "Gurpreet Kaur, Ph.D.",
     img_url = "gurpreet_kaur.jpg",
     title = "Project lead, App Ideation and Planning",
-    email = "gurpreetkaur@uabmc.edu",
+    email = "gurpreet.bioinfo@gmail.com",
     linkedin_url = "https://www.linkedin.com/in/gurpreet-bioin4/",
     x_url = "https://x.com/gurpreet_bioin4"
   )

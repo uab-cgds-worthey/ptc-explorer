@@ -1,14 +1,21 @@
+#### R specific ignore files
 *.Rproj
 *.RData
-.Rproj.user
-.Rhistory
-.Ruserdata
-.Renviron
+*.Rproj.user
+*.Rhistory
+*.Ruserdata
+*.Renviron
+
+#### Other uncommon files
 *.pptx
-.DS_Store
+*.DS_Store
 *.tar.gz
-trash.R
+
+#### Private directories
 data
 dev
 /archive
 /supplementary
+
+#### Misc files
+trash.R

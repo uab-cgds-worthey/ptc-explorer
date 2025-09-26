@@ -1,7 +1,7 @@
 navbarPage(
   title = "Pediatric Thyroid Cancer Explorer",
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "css/style.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "css/style.css?v=1.4"),
     tags$script(src = "js/script.js")
   ),
   inverse = FALSE,
