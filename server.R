@@ -93,7 +93,7 @@ function(input, output, session) {
   #### Oncoplot and sample variant tab
   variant_filter_server("variant_table_with_filters", sample_variants)
   makeInteractiveComplexHeatmap(input, output, session,
-                                oncoplot_rds,
+                                ptc_oncoprint_draw,
                                 "ht",
                                 res = 110)
   #### RNA-seq tab

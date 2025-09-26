@@ -50,7 +50,6 @@ meta_num_cols <- app_data_main$meta_num_col
 all_genes_main <- app_data_main$all_genes
 candidate_genes_main <- app_data_main$candidate_gens
 
-oncoplot_rds <- readRDS("data/oncoplot_boxplot_2024-12-20.rds")
 
 gostres_t_vs_n <- app_data_main$t_vs_n_gp
 gostres_ptc_vs_ftc <- app_data_main$ptc_vs_ftc_gp
@@ -64,3 +63,25 @@ sample_meta_display <- sample_meta
 colnames(sample_meta_display) <- str_replace_all(colnames(sample_meta_display),
                                                  "_",
                                                  " ")
+
+#oncoplot_rds <- readRDS("data/oncoplot_boxplot_2024-12-20.rds")
+onco_obj_list <- readRDS("data/ptc_onco_obj_list_2025-09-26.rds")
+
+oncoplot <- rlang::exec(
+  oncoPrint,
+  mat = onco_obj_list$mat,
+  alter_fun = onco_obj_list$alter_fun,
+  !!!onco_obj_list$params
+)
+
+
+invisible(grid::grid.grabExpr({
+ptc_oncoprint_draw <- draw(
+  oncoplot,
+  heatmap_legend_list = onco_obj_list$lgd,
+  merge_legend = TRUE,
+  legend_gap = unit(0.75, "cm")
+)}))
+
+
+
