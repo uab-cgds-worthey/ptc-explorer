@@ -21,11 +21,17 @@ meta_plots_server <-
                                 "PTCplusTHY" = "#6A3D9A", "THY" = "#FFFF99")
                    output$sample_meta_cols <- renderUI({
                      req(sample_df)
+                     sample_feature_choices <- sort(colnames(sample_df)[-c(1, 4)])
+                     sample_feature_choices_names <- gsub("_",
+                                                          " ",
+                                                          sample_feature_choices)
+                     names(sample_feature_choices) <- sample_feature_choices_names
+                     
                      fluidRow(column(
                        12,
-                       selectInput(ns("meta_col"),
+                       selectizeInput(ns("meta_col"),
                                    "Sample Features",
-                                   choices = sort(colnames(sample_df)[-c(1, 4)])),
+                                   choices = sample_feature_choices),
                      ))
                    })
                    observeEvent(input$meta_col, {
