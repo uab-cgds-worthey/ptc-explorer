@@ -78,7 +78,9 @@ variant_filter_server <- function(id, variant_table) {
       that can make pathogenicity predictions for any type of small genetic 
       variants and their predicted functional impact on transcript(s). 
       DITTO score ranges from (0-1), where higher scores translates to the
-      variant being likely pathogenic. For more details on DITTO, please refer here."
+      variant being likely pathogenic. For more details on DITTO, please refer ",
+      tags$a('here.', href = 'https://doi.org/10.20944/preprints202404.0837.v1', 
+      target = '_blank_')
                      )
                      )
                    )
