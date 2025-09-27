@@ -41,7 +41,7 @@ home_page <- fluidPage(
            column(12,
                   h3("Sample Metadata"),
                   tags$p(style = "color:darkred;",
-                         "Table showing patients clinical features in our study cohort."
+                         "Table showing patients' clinical features in our study cohort."
                   ))
            ),
   hr(),
