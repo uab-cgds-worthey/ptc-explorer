@@ -50,9 +50,12 @@ Or open global.R in R Studio and click "Run App" selecting "Run External"
 
 Watch a comprehensive walkthrough of the Pediatric Thyroid Cancer Explorer application:
 
-https://github.com/uab-cgds-worthey/ptc-explorer/raw/main/assets/ptc-explorer-walkthrough.mp4
+<video width="800" controls>
+  <source src="https://github.com/uab-cgds-worthey/ptc-explorer/raw/dev/assets/ptc-explorer-walkthrough.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-*Click the video above to see the application features and navigation in action.*
+*The video above demonstrates the application features and navigation.*
 
 ## Application Features
 
