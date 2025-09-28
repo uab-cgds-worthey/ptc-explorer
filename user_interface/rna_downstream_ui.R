@@ -26,13 +26,23 @@ rna_downstream_page <- fluidPage(
       add_busy_bar(),
       h4("Sample-wise PCA"),
       tags$img(src = "img/pca_label_batch-corr_b&w_pid_col.png",
-               style = "width: 90%; height: auto;")
+               style = "width: 90%; height: auto;"),
+      br(),
+      tags$p(
+        style = "font-style: italic; color: #666; font-size: 14px; margin-top: 10px;",
+        "Static PCA plot image showing tumor vs normal sample clustering"
+      )
     ),
     column(
       6,
       h4("Subtype-wise PCA"),
       tags$img(src = "img/pca_label_batch-corr_subtypes_pid_font.png",
-               style = "width: 90%; height: auto;")
+               style = "width: 90%; height: auto;"),
+      br(),
+      tags$p(
+        style = "font-style: italic; color: #666; font-size: 14px; margin-top: 10px;",
+        "Static PCA plot image showing subtype-wise sample clustering"
+      )
     )
   ),
   br(),
