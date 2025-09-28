@@ -1,0 +1,13 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    object_usage_linter = NULL,
+    object_name_linter = NULL
+  )
+exclusions: list(
+    "www/js" = list(
+      line_length_linter = Inf
+    ),
+    ".Rproj.user" = list(
+      line_length_linter = Inf
+    )
+  )

@@ -32,7 +32,7 @@ fusion_filter_server <- function(id, fusion_table) {
                          "Subtypes",
                          choices = c(unique(fusion_table$Phenotype_Subtype)),
                          selected = unique(fusion_table$Phenotype_Subtype),
-                         options = pickerOptions(container = "body", 
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
@@ -40,9 +40,9 @@ fusion_filter_server <- function(id, fusion_table) {
                        pickerInput(
                          ns("known_var"),
                          "Known Fusion Status",
-                         choices = c("Yes","No"),
-                         selected = c("Yes","No"),
-                         options = pickerOptions(container = "body", 
+                         choices = c("Yes", "No"),
+                         selected = c("Yes", "No"),
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
@@ -52,14 +52,14 @@ fusion_filter_server <- function(id, fusion_table) {
                          "Classification",
                          choices = unique(fusion_table$Classification),
                          selected = unique(fusion_table$Classification),
-                         options = pickerOptions(container = "body", 
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
                        ),
                        br(),
                        tags$p(style = "font-size: 85% !important; color:grey;",
-                              "* To filter by 'Gene' delete 'All' 
+                              "* To filter by 'Gene' delete 'All'
                             and select one or more options."),
                      )
                    )
@@ -73,18 +73,17 @@ fusion_filter_server <- function(id, fusion_table) {
                      input$known_var
                    ),
                    {
-                    # print(nrow(fusion_table))
                      temp_var_df <-  fusion_table
                      temp_var_df <-
                        temp_var_df[temp_var_df$Known %in%
                                      input$known_var, ]
-                     
+
                      temp_var_df <-
                        temp_var_df[temp_var_df$Classification %in%
                                      input$classification_var, ]
                      if (!("All" %in% input$pheno_var)) {
                        temp_var_df <-
-                         temp_var_df[temp_var_df$Phenotype_Subtype %in% 
+                         temp_var_df[temp_var_df$Phenotype_Subtype %in%
                                        input$pheno_var, ]
                      }
                      if (!("All" %in% input$gene_var)) {
@@ -93,9 +92,7 @@ fusion_filter_server <- function(id, fusion_table) {
                                                     temp_var_df$geneB %in%
                                                     input$gene_var, ]
                      }
-                     # print(nrow(temp_var_df))
-                     # print(ncol(temp_var_df))
-                     temp_var_df <- temp_var_df[, c(4,5,2,13,14,1,3,6:12)]
+                                          temp_var_df <- temp_var_df[, c(4, 5, 2, 13, 14, 1, 3, 6:12)]
                      filtered_sample_fusions(temp_var_df)
                    }
                  )
@@ -164,25 +161,19 @@ fusion_filter_server <- function(id, fusion_table) {
                    reactive_tbl = TRUE,
                    bordered = TRUE
                  )
-                 
-                 # reactable_server(
+
                  #   "sample_fusion_df",
                  #   filtered_sample_fusions,
                  #   bordered = TRUE,
                  #   columns = list(
                  #     `DITTO Score` = colDef(
                  #       style = function(value) {
-                 #         normalized <-
                  #           (value - min(fusion_table$`DITTO Score`)) /
                  #           (max(fusion_table$`DITTO Score`) -
-                 #              min(fusion_table$`DITTO Score`))
-                 #         color <- ditto_pal(normalized)
-                 #         list(fontWeight = 700, color = color)
                  #       }
                  #     ),
                  #     `Germline Class` = colDef(
                  #       style = function(value) {
-                 #         color <- if (value == "P") {
                  #           "#cc444b"
                  #         } else if (value == "LP") {
                  #           "#df7373"
@@ -191,10 +182,10 @@ fusion_filter_server <- function(id, fusion_table) {
                  #         } else if (value == "VUS") {
                  #           "#e4b1ab"
                  #         }
-                 #         list(fontWeight = 700, color = color)
                  #       }
                  #     )
                  #   )
                  # )
                })
 }
+

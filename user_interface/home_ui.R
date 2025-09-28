@@ -2,14 +2,13 @@ home_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,
-             #tags$h2("Pediatric Thyroid Cancer Explorer"),
              tags$p(
-               "Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of 
+               "Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of
                rare pediatric differentiated thyroid cancer."
              ),
-             tags$p("It characterizes the whole-exome and transcriptome from 
-               45 formalin-fixed paraffin-embedded (FFPE) surgical 
-               samples (tumor-normal) from pediatric patients with 
+             tags$p("It characterizes the whole-exome and transcriptome from
+               45 formalin-fixed paraffin-embedded (FFPE) surgical
+               samples (tumor-normal) from pediatric patients with
                female predominance (<19 years).")
            )),
   hr(),
@@ -20,7 +19,7 @@ home_page <- fluidPage(
       tags$h3("Study Design"),
       tags$p(style = "color:darkred;",
              "Flowchart showing RNA-Seq and WES study design and analytical steps performed."
-      ),br(),
+      ), br(),
       tags$img(src = "img/workflow_fig1.png",
                style = "width: 90%; height: auto;")
                #padding: 4px;
@@ -50,3 +49,4 @@ home_page <- fluidPage(
   br(),
   hr()
 )
+

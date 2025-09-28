@@ -3,7 +3,7 @@ meta_plots_ui <- function(id) {
   tagList(fluidRow(column(
     12,
     # style = "display: flex; flex-direction: column;
-    #       justify-content: center; 
+    #       justify-content: center;
     #       align-items: center; height: 100%;",
     uiOutput(ns("sample_meta_cols")),
     plotlyOutput(ns("meta_plot"),  height = "550px")
@@ -26,7 +26,7 @@ meta_plots_server <-
                                                           " ",
                                                           sample_feature_choices)
                      names(sample_feature_choices) <- sample_feature_choices_names
-                     
+
                      fluidRow(column(
                        12,
                        selectizeInput(ns("meta_col"),
@@ -43,7 +43,7 @@ meta_plots_server <-
                          p1 <- ggplot(sample_df,
                                       aes(fill = Subtypes,
                                           x = !!sym(input$meta_col))) +
-                           geom_bar(position = "dodge",color = "black") +
+                           geom_bar(position = "dodge", color = "black") +
                            labs(
                              title = paste0(
                                "Counts of feature: ",
@@ -77,13 +77,12 @@ meta_plots_server <-
                              legend.title = element_text(size = fs_meta_plot + 2),
                              legend.text = element_text(size = fs_meta_plot)
                            ) + scale_fill_manual(values = Subtypes_color)
-                           #scale_fill_brewer(palette = "Set2")
                          ggplotly(p1)
                        } else if (input$meta_col %in% num_cols) {
                          ggplot(sample_df, aes(x = !!sym(input$meta_col))) +
                            geom_histogram(
                              binwidth = 5,
-                             fill = "#00a5cf",#ccd5ae
+                             fill = "#00a5cf", #ccd5ae
                              color = "black",
                              alpha = 0.7
                            ) +
@@ -116,3 +115,4 @@ meta_plots_server <-
                    })
                  })
   }
+

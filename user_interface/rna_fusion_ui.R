@@ -13,3 +13,4 @@ rna_fusion_page <- fluidPage(
   br(),
   hr()
 )
+

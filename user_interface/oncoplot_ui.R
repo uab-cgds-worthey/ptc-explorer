@@ -4,21 +4,16 @@ onco_plot <- fluidPage(
            column(12,
                   h3("Variants Table"),
                   tags$p(style = "color:darkred;",
-                         "Variant information table is visualized using the oncoplot 
+                         "Variant information table is visualized using the oncoplot
                          shown below.")
                   )
-           ), 
+           ),
   hr(),
   fluidRow(
     column(12,
            variant_filter_ui("variant_table_with_filters"))#,
-    # column(
     #   1,
-    #   br(),
-    #   br(),
-    #   br(),
-    #   br(),
-    #  
+    #
     # )
   ),
   br(),
@@ -29,14 +24,14 @@ onco_plot <- fluidPage(
              8,
              h3("Interactive Oncoplot"),
              tags$p(style = "color:darkred;",
-               paste0("A comprehensive analysis using whole exome sequencing 
+               paste0("A comprehensive analysis using whole exome sequencing
                identified ",
                sample_variants_n,
-               " somatic and germline variants across 110 genes. 
-               These genetic alterations, derived from both tumor and normal 
-               samples, span six distinct subtypes, as illustrated in the 
-               interactive oncoplot below. On the right side, the box plots 
-               display the gene expression levels, contrasting tumor samples 
+               " somatic and germline variants across 110 genes.
+               These genetic alterations, derived from both tumor and normal
+               samples, span six distinct subtypes, as illustrated in the
+               interactive oncoplot below. On the right side, the box plots
+               display the gene expression levels, contrasting tumor samples
                with normal ones."
              )),
              column(2, )
@@ -75,3 +70,4 @@ onco_plot <- fluidPage(
   br(),
   hr()
 )
+

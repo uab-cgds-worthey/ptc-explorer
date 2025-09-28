@@ -20,3 +20,7 @@ dev
 #### Misc files
 trash.R
 .Rproj.user
+
+#### Linting temporary files
+linting_issues.txt
+fix_linting.R

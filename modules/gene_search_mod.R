@@ -6,18 +6,16 @@ gene_search_ui <- function(id) {
       12,
       fluidRow(
         column(4,
-               style = "display: flex; flex-direction: column;
-          justify-content: left; 
+          style = "display: flex; flex-direction: column;
+          justify-content: left;
           align-items: left; height: 100%;",
-               h4(style = "color:darkred; justify-content: center !important;",
-                  "Select or search a gene to display gene annotation and it's participation in our dataset."
-               ),
-               # fluidRow(
-               #   column(12,
-                        radioGroupButtons(
+          h4(style = "color:darkred; justify-content: center !important;",
+             "Select or search a gene to display gene annotation and it's participation in our dataset."
+          ),
+          radioGroupButtons(
                           inputId = ns("gene_type"),
                           label = "Select a gene category",
-                          choices = c("All Genes","Candidate Genes"),
+                          choices = c("All Genes", "Candidate Genes"),
                           selected = "Candidate Genes",
                           justified = TRUE
                         ),
@@ -30,11 +28,11 @@ gene_search_ui <- function(id) {
                #          )
                # ),
                tags$p(style = "font-size: 95% !important; color:grey;",
-                 "'All Genes' - This is an aggregated list of significant genes in our 
+                 "'All Genes' - This is an aggregated list of significant genes in our
           whole exome, bulk RNA-seq and downstream analysis."
                ),
                tags$p(style = "font-size: 95% !important; color:grey;",
-                 "'Candidate Genes' - This is an aggregated list of candidate genes (genes of interest) in our 
+                 "'Candidate Genes' - This is an aggregated list of candidate genes (genes of interest) in our
           whole exome, bulk RNA-seq and downstream analysis."
                ),
           ),
@@ -52,7 +50,6 @@ gene_search_ui <- function(id) {
       hr(),
       fluidRow(
         class = "text-center",
-        #column(1, ),
         column(
           12,
           style = "padding-right: 10px;",
@@ -61,7 +58,6 @@ gene_search_ui <- function(id) {
           hr(),
           reactable_ui(ns("variant_df_by_gene")),
         ),
-        #column(1, )
       ),
       br(),
       hr(),
@@ -101,7 +97,6 @@ gene_search_ui <- function(id) {
       hr(),
       fluidRow(
         class = "text-center",
-        #column(1, ),
         column(
           12,
           h3("RNA-Fusion Analysis",
@@ -109,7 +104,6 @@ gene_search_ui <- function(id) {
           hr(),
           reactable_ui(ns("rnafusion_df_by_gene"))
         ),
-        #column(1, )
       ),
       hr(),
       br()
@@ -126,14 +120,14 @@ gene_search_server <- function(id,
                                fusion_table) {
   moduleServer(id,
                function(input, output, session) {
-                 
+
                  observeEvent(input$gene_type, {
-                   if(input$gene_type == "All Genes"){
+                   if (input$gene_type == "All Genes") {
                      gene_list_in <- gene_list
                    } else {
                      gene_list_in <- candidate_gene_list
                    }
-                   
+
                    updateSelectizeInput(
                      session,
                      "gene_name",
@@ -141,22 +135,22 @@ gene_search_server <- function(id,
                      selected = gene_list_in[1],
                      server = TRUE
                    )
-                   
+
                  })
-                 
+
                  filtered_gene_df <- reactiveVal(var_table)
                  observeEvent(input$gene_name, {
-                   
+
                    validate(need(!is.null(input$gene_name),
                                  "Please select a gene"))
-                   
+
                    output$ualcan_redirect <- renderUI({
                      fluidRow(
                        column(
                          12,
                          p(paste0("Expression of gene ",
                                   input$gene_name,
-                                  " in THCA cohort based on tumor histology 
+                                  " in THCA cohort based on tumor histology
                                   subtype via UALCAN cancer data portal.")),
                          tags$a(href = paste0(
                            "https://ualcan.path.uab.edu/cgi-bin/TCGAExResultNew2.pl?genenam=",
@@ -167,9 +161,9 @@ gene_search_server <- function(id,
                          )
                      )
 
-                     
+
                    })
-                   
+
                    temp_gene_df <-
                      var_table[var_table$Gene %in% input$gene_name, ]
                    filtered_gene_df(temp_gene_df)
@@ -182,7 +176,7 @@ gene_search_server <- function(id,
                      ),
                      defaultColDef = colDef(align = "left"),
                      reactive_tbl = FALSE,
-                     null_msg = "This gene is not found to be differentially 
+                     null_msg = "This gene is not found to be differentially
                      expressed between our Tumor Vs Normal samples."
                    )
                    reactable_server(
@@ -194,7 +188,7 @@ gene_search_server <- function(id,
                      ),
                      defaultColDef = colDef(align = "left"),
                      reactive_tbl = FALSE,
-                     null_msg = "This gene is not found to be differentially 
+                     null_msg = "This gene is not found to be differentially
                      expressed between our PTCPlusThy vs FTC samples."
                    )
                    rna_fusion_df_filtered <-
@@ -203,9 +197,9 @@ gene_search_server <- function(id,
                    reactable_server(
                      "rnafusion_df_by_gene",
                      rna_fusion_df_filtered,
-                     defaultColDef = colDef( minWidth = 95, align = "left"),
+                     defaultColDef = colDef(minWidth = 95, align = "left"),
                      reactive_tbl = FALSE,
-                     null_msg = "This gene is not found to be significantly 
+                     null_msg = "This gene is not found to be significantly
                      participating in our RNA-fusion analysis."
                    )
                  })
@@ -220,3 +214,4 @@ gene_search_server <- function(id,
                  })
                })
 }
+

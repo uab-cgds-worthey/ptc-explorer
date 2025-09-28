@@ -4,3 +4,4 @@ source("R/utils.R")
 sapply(list.files("modules", full.names = TRUE), function(x) source(x))
 # Load user interface
 sapply(list.files("user_interface", full.names = TRUE), function(x) source(x))
+

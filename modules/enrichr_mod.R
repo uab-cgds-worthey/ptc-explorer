@@ -88,7 +88,7 @@ enrichr_server <- function(id, x, dbs, precalculate = FALSE) {
                            "OR",
                            "Score",
                            "Genes")
-                       return(enrichr_df)
+                       enrichr_df
                      }
                    output$enrichr_dbs_opt <- renderUI({
                      req(dbs)
@@ -187,3 +187,4 @@ enrichr_server <- function(id, x, dbs, precalculate = FALSE) {
                  }
                })
 }
+

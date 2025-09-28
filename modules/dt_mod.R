@@ -39,7 +39,8 @@ dt_server <-
         )
       })
       if (return_row) {
-        return(reactive(input$tbl_rows_selected))
+        reactive(input$tbl_rows_selected)
       }
     })
   }
+

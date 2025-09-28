@@ -58,3 +58,4 @@ reactable_server <- function(id,
                  })
                })
 }
+

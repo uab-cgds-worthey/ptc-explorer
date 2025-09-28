@@ -37,14 +37,13 @@ variant_filter_server <- function(id, variant_table) {
                          multiple = TRUE
                        ),
                      # ),
-                     # column(
                      #   6,
                        pickerInput(
                          ns("pheno_var"),
                          "Phenotype",
                          choices = c(unique(variant_table$Phenotype)),
                          selected =  c(unique(variant_table$Phenotype)),
-                         options = pickerOptions(container = "body", 
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
@@ -54,7 +53,7 @@ variant_filter_server <- function(id, variant_table) {
                          "Variant Type",
                          choices = c(unique(variant_table$`Variant Type`)),
                          selected = c(unique(variant_table$`Variant Type`)),
-                         options = pickerOptions(container = "body", 
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
@@ -64,22 +63,22 @@ variant_filter_server <- function(id, variant_table) {
                          "Germline Class",
                          choices = c(unique(variant_table$`Germline Class`)),
                          selected = c(unique(variant_table$`Germline Class`)),
-                         options = pickerOptions(container = "body", 
+                         options = pickerOptions(container = "body",
                                                  actionsBox = TRUE),
                          width = "100%",
                          multiple = TRUE
                        ),
                      br(),
                      tags$p(style = "font-size: 85% !important; color:grey;",
-                            "* To filter by 'Gene' and 'Chromosome' delete 'All' 
+                            "* To filter by 'Gene' and 'Chromosome' delete 'All'
                             and select one or more options."),
                      tags$p(style = "font-size: 80% !important; color:grey;",
                      "DITTO Score: DITTO (inspired by pokemon) is an explainable Neural network tool
-      that can make pathogenicity predictions for any type of small genetic 
-      variants and their predicted functional impact on transcript(s). 
+      that can make pathogenicity predictions for any type of small genetic
+      variants and their predicted functional impact on transcript(s).
       DITTO score ranges from (0-1), where higher scores translates to the
       variant being likely pathogenic. For more details on DITTO, please refer ",
-      tags$a('here.', href = 'https://doi.org/10.20944/preprints202404.0837.v1', 
+      tags$a('here.', href = 'https://doi.org/10.20944/preprints202404.0837.v1',
       target = '_blank_')
                      )
                      )
@@ -120,12 +119,9 @@ variant_filter_server <- function(id, variant_table) {
                    }
                  )
                  ditto_pal <- function(x, na_color = "transparent") {
-                 #   cols <- grDevices::rgb(
                  #     grDevices::colorRamp(
-                 #       c("#e4b1ab", "#cc444b")) (pmin(pmax(x,0),1)),
                  #     maxColorValue = 255
                  #     )
-                 #   cols[is.na(x)] <- na_color
                  #   cols
                  if(is.na(x)) x <- 0
                    rgb(colorRamp(c("#e4b1ab", "#cc444b"))(x),
@@ -144,13 +140,11 @@ variant_filter_server <- function(id, variant_table) {
                      ),
                      # Phenotype  = colDef(
                      #   style = function(value) {
-                     #     color <- if (value == "Tumor") {
                      #       "grey40"
                      #     } else if (value == "Normal") {
                      #       "grey90"
                      #     }
-                     #     list(background = color,
-                     #          color = c("white","black"))
+                     #          color = c("white", "black"))
                      #   }
                      # ),
                      `DITTO Score` = colDef(
@@ -160,8 +154,6 @@ variant_filter_server <- function(id, variant_table) {
                            (value - min(variant_table$`DITTO Score`)) /
                            (max(variant_table$`DITTO Score`) -
                             min(variant_table$`DITTO Score`))
-                         #color <- ditto_pal(normalized)
-                         #list(fontWeight = 700), color = color)
                        }
                      ),
                      `Germline Class` = colDef(
@@ -182,3 +174,4 @@ variant_filter_server <- function(id, variant_table) {
                  )
                })
 }
+

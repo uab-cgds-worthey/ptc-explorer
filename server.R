@@ -7,7 +7,7 @@ function(input, output, session) {
                     meta_num_cols)
   reactable_server(
     "sample_meta_df",
-    sample_meta_display %>% 
+    sample_meta_display %>%
       mutate(across(where(is.factor), ~ gsub("_", " ", .))),
 #    sample_meta_display,
     defaultColDef = colDef(na = "NA", minWidth = 95, align = "left"),
@@ -76,7 +76,7 @@ function(input, output, session) {
             "#FF8C00"
           } else if (value == "Low risk") {
             "#3CB371"
-          } 
+          }
           list(fontWeight = 700,
                background = color#,
                #color = fontcolor
@@ -89,7 +89,7 @@ function(input, output, session) {
     reactive_tbl = FALSE,
     bordered = TRUE
   )
- 
+
   #### Oncoplot and sample variant tab
   variant_filter_server("variant_table_with_filters", sample_variants)
   makeInteractiveComplexHeatmap(input, output, session,
@@ -114,17 +114,17 @@ function(input, output, session) {
                    2)
   volcano_server(
     "vol_aff_unaff",
-    res_t_vs_n[, -c(1,7,8)],
+    res_t_vs_n[, -c(1, 7, 8)],
     "Affected vs Unaffected Samples",
-    res_t_vs_n[, -c(1,7,8)],
+    res_t_vs_n[, -c(1, 7, 8)],
     res_t_vs_n_sel,
     1
   )
   volcano_server(
     "vol_ptc_vs_ftc",
-    res_ptc_vs_ftc[, -c(1,7,8)],
+    res_ptc_vs_ftc[, -c(1, 7, 8)],
     "Tumor Samples in PTCPlusThy vs FTC",
-    res_ptc_vs_ftc[, -c(1,7,8)],
+    res_ptc_vs_ftc[, -c(1, 7, 8)],
     res_ptc_vs_ftc_sel,
     1
   )
@@ -136,14 +136,14 @@ function(input, output, session) {
                      enrichr_ptc_vs_ftc,
                      enrichr_dbs,
                      precalculate = TRUE)
-  
+
   #### RNA-fusion tab
   fusion_filter_server("rna_fusion_tbl",
                        rna_fusion_df[, -12])
-  
+
   #### Genomics Analysis / WES page
-  
-  
+
+
   #### Gene search page
   gene_search_server(
     "geneSearch_main",
@@ -154,8 +154,8 @@ function(input, output, session) {
     fusion_table = rna_fusion_df,
     candidate_gene_list = candidate_genes_main
   )
-  
-  
+
+
   ######## Contact us
   profile_server(
     "gk",
@@ -166,7 +166,7 @@ function(input, output, session) {
     linkedin_url = "https://www.linkedin.com/in/gurpreet-bioin4/",
     x_url = "https://x.com/gurpreet_bioin4"
   )
-  
+
   profile_server(
     "sb",
     name = "Samuel Bharti",
@@ -177,7 +177,7 @@ function(input, output, session) {
     x_url = "#",
     img_style = "width:100%;"
   )
-  
+
   profile_server(
     "lw",
     name = "Elizabeth Worthey, Ph.D.",
@@ -189,3 +189,4 @@ function(input, output, session) {
     img_style = "width:100%;"
   )
 }
+

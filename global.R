@@ -64,7 +64,6 @@ colnames(sample_meta_display) <- str_replace_all(colnames(sample_meta_display),
                                                  "_",
                                                  " ")
 
-#oncoplot_rds <- readRDS("data/oncoplot_boxplot_2024-12-20.rds")
 onco_obj_list <- readRDS("data/ptc_onco_obj_list_2025-09-26.rds")
 
 oncoplot <- rlang::exec(
@@ -76,12 +75,11 @@ oncoplot <- rlang::exec(
 
 
 invisible(grid::grid.grabExpr({
-ptc_oncoprint_draw <- draw(
-  oncoplot,
-  heatmap_legend_list = onco_obj_list$lgd,
-  merge_legend = TRUE,
-  legend_gap = unit(0.75, "cm")
-)}))
-
-
+  ptc_oncoprint_draw <- draw(
+    oncoplot,
+    heatmap_legend_list = onco_obj_list$lgd,
+    merge_legend = TRUE,
+    legend_gap = unit(0.75, "cm")
+  )
+}))
 

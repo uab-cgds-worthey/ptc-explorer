@@ -22,3 +22,4 @@ gene_info_server <- function(id,
                  })
                })
 }
+

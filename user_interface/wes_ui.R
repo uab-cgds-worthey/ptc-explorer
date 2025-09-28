@@ -4,7 +4,7 @@ wes_page <- fluidPage(
              12,
              tags$h3("Mutational Signature Analysis"),
              tags$p(style = "color:darkred;",
-               "A summary of the signatures identified 
+               "A summary of the signatures identified
                in this study is shown below.
                For details about the specific single base substitution (SBS),
                click on the respective tabs on the right."
@@ -40,8 +40,8 @@ wes_page <- fluidPage(
              12,
              tags$h3("Tumor Clonal Evolution Analysis"),
              tags$p(style = "color:darkred;",
-               "Clonal analysis of somatic variation identified 
-               signatures of mutational processes in tumors from 
+               "Clonal analysis of somatic variation identified
+               signatures of mutational processes in tumors from
                participant 2, 17 and 18."
              )
            )),
@@ -78,3 +78,4 @@ wes_page <- fluidPage(
   br(),
   hr()
 )
+

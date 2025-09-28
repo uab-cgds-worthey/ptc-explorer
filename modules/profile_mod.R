@@ -5,7 +5,7 @@ profile_ui <- function(id) {
   )
 }
 
-profile_server <- function(id, 
+profile_server <- function(id,
                              name = NULL,
                              img_url = NULL,
                              title = NULL,
@@ -19,13 +19,11 @@ profile_server <- function(id,
   moduleServer(
     id,
     function(input, output, session) {
-      
-      img_url <- paste0("img/",img_url)
-      
-#      print("enter test")
+
+      img_url <- paste0("img/", img_url)
+
       output$profile_div_shiny <- renderUI({
- #       print("in render")
-        
+
         fluidRow(class = "profile_div_main",
                  column(
                    12,
@@ -34,7 +32,7 @@ profile_server <- function(id,
                                 alt = name,
                                 style = img_style,
                                 ...),
-                       
+
                    ),
                    h3(name),
                    tags$p(title),
@@ -46,7 +44,6 @@ profile_server <- function(id,
                    ),
                    # tags$a(
                    #   href = linkedin_url,
-                   #   icon("linkedin",  "fa-2x"),
                    #   target = "_blank"
                    # ),
                    tags$a(style = "color:black;",
@@ -60,3 +57,4 @@ profile_server <- function(id,
     }
   )
 }
+

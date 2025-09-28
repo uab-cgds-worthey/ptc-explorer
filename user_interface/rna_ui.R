@@ -5,15 +5,15 @@ rna_page <- fluidPage(
              8,
              h3("Prinical Component Analysis (PCA)"),
              tags$p(
-               "An unsupervised linear transformation technique, for 
-               dimensionality reduction to uncover interesting patterns and 
-               find any technical biases while preserving the biological 
-               variation in the dataset. First, we used phenotype (tumor 
-               and normal), batch and sex as factors which revealed 
-               distinctive clusters for tumor and normal samples 
-               (left PCA plot). Additionally, we also used six 
-               phenotype_subtypes, batch and sex as factors showing 
-               clustering of normal and tumor samples by 
+               "An unsupervised linear transformation technique, for
+               dimensionality reduction to uncover interesting patterns and
+               find any technical biases while preserving the biological
+               variation in the dataset. First, we used phenotype (tumor
+               and normal), batch and sex as factors which revealed
+               distinctive clusters for tumor and normal samples
+               (left PCA plot). Additionally, we also used six
+               phenotype_subtypes, batch and sex as factors showing
+               clustering of normal and tumor samples by
                subtypes (right PCA plot)."
              ),
              column(2, )
@@ -42,7 +42,7 @@ rna_page <- fluidPage(
              12,
              h3("Differential Genes Expression Analysis"),
              tags$p(
-               "List of differentially expressed genes (DEGs) for the 
+               "List of differentially expressed genes (DEGs) for the
                following two contrasts:"
              ),
              tags$p(style = "color:darkred;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
@@ -93,3 +93,4 @@ rna_page <- fluidPage(
   hr(),
   br()
 )
+
