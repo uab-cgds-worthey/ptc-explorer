@@ -46,6 +46,22 @@ shiny::runApp()
 
 Or open global.R in R Studio and click "Run App" selecting "Run External"
 
+## Application Features
+
+The PTCE application provides an intuitive interface with the following main sections:
+
+- **Home**: Overview of the study design, sample metadata, and clinical features
+- **Gene Search**: Interactive gene expression and variant lookup
+- **RNA Analysis**: Downstream RNA-seq analysis including differential gene expression
+- **RNA Fusion**: Analysis of fusion gene events
+- **WES Variants**: Whole exome sequencing variant analysis
+- **WES Additional**: Additional genomic variant analyses
+- **Download**: Access to latest versioned datasets in RDS format
+- **User Guide**: Comprehensive documentation for end users
+- **Developer Guide**: Technical documentation for developers and contributors
+- **Team**: Information about the research team
+- **Cite Us**: Citation information and formats for academic use
+
 ## Repo's directory structure
 
 The directory structure below shows the nature of files/directories used in this repo.
@@ -69,15 +85,17 @@ $ tree -a ptc-explorer/
 ├── ui.R                <-  Frontend functions for shiny components
 │
 ├── user_interface/     <-  UI components for each page
+│   ├── cite_us_ui.R    <- Citation information page layout
 │   ├── contact_ui.R    <- Team information page layout
-│   ├── docs_ui.R       <- Documentation page layout  
+│   ├── developer_guide_ui.R <- Developer documentation page layout
 │   ├── download_ui.R   <- Data download page layout
 │   ├── gene_search_ui.R <- Gene search page layout
 │   ├── home_ui.R       <- Home/landing page layout
-│   ├── oncoplot_ui.R   <- Variant distribution page layout
+│   ├── rna_downstream_ui.R <- RNA downstream analysis page layout
 │   ├── rna_fusion_ui.R <- RNA fusion analysis page layout
-│   ├── rna_ui.R        <- RNA-seq analysis page layout
-│   └── wes_ui.R        <- WES analysis page layout
+│   ├── user_guide_ui.R <- User documentation page layout
+│   ├── wes_additional_ui.R <- Additional WES analysis page layout
+│   └── wes_variant_ui.R <- WES variant analysis page layout
 │
 ├── modules/            <-  Reusable UI and server modules
 │   ├── dt_mod.R        <- Enhanced DataTable components
@@ -100,11 +118,12 @@ $ tree -a ptc-explorer/
 │   └── utils.R         <- General utility functions
 │
 ├── docs/               <-  Documentation files
-│   ├── API_DOCUMENTATION.md <- Module and component reference
-│   ├── DOCUMENTATION.md <- Complete application documentation
+│   ├── DYNAMIC_DATA_LOADING.md <- Dynamic data loading guide
+│   ├── LINTING_GUIDE.md <- Code linting and formatting guide
+│   ├── MODULES_COMPONENTS.md <- Module and component reference
 │   ├── TECHNICAL_REFERENCE.md <- Developer technical reference
-│   ├── USER_GUIDE.md   <- End-user guide
-│   └── ptce_docs.Rmd   <- In-app documentation content
+│   ├── TESTING_GUIDE.md <- Testing framework documentation
+│   └── USER_GUIDE_MERGED.md <- Comprehensive user guide
 │
 ├── www/                <-  Static web assets
 │   ├── css/            <- Stylesheets
