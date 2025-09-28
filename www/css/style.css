@@ -278,6 +278,31 @@ p {
   margin-right: 8px !important;
 }
 
+/* Download page styling */
+.download-section {
+  text-align: center !important;
+}
+
+.download-item {
+  text-align: center !important;
+}
+
+.download-item h4 {
+  font-weight: 600 !important;
+}
+
+.download-item p {
+  font-size: 16px !important;
+  color: #666 !important;
+  margin-bottom: 15px !important;
+}
+
+.btn-primary:hover, .btn-success:hover {
+  transform: translateY(-2px) !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
 /* Improve readability for documentation content */
 .tab-pane p {
   line-height: 1.7 !important;

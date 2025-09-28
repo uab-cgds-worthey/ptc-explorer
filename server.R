@@ -188,5 +188,32 @@ function(input, output, session) {
     x_url = "https://x.com/lizworthey",
     img_style = "width:100%;"
   )
+  
+  #### Download handlers
+  output$download_app_data <- downloadHandler(
+    filename = function() {
+      # Generate filename with current date
+      paste0("app_data_pack_", Sys.Date(), ".rds")
+    },
+    content = function(file) {
+      # Load the latest app data and save to download file
+      latest_data <- load_latest_app_data()
+      saveRDS(latest_data, file)
+    },
+    contentType = "application/octet-stream"
+  )
+  
+  output$download_onco_data <- downloadHandler(
+    filename = function() {
+      # Generate filename with current date
+      paste0("ptc_onco_obj_list_", Sys.Date(), ".rds")
+    },
+    content = function(file) {
+      # Load the latest onco data and save to download file
+      latest_onco <- load_latest_onco_data()
+      saveRDS(latest_onco, file)
+    },
+    contentType = "application/octet-stream"
+  )
 }
 

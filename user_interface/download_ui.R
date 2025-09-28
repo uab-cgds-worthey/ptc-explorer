@@ -1,23 +1,56 @@
-download_page <- fluidPage(fluidRow(class = "text-center",
-                                    column(
-                                      12,
-                                      h3("Download options for dataset:"),
-                                      br(),
-                                      div(
-                                        class = "text-center",
-                                        a(
-                                          href = "alldata.zip",
-                                          "All dataset zip",
-                                          download = NA,
-                                          target = "_blank"
-                                        ),
-                                        br(),
-                                        a(
-                                          href = "alldata.rds",
-                                          "All dataset RDS",
-                                          download = NA,
-                                          target = "_blank"
-                                        )
-                                      )
-                                    )))
+download_page <- fluidPage(
+  fluidRow(
+    class = "text-center",
+    column(
+      12,
+      h3("Download Latest Datasets"),
+      br(),
+      p("Download the most recent versions of the application datasets in RDS format:"),
+      br(),
+      
+      div(
+        class = "download-section",
+        style = "max-width: 600px; margin: 0 auto;",
+        
+        # App Data Pack Download
+        div(
+          class = "download-item",
+          style = "background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0;",
+          h4("Main Application Data", style = "color: darkred; margin-top: 0;"),
+          p("Complete dataset including variants, expression data, clinical metadata, and analysis results."),
+          downloadButton(
+            "download_app_data",
+            "Download app_data_pack.rds",
+            class = "btn-primary",
+            style = "background-color: darkred; border-color: darkred; font-weight: bold; padding: 10px 20px;"
+          )
+        ),
+        
+        # Oncoplot Data Download
+        div(
+          class = "download-item", 
+          style = "background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0;",
+          h4("Oncoplot Visualization Data", style = "color: darkgreen; margin-top: 0;"),
+          p("Pre-processed oncoplot objects for variant visualization and analysis."),
+          downloadButton(
+            "download_onco_data",
+            "Download ptc_onco_obj_list.rds",
+            class = "btn-success",
+            style = "background-color: darkgreen; border-color: darkgreen; font-weight: bold; padding: 10px 20px;"
+          )
+        )
+      ),
+      
+      br(),
+      div(
+        style = "max-width: 600px; margin: 0 auto; padding: 15px; background-color: #e9ecef; border-radius: 8px;",
+        h5("Usage Information", style = "color: #495057; margin-top: 0;"),
+        p("These RDS files can be loaded directly into R/RStudio using:", style = "margin-bottom: 8px;"),
+        code("data <- readRDS('filename.rds')", style = "display: block; background-color: white; padding: 8px; border-radius: 4px;"),
+        br(),
+        p("Files contain the most recent data available and are updated automatically.", style = "font-style: italic; margin-bottom: 0;")
+      )
+    )
+  )
+)
 
