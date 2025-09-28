@@ -2,9 +2,9 @@
 
 <!-- markdown-link-check-disable -->
 
-[![Perform linting - Markdown](https://github.com/uab-cgds-worthey/cgds_repo_template/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/cgds_repo_template/actions/workflows/linting.yml) <!-- markdown-link-check-enable -->
+[![Perform linting - Markdown](https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml) <!-- markdown-link-check-enable -->
 
-Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (\<19 years).
+Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19 years).
 
 ## Requirements
 
@@ -13,13 +13,13 @@ Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exp
 - R Packages listed in global.R
 - Minimum 1GB RAM
 
-## How to run
+## How to install
 
 Step 1: Clone this repo locally
 
 ``` bash
-git clone "https://github.com/uab-cgds-worthey/ptc-app.git"
-cd ptc-app
+git clone "https://github.com/uab-cgds-worthey/ptc-explorer.git"
+cd ptc-explorer
 ```
 
 Step 2: Run R in terminal or skip this step if using R Studio
@@ -36,6 +36,8 @@ devtools::install_github("wjawaid/enrichR")
 BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))
 ```
 
+## How to run
+
 Step 4: Run the app
 
 ``` r
@@ -49,7 +51,7 @@ Or open global.R in R Studio and click "Run App" selecting "Run External"
 The directory structure below shows the nature of files/directories used in this repo.
 
 ``` sh
-$ tree -a ptc-app/
+$ tree -a ptc-explorer/
 ├── CONTRIBUTING.md   <- Contribution guidelines
 │
 ├── LICENSE.md        <- License for the repo
@@ -66,20 +68,65 @@ $ tree -a ptc-app/
 │
 ├── ui.R                <-  Frontend functions for shiny components
 │
-├── userInterface/      <-  UI components for each page
+├── user_interface/     <-  UI components for each page
+│   ├── contact_ui.R    <- Team information page layout
+│   ├── docs_ui.R       <- Documentation page layout  
+│   ├── download_ui.R   <- Data download page layout
+│   ├── gene_search_ui.R <- Gene search page layout
+│   ├── home_ui.R       <- Home/landing page layout
+│   ├── oncoplot_ui.R   <- Variant distribution page layout
+│   ├── rna_fusion_ui.R <- RNA fusion analysis page layout
+│   ├── rna_ui.R        <- RNA-seq analysis page layout
+│   └── wes_ui.R        <- WES analysis page layout
 │
-├── modules/            <-  UI and server modules
+├── modules/            <-  Reusable UI and server modules
+│   ├── dt_mod.R        <- Enhanced DataTable components
+│   ├── enrichr_mod.R   <- Pathway enrichment analysis
+│   ├── fusion_filter_mod.R <- RNA fusion filtering
+│   ├── gene_info_mod.R <- Gene annotation services
+│   ├── gene_search_mod.R <- Gene search functionality
+│   ├── meta_plots_mod.R <- Clinical metadata visualization
+│   ├── profile_mod.R   <- Performance monitoring
+│   ├── reactable_mod.R <- Modern interactive tables
+│   ├── variant_filter_mod.R <- Genomic variant filtering
+│   └── volcano_mod.R   <- Interactive volcano plots
 │
 ├── data/               <-  Sample datasets
+│   ├── app_data_pack_*.rds <- Main application datasets
+│   └── oncoplot_boxplot_*.rds <- Visualization data
 │
 ├── R/                  <-  Utility functions
+│   ├── load_components.R <- Component loading functions
+│   └── utils.R         <- General utility functions
 │
-├── Dockerfile          <-  For containerization
+├── docs/               <-  Documentation files
+│   ├── API_DOCUMENTATION.md <- Module and component reference
+│   ├── DOCUMENTATION.md <- Complete application documentation
+│   ├── TECHNICAL_REFERENCE.md <- Developer technical reference
+│   ├── USER_GUIDE.md   <- End-user guide
+│   └── ptce_docs.Rmd   <- In-app documentation content
+│
+├── www/                <-  Static web assets
+│   ├── css/            <- Stylesheets
+│   ├── img/            <- Images and figures
+│   └── js/             <- JavaScript files
+│
+├── archive/            <-  Archived data and analysis files
+│
+├── dev/                <-  Development scripts and utilities
+│
+├── supplementary/      <-  Additional project materials
+│
+└── Dockerfile          <-  For containerization
 ```
 
 ## Contributing
 
 We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
+
+## Author
+
+Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
 
 ## Author
 
