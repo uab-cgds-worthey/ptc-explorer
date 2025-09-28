@@ -24,7 +24,7 @@ rna_downstream_page <- fluidPage(
     column(
       6,
       add_busy_bar(),
-      h4("Sample-wise PCA"),
+      h4("Sample-wise PCA", style = "font-weight: 600;"),
       tags$img(src = "img/pca_label_batch-corr_b&w_pid_col.png",
                style = "width: 90%; height: auto;"),
       br(),
@@ -35,7 +35,7 @@ rna_downstream_page <- fluidPage(
     ),
     column(
       6,
-      h4("Subtype-wise PCA"),
+      h4("Subtype-wise PCA", style = "font-weight: 600;"),
       tags$img(src = "img/pca_label_batch-corr_subtypes_pid_font.png",
                style = "width: 90%; height: auto;"),
       br(),
