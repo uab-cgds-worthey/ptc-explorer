@@ -17,5 +17,6 @@ navbarPage(
   tabPanel("Download", download_page),
   tabPanel("User Guide", user_guide_page),
   tabPanel("Developer Guide", developer_guide_page),
-  tabPanel("Team", contact_page)
+  tabPanel("Team", contact_page),
+  tabPanel("Cite Us", cite_us_page)
 )

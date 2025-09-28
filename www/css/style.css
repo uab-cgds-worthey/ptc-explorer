@@ -303,6 +303,33 @@ p {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
 }
 
+/* Citation page styling */
+.citation-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.citation-format {
+  transition: box-shadow 0.2s ease !important;
+}
+
+.citation-format:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.citation-text {
+  user-select: all !important;
+  cursor: text !important;
+}
+
+.btn-outline-secondary {
+  transition: all 0.2s ease !important;
+}
+
+.btn-outline-secondary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+
 /* Improve readability for documentation content */
 .tab-pane p {
   line-height: 1.7 !important;
