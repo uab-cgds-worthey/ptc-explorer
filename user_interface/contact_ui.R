@@ -7,13 +7,13 @@ contact_page <- fluidPage(
   hr(),
   fluidRow(class = "text-center",
            column(4,
-                  profiledivUI("gk")
+                  profile_ui("gk")
            ),
            column(4,
-                  profiledivUI("sb")
+                  profile_ui("sb")
            ),
            column(4,
-                  profiledivUI("lw")
+                  profile_ui("lw")
            )
   )
 )

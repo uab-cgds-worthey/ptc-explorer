@@ -84,9 +84,9 @@ rna_page <- fluidPage(
            )),
   hr(),
   fluidRow(column(6,
-                  enrichr_ui_mod("enrichr_t_vs_n")),
+                  enrichr_ui("enrichr_t_vs_n")),
            column(6,
-                  enrichr_ui_mod(
+                  enrichr_ui(
                     "enrichr_PTC_vs_FTC"
                   ))),
   br(),

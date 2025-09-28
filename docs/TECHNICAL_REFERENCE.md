@@ -175,7 +175,7 @@ volcano_config <- list(
 )
 ```
 
-#### 4. Enrichment Analysis Module (`enrichR_mod.R`)
+#### 4. Enrichment Analysis Module (`enrichr_mod.R`)
 
 **Purpose**: Pathway enrichment visualization and analysis
 

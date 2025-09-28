@@ -156,7 +156,7 @@ ptc-app/
   - `meta_plots_mod.R`: Clinical metadata visualization
   - `gene_search_mod.R`: Gene search and annotation
   - `volcano_mod.R`: Volcano plot generation
-  - `enrichR_mod.R`: Pathway enrichment analysis
+  - `enrichr_mod.R`: Pathway enrichment analysis
   - `variant_filter_mod.R`: Variant filtering logic
   - `fusion_filter_mod.R`: RNA fusion filtering
   - `reactable_mod.R`: Interactive table components
@@ -462,7 +462,7 @@ gene_search_server <- function(id, gene_list) {
 Each major plot type has its own module:
 - `meta_plots_mod.R`: Clinical metadata visualizations
 - `volcano_mod.R`: Volcano plot generation
-- `enrichR_mod.R`: Pathway enrichment plots
+- `enrichr_mod.R`: Pathway enrichment plots
 
 ### Data Structures
 

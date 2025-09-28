@@ -1,4 +1,4 @@
-enrichr_ui_mod <- function(id) {
+enrichr_ui <- function(id) {
   ns <- NS(id)
   tagList(fluidRow(
     column(
@@ -23,7 +23,7 @@ enrichr_ui_mod <- function(id) {
   )))
 }
 
-enrichr_server_mod <- function(id, x, dbs, precalculate = FALSE) {
+enrichr_server <- function(id, x, dbs, precalculate = FALSE) {
   moduleServer(id,
                function(input, output, session) {
                  ns <- session$ns

@@ -128,11 +128,11 @@ function(input, output, session) {
     res_ptc_vs_ftc_sel,
     1
   )
-  enrichr_server_mod("enrichr_t_vs_n",
+  enrichr_server("enrichr_t_vs_n",
                      enrichr_t_vs_n,
                      enrichr_dbs,
                      precalculate = TRUE)
-  enrichr_server_mod("enrichr_PTC_vs_FTC",
+  enrichr_server("enrichr_PTC_vs_FTC",
                      enrichr_ptc_vs_ftc,
                      enrichr_dbs,
                      precalculate = TRUE)
@@ -157,7 +157,7 @@ function(input, output, session) {
   
   
   ######## Contact us
-  profiledivServer(
+  profile_server(
     "gk",
     name = "Gurpreet Kaur, Ph.D.",
     img_url = "gurpreet_kaur.jpg",
@@ -167,7 +167,7 @@ function(input, output, session) {
     x_url = "https://x.com/gurpreet_bioin4"
   )
   
-  profiledivServer(
+  profile_server(
     "sb",
     name = "Samuel Bharti",
     img_url = "samuel_bharti.jpg",
@@ -178,7 +178,7 @@ function(input, output, session) {
     img_style = "width:100%;"
   )
   
-  profiledivServer(
+  profile_server(
     "lw",
     name = "Elizabeth Worthey, Ph.D.",
     img_url = "liz_worthey.jpg",

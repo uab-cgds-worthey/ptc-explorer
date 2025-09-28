@@ -82,7 +82,7 @@ The `modules/` directory contains reusable Shiny modules that provide both UI co
 
 **Usage**: Powers the Gene Search tab and provides gene lookup throughout the application.
 
-#### `enrichR_mod.R` - Pathway Enrichment Analysis
+#### `enrichr_mod.R` - Pathway Enrichment Analysis
 **Purpose**: Performs and visualizes pathway enrichment analysis using multiple databases.
 
 **Key Features**:

@@ -1,11 +1,11 @@
-profiledivUI <- function(id) {
+profile_ui <- function(id) {
   ns <- NS(id)
   tagList(
     uiOutput(ns("profile_div_shiny"))
   )
 }
 
-profiledivServer <- function(id, 
+profile_server <- function(id, 
                              name = NULL,
                              img_url = NULL,
                              title = NULL,
