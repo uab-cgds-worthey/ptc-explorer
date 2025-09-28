@@ -129,9 +129,8 @@ For the automatic detection to work, ensure new data files follow these patterns
 Documentation is available through two main menu items:
 
 ### **User Guide**
-- **Getting Started** - Quick app overview and basic usage
-- **User Manual** - Comprehensive user guide with detailed instructions  
-- **App Documentation** - Complete application documentation
+- **User Guide** - Comprehensive guide covering all application features and usage
+- **App Documentation** - Complete technical application documentation
 
 ### **Developer Guide**
 - **Technical Reference** - System architecture and API documentation

@@ -226,6 +226,30 @@ p {
   color: #2d5a2d !important;
 }
 
+/* Clean section styling for user guide */
+#user_guide_tabs h3 {
+  color: darkgreen !important;
+  margin-top: 25px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #c3e6cb !important;
+}
+
+#user_guide_tabs hr {
+  border-color: #c3e6cb !important;
+  margin: 30px 0 !important;
+}
+
+#user_guide_tabs blockquote {
+  background-color: #e8f5e9 !important;
+  border-left: 4px solid darkgreen !important;
+  padding: 15px 20px !important;
+  margin: 15px 0 !important;
+}
+
+#user_guide_tabs .emoji-section {
+  margin: 20px 0 !important;
+}
+
 /* Developer Guide content styling */
 #developer_guide_tabs .tab-content {
   border: 1px solid #f5c6cb !important;

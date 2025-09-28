@@ -6,24 +6,12 @@ user_guide_page <- fluidPage(
         type = "pills",
         
         tabPanel(
-          "Getting Started",
-          icon = icon("play-circle"),
-          fluidRow(
-            column(2, ),
-            column(8,
-              includeMarkdown("docs/ptce_docs.Rmd")
-            ),
-            column(2, )
-          )
-        ),
-        
-        tabPanel(
-          "User Manual",
+          "User Guide",
           icon = icon("book"),
           fluidRow(
             column(1, ),
             column(10,
-              includeMarkdown("docs/USER_GUIDE.md")
+              includeMarkdown("docs/USER_GUIDE_MERGED.md")
             ),
             column(1, )
           )
