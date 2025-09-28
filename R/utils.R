@@ -78,11 +78,24 @@ load_latest_data_file <- function(data_dir = "data",
   
   tryCatch({
     data <- readRDS(latest_file)
+    
+    # Check if the data object has version information
+    version_info <- NULL
+    if (is.list(data) && "version" %in% names(data)) {
+      version_info <- data$version
+      cat(paste("Data version:", version_info, "\n"))
+    } else if (exists("version", where = data, inherits = FALSE)) {
+      # In case version is an attribute or environment variable
+      version_info <- get("version", envir = as.environment(data))
+      cat(paste("Data version:", version_info, "\n"))
+    }
+    
     return(list(
       data = data,
       file_path = latest_file,
       date = latest_date,
-      filename = basename(latest_file)
+      filename = basename(latest_file),
+      version = version_info
     ))
   }, error = function(e) {
     stop(paste("Failed to load RDS file:", latest_file, "Error:", e$message))
@@ -92,12 +105,28 @@ load_latest_data_file <- function(data_dir = "data",
 # Convenience functions for specific data types
 load_latest_app_data <- function(data_dir = "data") {
   result <- load_latest_data_file(data_dir, "app_data_pack")
-  return(result$data)
+  return(list(
+    data = result$data,
+    version = result$version,
+    file_info = list(
+      filename = result$filename,
+      date = result$date,
+      file_path = result$file_path
+    )
+  ))
 }
 
 load_latest_onco_data <- function(data_dir = "data") {
   result <- load_latest_data_file(data_dir, "ptc_onco_obj_list")
-  return(result$data)
+  return(list(
+    data = result$data,
+    version = result$version,
+    file_info = list(
+      filename = result$filename,
+      date = result$date,
+      file_path = result$file_path
+    )
+  ))
 }
 
 clean_sig_df <- function(sig_df,

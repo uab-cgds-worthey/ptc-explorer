@@ -35,7 +35,10 @@ library(shiny)
 source("R/utils.R")
 
 # Load data/connections using latest date files
-app_data_main <- load_latest_app_data()
+app_data_result <- load_latest_app_data()
+app_data_main <- app_data_result$data
+app_data_version <- app_data_result$version
+app_data_file_info <- app_data_result$file_info
 
 sample_meta <- app_data_main$meta
 sample_variants <- app_data_main$variant
@@ -68,7 +71,10 @@ colnames(sample_meta_display) <- str_replace_all(colnames(sample_meta_display),
                                                  " ")
 
 # Load oncoplot data using latest date file
-onco_obj_list <- load_latest_onco_data()
+onco_result <- load_latest_onco_data()
+onco_obj_list <- onco_result$data
+onco_data_version <- onco_result$version
+onco_file_info <- onco_result$file_info
 
 oncoplot <- rlang::exec(
   oncoPrint,
