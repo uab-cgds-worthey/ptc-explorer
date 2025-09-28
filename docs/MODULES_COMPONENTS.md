@@ -285,4 +285,77 @@ function(input, output, session) {
 }
 ```
 
+## Utility Functions Directory
+
+### `R/utils.R` - Core Utility Functions
+**Purpose**: Provides shared utility functions used across the application, including dynamic data loading, gene annotation, and data validation.
+
+**Key Features**:
+
+#### Dynamic Data Loading
+```r
+# Automatically find and load the most recent data files
+load_latest_data_file()    # Generic file loader with date detection
+load_latest_app_data()     # Load latest app_data_pack_YYYY-MM-DD.rds
+load_latest_onco_data()    # Load latest ptc_onco_obj_list_YYYY-MM-DD.rds
+```
+
+#### Gene Annotation Functions
+```r
+validate_gene_symbol()     # Validate gene symbols against standards
+gene_query()              # Query gene information from mygene API
+gene_annotated()          # Get annotated gene information
+```
+
+#### Data Processing Utilities
+- Date parsing and validation functions
+- File management utilities
+- Error handling and logging functions
+- Data structure validation
+
+**Usage**: Sourced in `global.R` and used throughout modules for consistent data handling and gene annotation.
+
+### `R/load_components.R` - Component Management
+**Purpose**: Handles loading of UI components and server modules in a structured way.
+
+**Key Features**:
+- Systematic loading of all UI files from `user_interface/`
+- Loading and initialization of server modules from `modules/`
+- Dependency management between components
+
+---
+
+## Application Integration
+
+The complete application structure integrates as follows:
+
+```r
+# ui.R structure
+fluidPage(
+  # Include CSS and JavaScript
+  includeCSS("www/css/custom.css"),
+  
+  # Navigation structure
+  navbarPage("Pediatric Thyroid Cancer Explorer",
+    tabPanel("Home", home_ui), # from home_ui.R
+    tabPanel("Gene Search", gene_search_ui), # from gene_search_ui.R
+    tabPanel("Variants Distribution", onco_plot), # from oncoplot_ui.R
+    # ... other tabs
+  )
+)
+```
+
+The main `server.R` file calls the module server functions:
+
+```r
+# server.R structure
+function(input, output, session) {
+  # Call module servers
+  meta_plots_server("sample_meta_stats", ...)
+  gene_search_server("gene_search", ...)
+  volcano_server("volcano_plot", ...)
+  # ... other module servers
+}
+```
+
 This modular architecture ensures that the Pediatric Thyroid Cancer Explorer remains maintainable, extensible, and follows Shiny best practices for complex applications.

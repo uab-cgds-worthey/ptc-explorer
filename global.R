@@ -31,8 +31,11 @@ library(enrichR)
 detach("package:shiny", unload = TRUE)
 library(shiny)
 
-# Load data/connections
-app_data_main <- readRDS("data/app_data_pack_2025-09-26.rds")
+# Load utility functions
+source("R/utils.R")
+
+# Load data/connections using latest date files
+app_data_main <- load_latest_app_data()
 
 sample_meta <- app_data_main$meta
 sample_variants <- app_data_main$variant
@@ -64,7 +67,8 @@ colnames(sample_meta_display) <- str_replace_all(colnames(sample_meta_display),
                                                  "_",
                                                  " ")
 
-onco_obj_list <- readRDS("data/ptc_onco_obj_list_2025-09-26.rds")
+# Load oncoplot data using latest date file
+onco_obj_list <- load_latest_onco_data()
 
 oncoplot <- rlang::exec(
   oncoPrint,

@@ -162,7 +162,12 @@ ptc-app/
   - `reactable_mod.R`: Interactive table components
 
 #### 4. Data Layer
-- **Main Dataset**: `app_data_pack_2025-09-26.rds`
+### Key Application Data
+
+- **Dynamic Loading**: Application automatically loads the most recent data files based on date patterns
+- **Main Dataset**: `app_data_pack_YYYY-MM-DD.rds` (latest date automatically selected)
+- **Oncoplot Data**: `ptc_onco_obj_list_YYYY-MM-DD.rds` (latest date automatically selected)
+- **Data Source**: Data files generated using scripts from [ptc-explorer-data-prep](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep)
   - Sample metadata
   - Genomic variants
   - RNA fusion data
@@ -171,7 +176,7 @@ ptc-app/
 
 ### Data Processing Pipeline
 
-1. **Data Loading**: Raw datasets loaded in `global.R`
+1. **Data Loading**: Latest datasets automatically loaded in `global.R` using dynamic file detection
 2. **Data Preprocessing**: Variables transformed and prepared for visualization
 3. **Reactive Processing**: User inputs trigger reactive computations
 4. **Visualization Rendering**: Processed data rendered as interactive plots/tables
@@ -522,7 +527,8 @@ if(length(missing_packages)) install.packages(missing_packages)
 getwd()  # Should be the ptc-app directory
 
 # Verify data files exist
-file.exists("data/app_data_pack_2025-09-26.rds")
+# Check if latest data files are available
+load_latest_app_data()  # Automatically finds most recent app_data_pack_YYYY-MM-DD.rds
 ```
 
 #### 2. Slow Performance

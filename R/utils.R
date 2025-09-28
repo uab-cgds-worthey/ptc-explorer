@@ -20,6 +20,86 @@ validate_gene_symbol <- function(gene_symbol) {
   return(gene_clean)
 }
 
+# Function to load the latest data file based on date pattern
+load_latest_data_file <- function(data_dir = "data", 
+                                  file_pattern, 
+                                  date_format = "%Y-%m-%d") {
+  # Check if data directory exists
+  if (!dir.exists(data_dir)) {
+    stop(paste("Data directory not found:", data_dir))
+  }
+  
+  # Get all files matching the pattern
+  all_files <- list.files(data_dir, pattern = paste0(file_pattern, ".*\\.rds$"), full.names = TRUE)
+  
+  if (length(all_files) == 0) {
+    stop(paste("No files found matching pattern:", file_pattern, "in directory:", data_dir))
+  }
+  
+  # Extract dates from filenames
+  file_dates <- character(length(all_files))
+  valid_files <- logical(length(all_files))
+  
+  for (i in seq_along(all_files)) {
+    # Extract filename without extension
+    filename <- tools::file_path_sans_ext(basename(all_files[i]))
+    
+    # Remove the pattern prefix to get the date part
+    date_part <- gsub(paste0("^", file_pattern, "_?"), "", filename)
+    
+    # Try to parse the date
+    tryCatch({
+      parsed_date <- as.Date(date_part, format = date_format)
+      if (!is.na(parsed_date)) {
+        file_dates[i] <- as.character(parsed_date)
+        valid_files[i] <- TRUE
+      }
+    }, error = function(e) {
+      # Skip files with unparseable dates
+      valid_files[i] <- FALSE
+    })
+  }
+  
+  # Filter to valid files only
+  valid_file_paths <- all_files[valid_files]
+  valid_file_dates <- file_dates[valid_files]
+  
+  if (length(valid_file_paths) == 0) {
+    stop(paste("No files with valid dates found for pattern:", file_pattern))
+  }
+  
+  # Find the file with the latest date
+  latest_date_index <- which.max(as.Date(valid_file_dates))
+  latest_file <- valid_file_paths[latest_date_index]
+  latest_date <- valid_file_dates[latest_date_index]
+  
+  # Load and return the RDS file
+  cat(paste("Loading latest data file:", basename(latest_file), "(Date:", latest_date, ")\n"))
+  
+  tryCatch({
+    data <- readRDS(latest_file)
+    return(list(
+      data = data,
+      file_path = latest_file,
+      date = latest_date,
+      filename = basename(latest_file)
+    ))
+  }, error = function(e) {
+    stop(paste("Failed to load RDS file:", latest_file, "Error:", e$message))
+  })
+}
+
+# Convenience functions for specific data types
+load_latest_app_data <- function(data_dir = "data") {
+  result <- load_latest_data_file(data_dir, "app_data_pack")
+  return(result$data)
+}
+
+load_latest_onco_data <- function(data_dir = "data") {
+  result <- load_latest_data_file(data_dir, "ptc_onco_obj_list")
+  return(result$data)
+}
+
 clean_sig_df <- function(sig_df,
                          input_res = FALSE,
                          add_rownames = FALSE,

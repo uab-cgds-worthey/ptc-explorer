@@ -24,3 +24,9 @@ trash.R
 #### Linting temporary files
 linting_issues.txt
 fix_linting.R
+
+#### Testing files (temporarily excluded)
+tests/
+run_tests.R
+.github/workflows/test.yml
+docs/TESTING_GUIDE.md

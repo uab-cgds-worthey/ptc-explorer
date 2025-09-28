@@ -108,6 +108,52 @@ tibble::tibble(
 )
 ```
 
+## Data Management
+
+### Dynamic Data Loading Pattern
+
+The application implements a robust data loading system that automatically detects and loads the most recent data files based on date patterns in filenames.
+
+#### File Naming Convention
+- Main data: `app_data_pack_YYYY-MM-DD.rds`
+- Oncoplot data: `ptc_onco_obj_list_YYYY-MM-DD.rds`
+- Archive data: `oncoplot_boxplot_YYYY-MM-DD.rds`
+
+#### Implementation Details
+
+1. **Automatic Detection**: The `load_latest_data_file()` function scans the data directory for files matching specific patterns
+2. **Date Parsing**: Extracts dates from filenames using regex patterns (`\\d{4}-\\d{2}-\\d{2}`)
+3. **Version Selection**: Automatically selects the file with the most recent date
+4. **Error Handling**: Provides informative error messages when no matching files are found
+5. **Logging**: Reports which file is being loaded for transparency
+
+#### Data Preparation Pipeline
+Data files are generated using standardized scripts from the companion repository:
+
+**Repository**: [ptc-explorer-data-prep](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep)
+
+This repository contains:
+- Data processing and transformation scripts
+- Quality control and validation procedures
+- Automated data bundle creation (`app_data_pack_*.rds`)
+- Oncoplot object generation (`ptc_onco_obj_list_*.rds`)
+- Enrichment analysis pipelines
+- Documentation for data preparation workflows
+
+#### Benefits
+- **Maintenance-free**: No need to update hardcoded file paths when new data arrives
+- **Version Safety**: Always uses the most recent data version
+- **Development Friendly**: Consistent behavior across different data versions
+- **Deployment Ready**: Works seamlessly in production environments
+- **Reproducible Pipeline**: Standardized data preparation via companion repository
+
+```r
+# Example usage in global.R
+source("R/utils.R")
+app_data_pack <- load_latest_app_data()
+ptc_onco_obj_list <- load_latest_onco_data()
+```
+
 ## Module Architecture
 
 ### Core Modules
@@ -211,7 +257,44 @@ calculate_enrichment <- function(gene_set, background, database) {
 }
 ```
 
-#### Data Loading (`R/load_components.R`)
+#### Dynamic Data Loading (`R/utils.R`)
+
+The application uses dynamic data loading to automatically find and load the most recent data files based on date patterns in filenames.
+
+```r
+# Core data loading function - finds latest file matching pattern
+load_latest_data_file <- function(directory, pattern, 
+                                  date_pattern = "\\d{4}-\\d{2}-\\d{2}") {
+  files <- list.files(directory, pattern = pattern, full.names = TRUE)
+  
+  # Extract dates from filenames
+  dates <- stringr::str_extract(files, date_pattern)
+  valid_files <- files[!is.na(dates)]
+  
+  if (length(valid_files) == 0) {
+    stop(paste("No files found matching pattern:", pattern))
+  }
+  
+  # Find file with latest date
+  dates_parsed <- as.Date(dates[!is.na(dates)])
+  latest_idx <- which.max(dates_parsed)
+  latest_file <- valid_files[latest_idx]
+  
+  message(sprintf("Loading latest data file: %s", basename(latest_file)))
+  readRDS(latest_file)
+}
+
+# Specialized loading functions
+load_latest_app_data <- function() {
+  load_latest_data_file("data", "app_data_pack_.*\\.rds$")
+}
+
+load_latest_onco_data <- function() {
+  load_latest_data_file("data", "ptc_onco_obj_list_.*\\.rds$")
+}
+```
+
+#### Component Loading (`R/load_components.R`)
 
 ```r
 # Component loading functions
@@ -661,22 +744,40 @@ options(shiny.error = function() {
 ### Data Update Procedures
 
 ```r
-# Script to update main data file
+# Script to update main data file with dynamic loading
 update_app_data <- function(new_data_path) {
   # Validate new data structure
   validate_data_structure(new_data_path)
   
-  # Backup current data
-  backup_current_data()
+  # Generate dated filename
+  date_suffix <- format(Sys.Date(), "%Y-%m-%d")
+  target_name <- sprintf("app_data_pack_%s.rds", date_suffix)
+  target_path <- file.path("data", target_name)
   
-  # Update data file
-  file.copy(new_data_path, "data/app_data_pack_current.rds")
+  # Copy with date stamp - no backup needed as old versions remain
+  file.copy(new_data_path, target_path)
   
   # Update version info
   update_version_info()
   
-  # Test application
+  # Test application with new data
   test_app_functionality()
+  
+  message(sprintf("Data updated: %s", target_name))
+  message("Application will automatically use the new version on restart")
+}
+
+# Check available data versions
+list_data_versions <- function() {
+  app_files <- list.files("data", pattern = "app_data_pack_.*\\.rds$")
+  onco_files <- list.files("data", pattern = "ptc_onco_obj_list_.*\\.rds$")
+  
+  list(
+    app_data_versions = app_files,
+    onco_data_versions = onco_files,
+    latest_app = if(length(app_files) > 0) load_latest_data_file("data", "app_data_pack_.*\\.rds$") else NULL,
+    latest_onco = if(length(onco_files) > 0) load_latest_data_file("data", "ptc_onco_obj_list_.*\\.rds$") else NULL
+  )
 }
 ```
 
