@@ -46,17 +46,6 @@ shiny::runApp()
 
 Or open global.R in R Studio and click "Run App" selecting "Run External"
 
-## PTC Explorer Walkthrough
-
-Watch a comprehensive walkthrough of the Pediatric Thyroid Cancer Explorer application:
-
-<video width="800" controls>
-  <source src="https://github.com/uab-cgds-worthey/ptc-explorer/raw/dev/assets/ptc-explorer-walkthrough.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-*The video above demonstrates the application features and navigation.*
-
 ## Application Features
 
 The PTCE application provides an intuitive interface with the following main sections:
