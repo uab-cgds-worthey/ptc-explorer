@@ -225,7 +225,13 @@ gene_query <- function(gene,
   # Validate and clean gene symbol
   gene_clean <- validate_gene_symbol(gene)
   if (is.null(gene_clean)) {
-    return(HTML("<strong>Error:</strong> Invalid or empty gene symbol provided."))
+    return(HTML(
+      "<div style='padding: 10px; border: 1px solid #ffc107; border-radius: 4px; background-color: #fff3cd; color: #856404;'>",
+      "<strong>⚠️ Invalid Gene Identifier</strong><br/>",
+      "The gene identifier appears to be empty or contains invalid characters.<br/>",
+      "Please select a valid gene from the table above.",
+      "</div>"
+    ))
   }
   
   # URL encode the gene symbol
@@ -233,9 +239,22 @@ gene_query <- function(gene,
   
   base_url <- "https://mygene.info/v3/query"
   
+  # Determine query type based on gene identifier format
+  query_term <- if (grepl("^ENSG\\d+", gene_clean)) {
+    # Ensembl gene ID
+    paste0("ensembl.gene:", gene_encoded)
+  } else if (grepl("^\\d+$", gene_clean)) {
+    # Entrez gene ID (numeric)
+    paste0("entrezgene:", gene_encoded)
+  } else {
+    # Gene symbol (including non-standard ones like ABHD11-AS1)
+    # Try exact symbol match first, then broader search
+    gene_encoded
+  }
+  
   # Build query parameters properly
   params <- list(
-    q = paste0("symbol:", gene_encoded),
+    q = query_term,
     size = as.character(hit),
     species = species,
     fields = "name,symbol,entrezgene,ensembl.gene,summary"
@@ -253,48 +272,170 @@ gene_query <- function(gene,
       response_content <-
         httr::content(response, as = "text", encoding = "UTF-8")
       parsed_data <- jsonlite::fromJSON(response_content)
+      
       if (length(parsed_data$hits) == 0) {
-        gene_annotated(gene_clean)
-      } else {
-        # Extract relevant fields from the response
-        gene_symbol <- ifelse(is.null(parsed_data$hits[["symbol"]]),
-                              "NA", parsed_data$hits[["symbol"]])
-        gene_name   <- ifelse(is.null(parsed_data$hits[["name"]]),
-                              "NA", parsed_data$hits[["name"]])
-        gene_entrezgene   <-
-          ifelse(is.null(parsed_data$hits[["entrezgene"]]),
-                 "NA", parsed_data$hits[["entrezgene"]])
-        gene_ensembl   <-
-          ifelse(is.null(parsed_data$hits[["ensembl"]]),
-                 "NA", parsed_data$hits[["ensembl"]])
-        gene_summary <-
-          ifelse(is.null(parsed_data$hits[["summary"]]),
-                 "NA", parsed_data$hits[["summary"]])
-        result <- paste0(
-          "<strong>Gene Symbol:</strong> ",
-          gene_symbol,
-          "</br>",
-          "<strong>Name:</strong> ",
-          gene_name,
-          "</br>",
-          "<strong>Entrez Id:</strong> ",
-          gene_entrezgene,
-          "</br>",
-          "<strong>Ensembl Id:</strong> ",
-          gene_ensembl,
-          "</br>",
-          "<strong>Summary:</strong> ",
-          gene_summary
-        )
-        return(HTML(result))
+        # If no hits with the first query, try a broader search for gene symbols
+        if (!grepl("^ENSG\\d+", gene_clean) && !grepl("^\\d+$", gene_clean)) {
+          # Try symbol-prefixed search for gene symbols
+          params$q <- paste0("symbol:", gene_encoded)
+          query_string <- paste(names(params), params, sep = "=", collapse = "&")
+          api_url_retry <- paste0(base_url, "?", query_string)
+          
+          response_retry <- httr::GET(api_url_retry)
+          if (httr::status_code(response_retry) == 200) {
+            response_content_retry <- httr::content(response_retry, as = "text", encoding = "UTF-8")
+            parsed_data_retry <- jsonlite::fromJSON(response_content_retry)
+            
+            if (length(parsed_data_retry$hits) > 0) {
+              parsed_data <- parsed_data_retry
+              api_url <- api_url_retry  # Update for error reporting
+            }
+          }
+        }
+        
+        # If still no hits, provide user-friendly error message
+        if (length(parsed_data$hits) == 0) {
+          error_type <- if (grepl("^ENSG\\d+", gene_clean)) {
+            "Ensembl ID"
+          } else if (grepl("^\\d+$", gene_clean)) {
+            "Entrez ID"
+          } else {
+            "gene symbol"
+          }
+          
+          search_suggestions <- paste0(
+            "<div style='margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-left: 3px solid #007bff;'>",
+            "<strong>💡 Search Suggestions:</strong><br/>",
+            "• Try searching on <a href='https://www.genecards.org/cgi-bin/carddisp.pl?gene=", gene_encoded, "' target='_blank'>GeneCards</a><br/>",
+            "• Search on <a href='https://www.ncbi.nlm.nih.gov/gene/?term=", gene_encoded, "' target='_blank'>NCBI Gene</a><br/>",
+            "• Look up on <a href='https://www.ensembl.org/Multi/Search/Results?q=", gene_encoded, "' target='_blank'>Ensembl</a>",
+            "</div>"
+          )
+          
+          error_msg <- paste0(
+            "<div style='padding: 10px; border: 1px solid #dc3545; border-radius: 4px; background-color: #f8d7da; color: #721c24;'>",
+            "<strong>❌ Gene Not Found</strong><br/>",
+            "The ", error_type, " '<strong>", gene_clean, "</strong>' was not found in our database.<br/><br/>",
+            "<strong>Possible reasons:</strong><br/>",
+            "• Gene may be deprecated or renamed<br/>",
+            "• Identifier format might be non-standard<br/>",
+            "• Gene might be specific to certain species/builds<br/>",
+            "</div>",
+            search_suggestions
+          )
+          return(HTML(error_msg))
+        }
       }
+      
+      # Extract relevant fields from the response
+      hit_data <- parsed_data$hits[1, ]  # Get first hit
+      
+      gene_symbol <- ifelse(is.null(hit_data[["symbol"]]) || is.na(hit_data[["symbol"]]),
+                            "NA", hit_data[["symbol"]])
+      gene_name   <- ifelse(is.null(hit_data[["name"]]) || is.na(hit_data[["name"]]),
+                            "NA", hit_data[["name"]])
+      gene_entrezgene <- ifelse(is.null(hit_data[["entrezgene"]]) || is.na(hit_data[["entrezgene"]]),
+                               "NA", hit_data[["entrezgene"]])
+      
+      # Handle ensembl field (can be nested)
+      ensembl_id <- "NA"
+      if (!is.null(hit_data[["ensembl"]]) && !is.na(hit_data[["ensembl"]])) {
+        ensembl_data <- hit_data[["ensembl"]]
+        if (is.list(ensembl_data) && !is.null(ensembl_data[["gene"]])) {
+          ensembl_id <- ensembl_data[["gene"]]
+        } else if (is.character(ensembl_data)) {
+          ensembl_id <- ensembl_data
+        }
+      }
+      
+      gene_summary <- ifelse(is.null(hit_data[["summary"]]) || is.na(hit_data[["summary"]]),
+                            "NA", hit_data[["summary"]])
+      
+      result <- paste0(
+        "<strong>Gene Symbol:</strong> ",
+        gene_symbol,
+        "</br>",
+        "<strong>Name:</strong> ",
+        gene_name,
+        "</br>",
+        "<strong>Entrez Id:</strong> ",
+        gene_entrezgene,
+        "</br>",
+        "<strong>Ensembl Id:</strong> ",
+        ensembl_id,
+        "</br>",
+        "<strong>Summary:</strong> ",
+        gene_summary
+      )
+      return(HTML(result))
+      
     } else {
-      return(HTML(paste0("<strong>API Error:</strong> Status code ", 
-                         httr::status_code(response), ". Please try again later.")))
+      # Enhanced user-friendly error message for API failures
+      status_code <- httr::status_code(response)
+      
+      error_icon <- if (status_code == 404) "🔍" else if (status_code >= 500) "🔧" else "⚠️"
+      error_title <- if (status_code == 404) {
+        "Gene Information Not Available"
+      } else if (status_code >= 500) {
+        "Service Temporarily Unavailable"
+      } else {
+        "Connection Issue"
+      }
+      
+      error_explanation <- if (status_code == 404) {
+        paste0("The gene '<strong>", gene_clean, "</strong>' could not be found in the mygene.info database.")
+      } else if (status_code >= 500) {
+        "The gene information service is temporarily experiencing issues."
+      } else {
+        "There was a problem connecting to the gene information service."
+      }
+      
+      user_actions <- if (status_code == 404) {
+        paste0(
+          "<div style='margin-top: 10px; padding: 8px; background-color: #e7f3ff; border-left: 3px solid #007bff;'>",
+          "<strong>💡 Try These Resources:</strong><br/>",
+          "• Search <a href='https://www.genecards.org/cgi-bin/carddisp.pl?gene=", gene_encoded, "' target='_blank'>GeneCards</a><br/>",
+          "• Check <a href='https://www.ncbi.nlm.nih.gov/gene/?term=", gene_encoded, "' target='_blank'>NCBI Gene Database</a><br/>",
+          "• Browse <a href='https://www.ensembl.org/Multi/Search/Results?q=", gene_encoded, "' target='_blank'>Ensembl Genome Browser</a>",
+          "</div>"
+        )
+      } else {
+        paste0(
+          "<div style='margin-top: 10px; padding: 8px; background-color: #fff3cd; border-left: 3px solid #ffc107;'>",
+          "<strong>🔄 What You Can Do:</strong><br/>",
+          "• Please try again in a few moments<br/>",
+          "• Check your internet connection<br/>",
+          "• If the problem persists, search for '<strong>", gene_clean, "</strong>' on <a href='https://www.google.com/search?q=", gene_encoded, "+gene' target='_blank'>Google</a>",
+          "</div>"
+        )
+      }
+      
+      error_msg <- paste0(
+        "<div style='padding: 12px; border: 1px solid #dc3545; border-radius: 6px; background-color: #f8d7da; color: #721c24; margin: 5px 0;'>",
+        "<strong>", error_icon, " ", error_title, "</strong><br/>",
+        error_explanation, "<br/>",
+        "<small style='color: #6c757d;'>Error Code: ", status_code, "</small>",
+        "</div>",
+        user_actions
+      )
+      return(HTML(error_msg))
     }
   }, error = function(e) {
-    return(HTML(paste0("<strong>Error:</strong> Unable to fetch gene information for '", 
-                       gene_clean, "'. ", e$message)))
+    # User-friendly error message for connection/technical issues
+    error_msg <- paste0(
+      "<div style='padding: 12px; border: 1px solid #dc3545; border-radius: 6px; background-color: #f8d7da; color: #721c24; margin: 5px 0;'>",
+      "<strong>🔌 Connection Problem</strong><br/>",
+      "Unable to fetch gene information for '<strong>", gene_clean, "</strong>'.<br/>",
+      "<small style='color: #6c757d;'>Technical details: ", e$message, "</small>",
+      "</div>",
+      "<div style='margin-top: 10px; padding: 8px; background-color: #d1ecf1; border-left: 3px solid #bee5eb;'>",
+      "<strong>🔧 Troubleshooting:</strong><br/>",
+      "• Check your internet connection<br/>",
+      "• Try refreshing the page<br/>",
+      "• Search for '<strong>", gene_clean, "</strong>' on <a href='https://www.google.com/search?q=", utils::URLencode(gene_clean, reserved = TRUE), "+gene' target='_blank'>Google</a> or <a href='https://www.genecards.org/cgi-bin/carddisp.pl?gene=", utils::URLencode(gene_clean, reserved = TRUE), "' target='_blank'>GeneCards</a>",
+      "</div>"
+    )
+    return(HTML(error_msg))
   })
 }
 
