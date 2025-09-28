@@ -104,7 +104,7 @@ $ tree -a ptc-explorer/
 │   ├── gene_info_mod.R <- Gene annotation services
 │   ├── gene_search_mod.R <- Gene search functionality
 │   ├── meta_plots_mod.R <- Clinical metadata visualization
-│   ├── profile_mod.R   <- Performance monitoring
+│   ├── profile_mod.R   <- Team photo and social media display
 │   ├── reactable_mod.R <- Modern interactive tables
 │   ├── variant_filter_mod.R <- Genomic variant filtering
 │   └── volcano_mod.R   <- Interactive volcano plots

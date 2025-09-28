@@ -120,17 +120,17 @@ The `modules/` directory contains reusable Shiny modules that provide both UI co
 
 ### Utility Modules
 
-#### `profile_mod.R` - Performance Monitoring
-**Purpose**: Monitors application performance and resource usage during development.
+#### `profile_mod.R` - Team Photo Display
+**Purpose**: UI module for displaying team member photos and social media links.
 
 **Key Features**:
-- Memory usage tracking
-- Reactive execution timing
-- Performance bottleneck identification
-- Resource usage alerts
-- Development-time profiling tools
+- Team member photo gallery
+- Social media link integration
+- Professional team presentation
+- Responsive layout for team information
+- Contact information display
 
-**Usage**: Primarily used during development and testing for performance optimization.
+**Usage**: Used on the Team page to showcase research team members and their social media profiles.
 
 #### `gene_info_mod.R` - Gene Annotation Services
 **Purpose**: Retrieves additional gene information from external databases and APIs.
