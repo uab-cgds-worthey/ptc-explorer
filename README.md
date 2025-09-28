@@ -128,6 +128,3 @@ We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
 
 Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
 
-## Author
-
-Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
