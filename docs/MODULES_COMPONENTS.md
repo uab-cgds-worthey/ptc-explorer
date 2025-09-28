@@ -1,4 +1,4 @@
-# Pediatric Thyroid Cancer Explorer - Module and Component Reference
+# Pediatric Thyroid Cancer Explorer - Modules and Components Reference
 
 ## Overview
 

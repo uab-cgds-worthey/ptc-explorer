@@ -79,3 +79,71 @@ p {
     color: darkred;
   }
 }
+
+/* Documentation tab styling */
+.tab-content {
+  padding-top: 20px !important;
+}
+
+#docs_tabs .nav-tabs > li > a {
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+
+#docs_tabs .nav-tabs > li.active > a {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+#docs_tabs .tab-pane {
+  padding: 20px 0 !important;
+}
+
+/* Documentation content styling */
+.tab-pane h1 {
+  color: darkred !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid darkred !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.tab-pane h2 {
+  color: darkgreen !important;
+  font-weight: 600 !important;
+  margin-top: 25px !important;
+  margin-bottom: 15px !important;
+}
+
+.tab-pane h3 {
+  color: #555 !important;
+  font-weight: 600 !important;
+  margin-top: 20px !important;
+}
+
+.tab-pane ul, .tab-pane ol {
+  font-size: 1.6rem !important;
+}
+
+.tab-pane code {
+  background-color: #f8f8f8 !important;
+  color: #c7254e !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+}
+
+.tab-pane pre {
+  background-color: #f8f8f8 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 5px !important;
+  padding: 15px !important;
+  margin: 10px 0 !important;
+}
+
+.tab-pane blockquote {
+  border-left: 4px solid darkred !important;
+  background-color: #f9f9f9 !important;
+  padding: 10px 20px !important;
+  margin: 15px 0 !important;
+}
