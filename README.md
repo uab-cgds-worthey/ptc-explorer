@@ -46,6 +46,14 @@ shiny::runApp()
 
 Or open global.R in R Studio and click "Run App" selecting "Run External"
 
+## PTC Explorer Walkthrough
+
+Watch a comprehensive walkthrough of the Pediatric Thyroid Cancer Explorer application:
+
+https://github.com/uab-cgds-worthey/ptc-explorer/raw/main/assets/ptc-explorer-walkthrough.mp4
+
+*Click the video above to see the application features and navigation in action.*
+
 ## Application Features
 
 The PTCE application provides an intuitive interface with the following main sections:
@@ -77,6 +85,9 @@ $ tree -a ptc-explorer/
 ├── .gitignore        <- Specifies intentionally untracked files to ignore by git
 │
 ├── .markdownlint.json  <- Markdown linting config
+│
+├── assets/             <-  Media files and resources
+│   └── ptc-explorer-walkthrough.mp4 <- Application walkthrough video
 │
 ├── global.R            <-  Load libraries, datasets
 │
