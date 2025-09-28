@@ -28,5 +28,6 @@ fix_linting.R
 #### Testing files (temporarily excluded)
 tests/
 run_tests.R
+test_data_loading.R
 .github/workflows/test.yml
 docs/TESTING_GUIDE.md

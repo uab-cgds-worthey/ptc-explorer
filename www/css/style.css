@@ -147,3 +147,123 @@ p {
   padding: 10px 20px !important;
   margin: 15px 0 !important;
 }
+
+/* Documentation tabs styling */
+.nav-pills > li > a {
+  font-weight: 500 !important;
+  color: #555 !important;
+  margin: 2px !important;
+  border-radius: 20px !important;
+  border: 1px solid #ddd !important;
+  background-color: #f8f8f8 !important;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+.nav-pills > li > a:hover {
+  background-color: #e7e7e7 !important;
+  color: #555 !important;
+  border-color: #bbb !important;
+}
+
+/* User Guide specific styling */
+#user_guide_tabs .nav-pills > li.active > a,
+#user_guide_tabs .nav-pills > li.active > a:hover,
+#user_guide_tabs .nav-pills > li.active > a:focus {
+  background-color: darkgreen !important;
+  color: white !important;
+  border-color: darkgreen !important;
+}
+
+#user_guide_tabs .nav-pills > li > a:hover {
+  background-color: #e8f5e8 !important;
+  color: darkgreen !important;
+  border-color: #9cb99c !important;
+}
+
+/* Developer Guide specific styling */
+#developer_guide_tabs .nav-pills > li.active > a,
+#developer_guide_tabs .nav-pills > li.active > a:hover,
+#developer_guide_tabs .nav-pills > li.active > a:focus {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+#developer_guide_tabs .nav-pills > li > a:hover {
+  background-color: #ffe8e8 !important;
+  color: darkred !important;
+  border-color: #d9a3a3 !important;
+}
+
+/* Tab content area styling */
+.tab-pane {
+  padding: 20px 0 !important;
+  animation: fadeIn 0.3s ease-in-out !important;
+}
+
+/* User Guide content styling */
+#user_guide_tabs .tab-content {
+  border: 1px solid #d4edda !important;
+  border-radius: 5px !important;
+  background-color: #f8fff8 !important;
+  padding: 20px !important;
+  margin-top: 10px !important;
+}
+
+#user_guide_tabs h1 {
+  color: darkgreen !important;
+  border-bottom: 2px solid darkgreen !important;
+}
+
+#user_guide_tabs h2 {
+  color: #2d5a2d !important;
+}
+
+/* Developer Guide content styling */
+#developer_guide_tabs .tab-content {
+  border: 1px solid #f5c6cb !important;
+  border-radius: 5px !important;
+  background-color: #fff8f8 !important;
+  padding: 20px !important;
+  margin-top: 10px !important;
+}
+
+#developer_guide_tabs h1 {
+  color: darkred !important;
+  border-bottom: 2px solid darkred !important;
+}
+
+#developer_guide_tabs h2 {
+  color: #8b0000 !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Documentation icons styling */
+.fa-user, .fa-code {
+  margin-right: 8px !important;
+}
+
+/* Improve readability for documentation content */
+.tab-pane p {
+  line-height: 1.7 !important;
+  margin-bottom: 15px !important;
+}
+
+.tab-pane strong {
+  color: darkred !important;
+}
+
+.tab-pane em {
+  color: darkgreen !important;
+}

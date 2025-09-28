@@ -1,4 +1,4 @@
-rna_page <- fluidPage(
+rna_downstream_page <- fluidPage(
   fluidRow(class = "text-center",
            column(2, ),
            column(

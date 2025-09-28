@@ -104,12 +104,6 @@ The data files used by this application are created using scripts from the dedic
 - **Differential expression workflows** - Gene expression comparison pipelines
 - **Variant annotation pipeline** - Genomic variant processing and annotation
 
-**Benefits of Separate Repository**:
-- ✅ **Separation of Concerns**: Data processing separate from application logic
-- ✅ **Reproducible Pipeline**: Complete record of how each data version was created
-- ✅ **Independent Versioning**: Data pipeline evolves independently of app
-- ✅ **Collaboration Friendly**: Data scientists can work on pipelines without affecting production
-
 ### Adding New Data
 1. **Use data preparation scripts** from: https://github.com/uab-cgds-worthey/ptc-explorer-data-prep
 2. **Generate files** with naming convention: `app_data_pack_YYYY-MM-DD.rds`

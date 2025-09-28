@@ -126,7 +126,18 @@ For the automatic detection to work, ensure new data files follow these patterns
 
 ## Documentation Access
 
-All documentation has been updated and is accessible through your app's **"Docs"** tab, including the new comprehensive guide on dynamic data loading.
+Documentation is available through two main menu items:
+
+### **User Guide**
+- **Getting Started** - Quick app overview and basic usage
+- **User Manual** - Comprehensive user guide with detailed instructions  
+- **App Documentation** - Complete application documentation
+
+### **Developer Guide**
+- **Technical Reference** - System architecture and API documentation
+- **Architecture & Modules** - Modular component structure and organization
+- **Data Management** - Dynamic data loading implementation and workflows
+- **Development Workflow** - Code standards, linting, and development practices
 
 ---
 

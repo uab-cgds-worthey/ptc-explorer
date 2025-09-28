@@ -1,4 +1,4 @@
-wes_page <- fluidPage(
+wes_additional_page <- fluidPage(
   fluidRow(class = "text-center",
            column(
              12,

@@ -140,13 +140,6 @@ This repository contains:
 - Enrichment analysis pipelines
 - Documentation for data preparation workflows
 
-#### Benefits
-- **Maintenance-free**: No need to update hardcoded file paths when new data arrives
-- **Version Safety**: Always uses the most recent data version
-- **Development Friendly**: Consistent behavior across different data versions
-- **Deployment Ready**: Works seamlessly in production environments
-- **Reproducible Pipeline**: Standardized data preparation via companion repository
-
 ```r
 # Example usage in global.R
 source("R/utils.R")

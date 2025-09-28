@@ -1,4 +1,4 @@
-onco_plot <- fluidPage(
+wes_variant_page <- fluidPage(
   # Page title
   fluidRow(class = "text-center",
            column(12,
