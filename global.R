@@ -3,7 +3,7 @@ library(shiny)
 library(shinybusy)
 library(shinycssloaders)
 library(shinyWidgets)
-
+library(markdown)
 ## Plots and data manipulation
 library(dplyr)
 library(reshape2)
@@ -54,7 +54,7 @@ meta_fact_cols <- app_data_main$meta_fact_col
 meta_num_cols <- app_data_main$meta_num_col
 
 all_genes_main <- app_data_main$all_genes
-candidate_genes_main <- app_data_main$candidate_gens
+candidate_genes_main <- app_data_main$candidate_gens # Update to "candidate_genes" from new data
 
 
 gostres_t_vs_n <- app_data_main$t_vs_n_gp

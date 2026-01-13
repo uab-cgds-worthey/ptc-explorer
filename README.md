@@ -52,10 +52,10 @@ The PTCE application provides an intuitive interface with the following main sec
 
 - **Home**: Overview of the study design, sample metadata, and clinical features
 - **Gene Search**: Interactive gene expression and variant lookup
+- **WES Variants**: Whole exome sequencing variant analysis
+- **WES Additional**: Additional genomic variant analyses (Signature, Clonal and MSI)
 - **RNA Analysis**: Downstream RNA-seq analysis including differential gene expression
 - **RNA Fusion**: Analysis of fusion gene events
-- **WES Variants**: Whole exome sequencing variant analysis
-- **WES Additional**: Additional genomic variant analyses
 - **Download**: Access to latest versioned datasets in RDS format
 - **User Guide**: Comprehensive documentation for end users
 - **Developer Guide**: Technical documentation for developers and contributors

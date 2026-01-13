@@ -17,9 +17,17 @@ dev
 /archive
 /supplementary
 
+### Deployment
+rsconnect
+.posit
+
 #### Misc files
 trash.R
-.Rproj.user
+.Rbuildignore
+.rscignore
+.Rprofile
+renv
+
 
 #### Linting temporary files
 linting_issues.txt
