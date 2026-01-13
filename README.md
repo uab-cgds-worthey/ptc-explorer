@@ -62,6 +62,8 @@ The PTCE application provides an intuitive interface with the following main sec
 - **Team**: Information about the research team
 - **Cite Us**: Citation information and formats for academic use
 
+For detailed usage instructions, see the [User Guide](docs/USER_GUIDE.md).
+
 ## Repo's directory structure
 
 The directory structure below shows the nature of files/directories used in this repo.
