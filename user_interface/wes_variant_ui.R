@@ -27,7 +27,7 @@ wes_variant_page <- fluidPage(
                paste0("A comprehensive analysis using whole exome sequencing
                identified ",
                sample_variants_n,
-               " somatic and germline variants across 110 genes.
+               " somatic and germline variants across 99 genes.
                These genetic alterations, derived from both tumor and normal
                samples, span six distinct subtypes, as illustrated in the
                interactive oncoplot below. On the right side, the box plots

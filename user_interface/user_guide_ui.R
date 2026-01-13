@@ -11,7 +11,7 @@ user_guide_page <- fluidPage(
           fluidRow(
             column(1, ),
             column(10,
-              includeMarkdown("docs/USER_GUIDE_MERGED.md")
+              includeMarkdown("docs/USER_GUIDE.md")
             ),
             column(1, )
           )

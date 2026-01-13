@@ -40,3 +40,4 @@ test_data_loading.R
 .github/workflows/test.yml
 docs/TESTING_GUIDE.md
 docs/USER_GUIDE_old.md
+.Rproj.user
