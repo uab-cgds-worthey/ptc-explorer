@@ -2,9 +2,14 @@
 
 <!-- markdown-link-check-disable -->
 
-[![Perform linting - Markdown](https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml) <!-- markdown-link-check-enable -->
+[![Perform linting -
+Markdown](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml)
+<!-- markdown-link-check-enable -->
 
-Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19 years).
+Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric
+differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed
+paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19
+years).
 
 ## Requirements
 
@@ -14,6 +19,44 @@ Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exp
 - Minimum 1GB RAM
 
 ## How to install
+
+### Option 1: Using renv (Recommended)
+
+This project uses `renv` for reproducible dependency management. Using renv ensures that you have
+the exact same package versions as the development environment.
+
+Step 1: Clone this repo locally
+
+``` bash
+git clone "https://github.com/uab-cgds-worthey/ptc-explorer.git"
+cd ptc-explorer
+```
+
+Step 2: Restore the R environment using renv
+
+In R or R Studio:
+
+``` r
+# Install renv if not already installed
+if (!requireNamespace("renv", quietly = TRUE)) {
+  install.packages("renv")
+}
+
+# Restore all packages from the lock file
+renv::restore()
+```
+
+Step 3: Run the app
+
+``` r
+shiny::runApp()
+```
+
+Or open global.R in R Studio and click "Run App" selecting "Run External"
+
+### Option 2: Manual installation
+
+If you prefer to install packages manually without renv:
 
 Step 1: Clone this repo locally
 
@@ -31,14 +74,23 @@ R
 Step 3: Install R packages
 
 ``` r
-install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2","scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
+install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2",
+"scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
 devtools::install_github("wjawaid/enrichR")
 BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))
 ```
 
+Step 4: Run the app
+
+``` r
+shiny::runApp()
+```
+
+Or open global.R in R Studio and click "Run App" selecting "Run External"
+
 ## How to run
 
-Step 4: Run the app
+Once dependencies are installed (via renv or manual installation), run the app:
 
 ``` r
 shiny::runApp()
@@ -151,4 +203,3 @@ We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
 ## Author
 
 Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
-
