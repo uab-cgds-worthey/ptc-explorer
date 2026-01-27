@@ -649,7 +649,7 @@ reactlog::reactlog_enable()
 
 ## Contributing
 
-We welcome contributions to the Pediatric Thyroid Cancer Explorer! Please see our [Contributing Guidelines](CONTRIBUTING.md) for detailed information.
+We welcome contributions to the Pediatric Thyroid Cancer Explorer! Please see our [Contributing Guidelines](./CONTRIBUTING.md) for detailed information.
 
 ### Development Setup
 
@@ -708,14 +708,13 @@ We welcome contributions to the Pediatric Thyroid Cancer Explorer! Please see ou
 If you use this application in your research, please cite:
 
 ```
-Bharti, S., et al. (2025). Pediatric Thyroid Cancer Explorer: An Interactive 
-Resource for Exploring Pediatric Differentiated Thyroid Cancer. 
-UAB Center for Computational Genomics and Data Science.
+To be updated. 
+
 ```
 
 ### License
 
-This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the _TO BE UPDATED_ License. See the [LICENSE.md](./LICENSE.md) file for details.
 
 ### Acknowledgments
 
