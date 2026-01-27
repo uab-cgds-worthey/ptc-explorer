@@ -188,7 +188,7 @@ function(input, output, session) {
     x_url = "https://x.com/lizworthey",
     img_style = "width:100%;"
   )
-  
+
   #### Download handlers
   output$download_app_data <- downloadHandler(
     filename = function() {
@@ -202,7 +202,7 @@ function(input, output, session) {
     },
     contentType = "application/octet-stream"
   )
-  
+
   output$download_onco_data <- downloadHandler(
     filename = function() {
       # Generate filename with current date

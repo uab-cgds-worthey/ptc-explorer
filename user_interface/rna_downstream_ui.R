@@ -58,7 +58,7 @@ rna_downstream_page <- fluidPage(
              tags$p(style = "color:darkred;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
            )),
   hr(),
-  
+
   # Analysis type headers with colored backgrounds
   fluidRow(
     column(
@@ -78,7 +78,7 @@ rna_downstream_page <- fluidPage(
       )
     )
   ),
-  
+
   # DEG Tables Section
   fluidRow(
     column(
@@ -105,7 +105,7 @@ rna_downstream_page <- fluidPage(
     )
   ),
   hr(),
-  
+
   # Volcano Plots Section
   fluidRow(
     column(
@@ -135,7 +135,7 @@ rna_downstream_page <- fluidPage(
              h3("Enrichment Analysis")
            )),
   hr(),
-  
+
   # Enrichment Analysis Section
   fluidRow(
     column(

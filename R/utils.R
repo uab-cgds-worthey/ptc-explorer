@@ -5,48 +5,48 @@ validate_gene_symbol <- function(gene_symbol) {
   if (is.null(gene_symbol) || is.na(gene_symbol) || gene_symbol == "") {
     return(NULL)
   }
-  
+
   # Convert to character and trim whitespace
   gene_clean <- trimws(as.character(gene_symbol))
-  
+
   # Remove any problematic characters that might break URLs
   gene_clean <- gsub("[^A-Za-z0-9._-]", "", gene_clean)
-  
+
   # Return NULL if the cleaned symbol is empty
   if (gene_clean == "") {
     return(NULL)
   }
-  
+
   return(gene_clean)
 }
 
 # Function to load the latest data file based on date pattern
-load_latest_data_file <- function(data_dir = "data", 
-                                  file_pattern, 
+load_latest_data_file <- function(data_dir = "data",
+                                  file_pattern,
                                   date_format = "%Y-%m-%d") {
   # Check if data directory exists
   if (!dir.exists(data_dir)) {
     stop(paste("Data directory not found:", data_dir))
   }
-  
+
   # Get all files matching the pattern
   all_files <- list.files(data_dir, pattern = paste0(file_pattern, ".*\\.rds$"), full.names = TRUE)
-  
+
   if (length(all_files) == 0) {
     stop(paste("No files found matching pattern:", file_pattern, "in directory:", data_dir))
   }
-  
+
   # Extract dates from filenames
   file_dates <- character(length(all_files))
   valid_files <- logical(length(all_files))
-  
+
   for (i in seq_along(all_files)) {
     # Extract filename without extension
     filename <- tools::file_path_sans_ext(basename(all_files[i]))
-    
+
     # Remove the pattern prefix to get the date part
     date_part <- gsub(paste0("^", file_pattern, "_?"), "", filename)
-    
+
     # Try to parse the date
     tryCatch({
       parsed_date <- as.Date(date_part, format = date_format)
@@ -59,26 +59,26 @@ load_latest_data_file <- function(data_dir = "data",
       valid_files[i] <- FALSE
     })
   }
-  
+
   # Filter to valid files only
   valid_file_paths <- all_files[valid_files]
   valid_file_dates <- file_dates[valid_files]
-  
+
   if (length(valid_file_paths) == 0) {
     stop(paste("No files with valid dates found for pattern:", file_pattern))
   }
-  
+
   # Find the file with the latest date
   latest_date_index <- which.max(as.Date(valid_file_dates))
   latest_file <- valid_file_paths[latest_date_index]
   latest_date <- valid_file_dates[latest_date_index]
-  
+
   # Load and return the RDS file
   cat(paste("Loading latest data file:", basename(latest_file), "(Date:", latest_date, ")\n"))
-  
+
   tryCatch({
     data <- readRDS(latest_file)
-    
+
     # Check if the data object has version information
     version_info <- NULL
     if (is.list(data) && "version" %in% names(data)) {
@@ -89,7 +89,7 @@ load_latest_data_file <- function(data_dir = "data",
       version_info <- get("version", envir = as.environment(data))
       cat(paste("Data version:", version_info, "\n"))
     }
-    
+
     return(list(
       data = data,
       file_path = latest_file,
@@ -169,27 +169,27 @@ gene_annotated <- function(gene,
   if (is.null(gene) || is.na(gene) || gene == "") {
     return(HTML("<strong>Error:</strong> No gene identifier provided."))
   }
-  
+
   # Clean the gene identifier but allow numbers for Entrez IDs
   gene_clean <- trimws(as.character(gene))
   if (gene_clean == "") {
     return(HTML("<strong>Error:</strong> Invalid gene identifier provided."))
   }
-  
+
   gene_encoded <- utils::URLencode(gene_clean, reserved = TRUE)
-  
+
   base_url <- "https://mygene.info/v3/gene/"
-  
+
   # Build query parameters properly
   params <- list(
     species = species,
     fields = "name,symbol,entrezgene,ensembl.gene,summary"
   )
-  
+
   # Construct the full URL
   query_string <- paste(names(params), params, sep = "=", collapse = "&")
   api_url <- paste0(base_url, gene_encoded, "?", query_string)
-  
+
   tryCatch({
     response <- httr::GET(api_url)
     # Check if the request was successful (status code 200)
@@ -198,13 +198,13 @@ gene_annotated <- function(gene,
       response_content <-
         httr::content(response, as = "text", encoding = "UTF-8")
       parsed_data <- jsonlite::fromJSON(response_content)
-      
+
       # Check if we got valid data
       if (is.null(parsed_data) || length(parsed_data) == 0) {
-        return(HTML(paste0("<strong>No Information Found:</strong> No data available for gene '", 
+        return(HTML(paste0("<strong>No Information Found:</strong> No data available for gene '",
                            gene_clean, "'.")))
       }
-      
+
       # Extract relevant fields from the response
       gene_symbol <- ifelse(is.null(parsed_data[["symbol"]]),
                             "NA", parsed_data[["symbol"]])
@@ -237,11 +237,11 @@ gene_annotated <- function(gene,
       )
       return(HTML(result))
     } else {
-      return(HTML(paste0("<strong>API Error:</strong> Status code ", 
+      return(HTML(paste0("<strong>API Error:</strong> Status code ",
                          httr::status_code(response), ". Unable to retrieve gene information.")))
     }
   }, error = function(e) {
-    return(HTML(paste0("<strong>Error:</strong> Unable to fetch gene information for '", 
+    return(HTML(paste0("<strong>Error:</strong> Unable to fetch gene information for '",
                        gene_clean, "'. ", e$message)))
   })
 }
@@ -262,12 +262,12 @@ gene_query <- function(gene,
       "</div>"
     ))
   }
-  
+
   # URL encode the gene symbol
   gene_encoded <- utils::URLencode(gene_clean, reserved = TRUE)
-  
+
   base_url <- "https://mygene.info/v3/query"
-  
+
   # Determine query type based on gene identifier format
   query_term <- if (grepl("^ENSG\\d+", gene_clean)) {
     # Ensembl gene ID
@@ -280,7 +280,7 @@ gene_query <- function(gene,
     # Try exact symbol match first, then broader search
     gene_encoded
   }
-  
+
   # Build query parameters properly
   params <- list(
     q = query_term,
@@ -288,11 +288,11 @@ gene_query <- function(gene,
     species = species,
     fields = "name,symbol,entrezgene,ensembl.gene,summary"
   )
-  
+
   # Construct the full URL with proper encoding
   query_string <- paste(names(params), params, sep = "=", collapse = "&")
   api_url <- paste0(base_url, "?", query_string)
-  
+
   tryCatch({
     response <- httr::GET(api_url)
     # Check if the request was successful (status code 200)
@@ -301,7 +301,7 @@ gene_query <- function(gene,
       response_content <-
         httr::content(response, as = "text", encoding = "UTF-8")
       parsed_data <- jsonlite::fromJSON(response_content)
-      
+
       if (length(parsed_data$hits) == 0) {
         # If no hits with the first query, try a broader search for gene symbols
         if (!grepl("^ENSG\\d+", gene_clean) && !grepl("^\\d+$", gene_clean)) {
@@ -309,19 +309,19 @@ gene_query <- function(gene,
           params$q <- paste0("symbol:", gene_encoded)
           query_string <- paste(names(params), params, sep = "=", collapse = "&")
           api_url_retry <- paste0(base_url, "?", query_string)
-          
+
           response_retry <- httr::GET(api_url_retry)
           if (httr::status_code(response_retry) == 200) {
             response_content_retry <- httr::content(response_retry, as = "text", encoding = "UTF-8")
             parsed_data_retry <- jsonlite::fromJSON(response_content_retry)
-            
+
             if (length(parsed_data_retry$hits) > 0) {
               parsed_data <- parsed_data_retry
               api_url <- api_url_retry  # Update for error reporting
             }
           }
         }
-        
+
         # If still no hits, provide user-friendly error message
         if (length(parsed_data$hits) == 0) {
           error_type <- if (grepl("^ENSG\\d+", gene_clean)) {
@@ -331,7 +331,7 @@ gene_query <- function(gene,
           } else {
             "gene symbol"
           }
-          
+
           search_suggestions <- paste0(
             "<div style='margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-left: 3px solid #007bff;'>",
             "<strong>💡 Search Suggestions:</strong><br/>",
@@ -340,7 +340,7 @@ gene_query <- function(gene,
             "• Look up on <a href='https://www.ensembl.org/Multi/Search/Results?q=", gene_encoded, "' target='_blank'>Ensembl</a>",
             "</div>"
           )
-          
+
           error_msg <- paste0(
             "<div style='padding: 10px; border: 1px solid #dc3545; border-radius: 4px; background-color: #f8d7da; color: #721c24;'>",
             "<strong>❌ Gene Not Found</strong><br/>",
@@ -355,17 +355,17 @@ gene_query <- function(gene,
           return(HTML(error_msg))
         }
       }
-      
+
       # Extract relevant fields from the response
       hit_data <- parsed_data$hits[1, ]  # Get first hit
-      
+
       gene_symbol <- ifelse(is.null(hit_data[["symbol"]]) || is.na(hit_data[["symbol"]]),
                             "NA", hit_data[["symbol"]])
       gene_name   <- ifelse(is.null(hit_data[["name"]]) || is.na(hit_data[["name"]]),
                             "NA", hit_data[["name"]])
       gene_entrezgene <- ifelse(is.null(hit_data[["entrezgene"]]) || is.na(hit_data[["entrezgene"]]),
                                "NA", hit_data[["entrezgene"]])
-      
+
       # Handle ensembl field (can be nested)
       ensembl_id <- "NA"
       if (!is.null(hit_data[["ensembl"]]) && !is.na(hit_data[["ensembl"]])) {
@@ -376,10 +376,10 @@ gene_query <- function(gene,
           ensembl_id <- ensembl_data
         }
       }
-      
+
       gene_summary <- ifelse(is.null(hit_data[["summary"]]) || is.na(hit_data[["summary"]]),
                             "NA", hit_data[["summary"]])
-      
+
       result <- paste0(
         "<strong>Gene Symbol:</strong> ",
         gene_symbol,
@@ -397,11 +397,11 @@ gene_query <- function(gene,
         gene_summary
       )
       return(HTML(result))
-      
+
     } else {
       # Enhanced user-friendly error message for API failures
       status_code <- httr::status_code(response)
-      
+
       error_icon <- if (status_code == 404) "🔍" else if (status_code >= 500) "🔧" else "⚠️"
       error_title <- if (status_code == 404) {
         "Gene Information Not Available"
@@ -410,7 +410,7 @@ gene_query <- function(gene,
       } else {
         "Connection Issue"
       }
-      
+
       error_explanation <- if (status_code == 404) {
         paste0("The gene '<strong>", gene_clean, "</strong>' could not be found in the mygene.info database.")
       } else if (status_code >= 500) {
@@ -418,7 +418,7 @@ gene_query <- function(gene,
       } else {
         "There was a problem connecting to the gene information service."
       }
-      
+
       user_actions <- if (status_code == 404) {
         paste0(
           "<div style='margin-top: 10px; padding: 8px; background-color: #e7f3ff; border-left: 3px solid #007bff;'>",
@@ -438,7 +438,7 @@ gene_query <- function(gene,
           "</div>"
         )
       }
-      
+
       error_msg <- paste0(
         "<div style='padding: 12px; border: 1px solid #dc3545; border-radius: 6px; background-color: #f8d7da; color: #721c24; margin: 5px 0;'>",
         "<strong>", error_icon, " ", error_title, "</strong><br/>",

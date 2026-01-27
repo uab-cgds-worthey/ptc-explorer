@@ -4,7 +4,7 @@ user_guide_page <- fluidPage(
       tabsetPanel(
         id = "user_guide_tabs",
         type = "pills",
-        
+
         tabPanel(
           "User Guide",
           icon = icon("book"),
@@ -16,7 +16,7 @@ user_guide_page <- fluidPage(
             column(1, )
           )
         ),
-        
+
         tabPanel(
           "App Documentation",
           icon = icon("info-circle"),
@@ -33,3 +33,4 @@ user_guide_page <- fluidPage(
   ),
   br()
 )
+

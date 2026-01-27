@@ -4,12 +4,12 @@ cite_us_page <- fluidPage(
       div(
         class = "citation-container",
         style = "max-width: 800px; margin: 0 auto; padding: 20px;",
-        
+
         h2("How to Cite PTCE", style = "color: darkred; text-align: center; margin-bottom: 30px;"),
-        
-        p("If you use the Pediatric Thyroid Cancer Explorer (PTCE) in your research, please cite our work using one of the formats below:", 
+
+        p("If you use the Pediatric Thyroid Cancer Explorer (PTCE) in your research, please cite our work using one of the formats below:",
           style = "text-align: center; font-size: 18px; margin-bottom: 40px;"),
-        
+
         # Journal Citation
         div(
           class = "citation-format",
@@ -29,7 +29,7 @@ cite_us_page <- fluidPage(
             onclick = "copyToClipboard('journal_citation', this)"
           )
         ),
-        
+
         # BibTeX Citation
         div(
           class = "citation-format",
@@ -56,7 +56,7 @@ cite_us_page <- fluidPage(
             onclick = "copyToClipboard('bibtex_citation', this)"
           )
         ),
-        
+
         # Software Citation
         div(
           class = "citation-format",
@@ -76,7 +76,7 @@ cite_us_page <- fluidPage(
             onclick = "copyToClipboard('software_citation', this)"
           )
         ),
-        
+
         # Additional Information
         hr(style = "margin: 40px 0;"),
         div(
@@ -90,3 +90,4 @@ cite_us_page <- fluidPage(
     )
   )
 )
+

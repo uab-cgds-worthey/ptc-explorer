@@ -4,7 +4,7 @@ developer_guide_page <- fluidPage(
       tabsetPanel(
         id = "developer_guide_tabs",
         type = "pills",
-        
+
         tabPanel(
           "Technical Reference",
           icon = icon("cog"),
@@ -16,7 +16,7 @@ developer_guide_page <- fluidPage(
             column(1, )
           )
         ),
-        
+
         tabPanel(
           "Architecture & Modules",
           icon = icon("puzzle-piece"),
@@ -28,7 +28,7 @@ developer_guide_page <- fluidPage(
             column(1, )
           )
         ),
-        
+
         tabPanel(
           "Data Management",
           icon = icon("database"),
@@ -40,7 +40,7 @@ developer_guide_page <- fluidPage(
             column(1, )
           )
         ),
-        
+
         tabPanel(
           "Development Workflow",
           icon = icon("wrench"),
@@ -57,3 +57,4 @@ developer_guide_page <- fluidPage(
   ),
   br()
 )
+

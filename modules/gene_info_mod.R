@@ -13,11 +13,11 @@ gene_info_server <- function(id,
                function(input, output, session) {
                  output$gene_info <- renderUI({
                    req(selected_row())
-                   
+
                    # Validate and get gene information
                    tryCatch({
                      col_value <- tbl[selected_row(), gene_symbol_col]
-                     
+
                      # Check if column value is valid
                      if (is.null(col_value) || is.na(col_value) || col_value == "") {
                        return(HTML(
@@ -31,15 +31,15 @@ gene_info_server <- function(id,
                          "</div>"
                        ))
                      }
-                     
+
                      result <- if (query) {
                        gene_query(col_value)
                      } else {
                        gene_annotated(col_value)
                      }
-                     
+
                      return(result)
-                     
+
                    }, error = function(e) {
                      return(HTML(
                        "<div style='padding: 12px; border: 1px solid #dc3545; border-radius: 6px; background-color: #f8d7da; color: #721c24;'>",
