@@ -22,7 +22,8 @@ years).
 
 ### Option 1: Using renv (Recommended)
 
-This project uses `renv` for reproducible dependency management. Using renv ensures that you have the exact same package versions as the development environment.
+This project uses `renv` for reproducible dependency management. Using renv ensures that you have
+the exact same package versions as the development environment.
 
 Step 1: Clone this repo locally
 
@@ -73,7 +74,8 @@ R
 Step 3: Install R packages
 
 ``` r
-install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2","scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
+install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2",
+"scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
 devtools::install_github("wjawaid/enrichR")
 BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))
 ```
