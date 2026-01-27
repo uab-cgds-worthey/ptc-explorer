@@ -649,14 +649,15 @@ reactlog::reactlog_enable()
 
 ## Contributing
 
-We welcome contributions to the Pediatric Thyroid Cancer Explorer! Please see our [Contributing Guidelines](./CONTRIBUTING.md) for detailed information.
+We welcome contributions to the Pediatric Thyroid Cancer Explorer! Please see our Contributing Guidelines
+in the GitHub repo for detailed information.
 
 ### Development Setup
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/your-username/ptc-app.git
+   git clone https://github.com/your-username/ptc-explorer.git
    ```
 3. **Create a feature branch**:
    ```bash
@@ -714,7 +715,7 @@ To be updated.
 
 ### License
 
-This project is licensed under the _TO BE UPDATED_ License. See the [LICENSE.md](./LICENSE.md) file for details.
+This project is licensed under the _TO BE UPDATED_ License. See the LICENSE.md in the GitHub repo for details.
 
 ### Acknowledgments
 
@@ -725,6 +726,6 @@ This project is licensed under the _TO BE UPDATED_ License. See the [LICENSE.md]
 
 ---
 
-**Last Updated**: September 27, 2025  
+**Last Updated**: Jan 27, 2026  
 **Version**: 2.0  
-**Documentation Version**: 1.0
+**Documentation Version**: 1.1
