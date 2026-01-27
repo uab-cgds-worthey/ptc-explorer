@@ -1,15 +1,17 @@
 # Shiny Server
 function(input, output, session) {
   #### Home tab/page
-  meta_plots_server("sample_meta_stats",
-                    sample_meta,
-                    meta_fact_cols,
-                    meta_num_cols)
+  meta_plots_server(
+    "sample_meta_stats",
+    sample_meta,
+    meta_fact_cols,
+    meta_num_cols
+  )
   reactable_server(
     "sample_meta_df",
     sample_meta_display %>%
       mutate(across(where(is.factor), ~ gsub("_", " ", .))),
-#    sample_meta_display,
+    #    sample_meta_display,
     defaultColDef = colDef(na = "NA", minWidth = 95, align = "left"),
     columns = list(
       `Participant id` = colDef(
@@ -19,20 +21,24 @@ function(input, output, session) {
         minWidth = 60,
       ),
       `Age at diagnosis` = colDef(
-      minWidth = 120,
-      name = "Age at diagnosis / Sex",
-      # Show species under character names
-      cell = function(value, index) {
-        Sex <- sample_meta_display$Sex[index]
-        Sex <- if (!is.na(Sex)) Sex else "Unknown"
-        div(
-          div(style = list(fontWeight = 600),
-              value),
-          div(style = list(#fontSize = "1rem"
+        minWidth = 120,
+        name = "Age at diagnosis / Sex",
+        # Show species under character names
+        cell = function(value, index) {
+          Sex <- sample_meta_display$Sex[index]
+          Sex <- if (!is.na(Sex)) Sex else "Unknown"
+          div(
+            div(
+              style = list(fontWeight = 600),
+              value
             ),
-              Sex)
-        )
-      }
+            div(
+              style = list( # fontSize = "1rem"
+              ),
+              Sex
+            )
+          )
+        }
       ),
       Sex = colDef(show = FALSE),
       Subtypes = colDef(
@@ -63,12 +69,14 @@ function(input, output, session) {
           } else if (value == "THY") {
             "#000"
           }
-          list(fontWeight = 700,
-               background = color,
-               color = fontcolor)
+          list(
+            fontWeight = 700,
+            background = color,
+            color = fontcolor
+          )
         }
       ),
-      `ATA Pediatric Risk Level` =  colDef(
+      `ATA Pediatric Risk Level` = colDef(
         style = function(value) {
           color <- if (value == "High risk") {
             "#FF0000"
@@ -77,10 +85,11 @@ function(input, output, session) {
           } else if (value == "Low risk") {
             "#3CB371"
           }
-          list(fontWeight = 700,
-               background = color#,
-               #color = fontcolor
-               )
+          list(
+            fontWeight = 700,
+            background = color # ,
+            # color = fontcolor
+          )
         }
       )
     ),
@@ -93,25 +102,33 @@ function(input, output, session) {
   #### Oncoplot and sample variant tab
   variant_filter_server("variant_table_with_filters", sample_variants)
   makeInteractiveComplexHeatmap(input, output, session,
-                                ptc_oncoprint_draw,
-                                "ht",
-                                res = 110)
+    ptc_oncoprint_draw,
+    "ht",
+    res = 110
+  )
   #### RNA-seq tab
   res_t_vs_n_sel <- dt_server("dds_all_deg",
-                                  clean_sig_df(res_t_vs_n, rename_cols = TRUE),
-                                  return_row = TRUE)
+    clean_sig_df(res_t_vs_n, rename_cols = TRUE),
+    return_row = TRUE
+  )
   res_ptc_vs_ftc_sel <- dt_server("dds_subtype_deg",
-                                  clean_sig_df(res_ptc_vs_ftc,
-                                               rename_cols = TRUE),
-                                  return_row = TRUE)
-  gene_info_server("sel_gene_t_vs_n",
-                   res_t_vs_n_sel,
-                   clean_sig_df(res_t_vs_n),
-                   2)
-  gene_info_server("sel_gene_PTC_vs_FTC",
-                   res_ptc_vs_ftc_sel,
-                   clean_sig_df(res_ptc_vs_ftc),
-                   2)
+    clean_sig_df(res_ptc_vs_ftc,
+      rename_cols = TRUE
+    ),
+    return_row = TRUE
+  )
+  gene_info_server(
+    "sel_gene_t_vs_n",
+    res_t_vs_n_sel,
+    clean_sig_df(res_t_vs_n),
+    2
+  )
+  gene_info_server(
+    "sel_gene_PTC_vs_FTC",
+    res_ptc_vs_ftc_sel,
+    clean_sig_df(res_ptc_vs_ftc),
+    2
+  )
   volcano_server(
     "vol_aff_unaff",
     res_t_vs_n[, -c(1, 7, 8)],
@@ -129,17 +146,21 @@ function(input, output, session) {
     1
   )
   enrichr_server("enrichr_t_vs_n",
-                     enrichr_t_vs_n,
-                     enrichr_dbs,
-                     precalculate = TRUE)
+    enrichr_t_vs_n,
+    enrichr_dbs,
+    precalculate = TRUE
+  )
   enrichr_server("enrichr_PTC_vs_FTC",
-                     enrichr_ptc_vs_ftc,
-                     enrichr_dbs,
-                     precalculate = TRUE)
+    enrichr_ptc_vs_ftc,
+    enrichr_dbs,
+    precalculate = TRUE
+  )
 
   #### RNA-fusion tab
-  fusion_filter_server("rna_fusion_tbl",
-                       rna_fusion_df[, -12])
+  fusion_filter_server(
+    "rna_fusion_tbl",
+    rna_fusion_df[, -12]
+  )
 
   #### Genomics Analysis / WES page
 
@@ -216,4 +237,3 @@ function(input, output, session) {
     contentType = "application/octet-stream"
   )
 }
-
