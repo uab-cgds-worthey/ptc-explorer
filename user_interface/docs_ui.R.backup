@@ -1,0 +1,141 @@
+docs_page <- fluidPage(
+  fluidRow(
+    column(12,
+      tabsetPanel(
+        id = "main_docs_tabs",
+        type = "tabs",
+        
+        # User Documentation Tab
+        tabPanel(
+          "User Guide",
+          icon = icon("user"),
+          br(),
+          tabsetPanel(
+            id = "user_docs_subtabs",
+            type = "pills",
+            
+            # App Overview & Getting Started
+            tabPanel(
+              "Getting Started",
+              icon = icon("play-circle"),
+              fluidRow(
+                column(2, ),
+                column(8,
+                  style = "display: flex; flex-direction: column;
+                  justify-content: center;
+                  align-items: left; height: 100%;",
+                  includeMarkdown("docs/ptce_docs.Rmd")
+                ),
+                column(2, )
+              )
+            ),
+            
+            # Comprehensive User Guide
+            tabPanel(
+              "User Manual",
+              icon = icon("book"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/USER_GUIDE.md")
+                ),
+                column(1, )
+              )
+            ),
+            
+            # Main Application Documentation
+            tabPanel(
+              "App Documentation",
+              icon = icon("info-circle"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/DOCUMENTATION.md")
+                ),
+                column(1, )
+              )
+            )
+          )
+        ),
+        
+        # Developer Documentation Tab
+        tabPanel(
+          "Developer Guide",
+          icon = icon("code"),
+          br(),
+          tabsetPanel(
+            id = "dev_docs_subtabs",
+            type = "pills",
+            
+            # Technical Reference
+            tabPanel(
+              "Technical Reference",
+              icon = icon("cog"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/TECHNICAL_REFERENCE.md")
+                ),
+                column(1, )
+              )
+            ),
+            
+            # Modules & Architecture
+            tabPanel(
+              "Architecture & Modules",
+              icon = icon("puzzle-piece"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/MODULES_COMPONENTS.md")
+                ),
+                column(1, )
+              )
+            ),
+            
+            # Dynamic Data Loading
+            tabPanel(
+              "Data Management",
+              icon = icon("database"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/DYNAMIC_DATA_LOADING.md")
+                ),
+                column(1, )
+              )
+            ),
+            
+            # Development & Testing Guide
+            tabPanel(
+              "Development Workflow",
+              icon = icon("wrench"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/LINTING_GUIDE.md")
+                ),
+                column(1, )
+              )
+            ),
+            
+            # Testing Guide
+            tabPanel(
+              "Testing Guide",
+              icon = icon("flask"),
+              fluidRow(
+                column(1, ),
+                column(10,
+                  includeMarkdown("docs/TESTING_GUIDE.md")
+                ),
+                column(1, )
+              )
+            )
+          )
+        )
+      )
+    )
+  ),
+  br()
+)
+

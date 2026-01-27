@@ -1,0 +1,22 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    object_usage_linter = NULL,
+    object_name_linter = NULL,
+    pipe_consistency_linter = NULL
+  )
+exclusions: list(
+    "www/js" = list(
+      line_length_linter = Inf
+    ),
+    ".Rproj.user" = list(
+      line_length_linter = Inf
+    ),
+  "renv/",
+  "dev/",
+  "archive/",
+  "rsconnect/",
+  "tests",
+  "trash.R",
+  "supplementary/",
+  "fix_linting.R"
+  )

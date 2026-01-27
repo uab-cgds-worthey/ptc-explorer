@@ -1,14 +1,47 @@
+#### R specific ignore files
 *.Rproj
 *.RData
-.Rproj.user
-.Rhistory
-.Ruserdata
-.Renviron
+*.Rproj.user
+*.Rhistory
+*.Ruserdata
+*.Renviron
+
+#### Other uncommon files
 *.pptx
-.DS_Store
+*.DS_Store
 *.tar.gz
-trash.R
+
+#### Private directories
 data
 dev
-docs
 /archive
+/supplementary
+
+### Deployment
+rsconnect
+.posit
+
+#### Misc files
+trash.R
+.Rbuildignore
+.rscignore
+.Rprofile
+renv
+
+
+#### Linting temporary files
+linting_issues.txt
+fix_linting.R
+
+#### Testing files (temporarily excluded)
+tests
+run_tests.R
+test_data_loading.R
+.github/workflows/test.yml
+docs/TESTING_GUIDE.md
+docs/USER_GUIDE_old.md
+.Rproj.user
+/tests
+/tests/testthat
+tests/testthat.R
+tests/testthat/test-utils.R

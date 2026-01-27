@@ -1,4 +1,368 @@
-h3{
+.navbar {
+  background-color: darkred !important;
+}
+
+.navbar-default .navbar-brand {
+    color: white !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white !important;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+    color: #555 !important;
+    background-color: #e7e7e7;
+}
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:hover {
+    color: #555 !important;
+    background-color: #e7e7e7;
+}
+
+
+h3 {
   color: darkgreen !important; 
   font-weight: 800 !important;
+}
+
+p {
+  font-size: 1.8rem !important;
+}
+
+
+.profile_div_img {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 20px;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.profile_div_main h3 {
+  color: darkred !important; 
+  font-weight: 600 !important;
+}
+
+.profile_div_main a {
+  padding: 2px !important;
+  margin: 3px !important;
+}
+
+.profile_div_main p {
+  font-weight: 550 !important;
+}
+
+/* Show high-resolution content by default */
+#high_res {
+  display: block;
+}
+
+#low_res {
+  display: none;
+}
+
+/* If screen width is below 1920px, hide high-res section and show text */
+@media screen and (max-width: 1919px) {
+  #high_res {
+    display: none;
+  }
+
+  #low_res {
+    display: block;
+    color: darkred;
+  }
+}
+
+/* Documentation tab styling */
+.tab-content {
+  padding-top: 20px !important;
+}
+
+#docs_tabs .nav-tabs > li > a {
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+
+#docs_tabs .nav-tabs > li.active > a {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+#docs_tabs .tab-pane {
+  padding: 20px 0 !important;
+}
+
+/* Documentation content styling */
+.tab-pane h1 {
+  color: darkred !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid darkred !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.tab-pane h2 {
+  color: darkgreen !important;
+  font-weight: 600 !important;
+  margin-top: 25px !important;
+  margin-bottom: 15px !important;
+}
+
+.tab-pane h3 {
+  color: #555 !important;
+  font-weight: 600 !important;
+  margin-top: 20px !important;
+}
+
+.tab-pane ul, .tab-pane ol {
+  font-size: 1.6rem !important;
+}
+
+.tab-pane code {
+  background-color: #f8f8f8 !important;
+  color: #c7254e !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+}
+
+.tab-pane pre {
+  background-color: #f8f8f8 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 5px !important;
+  padding: 15px !important;
+  margin: 10px 0 !important;
+}
+
+.tab-pane blockquote {
+  border-left: 4px solid darkred !important;
+  background-color: #f9f9f9 !important;
+  padding: 10px 20px !important;
+  margin: 15px 0 !important;
+}
+
+/* Documentation tabs styling */
+.nav-pills > li > a {
+  font-weight: 500 !important;
+  color: #555 !important;
+  margin: 2px !important;
+  border-radius: 20px !important;
+  border: 1px solid #ddd !important;
+  background-color: #f8f8f8 !important;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+.nav-pills > li > a:hover {
+  background-color: #e7e7e7 !important;
+  color: #555 !important;
+  border-color: #bbb !important;
+}
+
+/* User Guide specific styling */
+#user_guide_tabs .nav-pills > li.active > a,
+#user_guide_tabs .nav-pills > li.active > a:hover,
+#user_guide_tabs .nav-pills > li.active > a:focus {
+  background-color: darkgreen !important;
+  color: white !important;
+  border-color: darkgreen !important;
+}
+
+#user_guide_tabs .nav-pills > li > a:hover {
+  background-color: #e8f5e8 !important;
+  color: darkgreen !important;
+  border-color: #9cb99c !important;
+}
+
+/* Developer Guide specific styling */
+#developer_guide_tabs .nav-pills > li.active > a,
+#developer_guide_tabs .nav-pills > li.active > a:hover,
+#developer_guide_tabs .nav-pills > li.active > a:focus {
+  background-color: darkred !important;
+  color: white !important;
+  border-color: darkred !important;
+}
+
+#developer_guide_tabs .nav-pills > li > a:hover {
+  background-color: #ffe8e8 !important;
+  color: darkred !important;
+  border-color: #d9a3a3 !important;
+}
+
+/* Tab content area styling */
+.tab-pane {
+  padding: 20px 0 !important;
+  animation: fadeIn 0.3s ease-in-out !important;
+}
+
+/* User Guide content styling */
+#user_guide_tabs .tab-content {
+  border: 1px solid #d4edda !important;
+  border-radius: 5px !important;
+  background-color: #f8fff8 !important;
+  padding: 20px !important;
+  margin-top: 10px !important;
+}
+
+#user_guide_tabs h1 {
+  color: darkgreen !important;
+  border-bottom: 2px solid darkgreen !important;
+}
+
+#user_guide_tabs h2 {
+  color: #2d5a2d !important;
+}
+
+/* Clean section styling for user guide */
+#user_guide_tabs h3 {
+  color: darkgreen !important;
+  margin-top: 25px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #c3e6cb !important;
+}
+
+#user_guide_tabs hr {
+  border-color: #c3e6cb !important;
+  margin: 30px 0 !important;
+}
+
+#user_guide_tabs blockquote {
+  background-color: #e8f5e9 !important;
+  border-left: 4px solid darkgreen !important;
+  padding: 15px 20px !important;
+  margin: 15px 0 !important;
+}
+
+#user_guide_tabs .emoji-section {
+  margin: 20px 0 !important;
+}
+
+/* Developer Guide content styling */
+#developer_guide_tabs .tab-content {
+  border: 1px solid #f5c6cb !important;
+  border-radius: 5px !important;
+  background-color: #fff8f8 !important;
+  padding: 20px !important;
+  margin-top: 10px !important;
+}
+
+#developer_guide_tabs h1 {
+  color: darkred !important;
+  border-bottom: 2px solid darkred !important;
+}
+
+#developer_guide_tabs h2 {
+  color: #8b0000 !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Documentation icons styling */
+.fa-user, .fa-code {
+  margin-right: 8px !important;
+}
+
+/* Download page styling */
+.download-section {
+  text-align: center !important;
+}
+
+.download-item {
+  text-align: center !important;
+}
+
+.download-item h4 {
+  font-weight: 600 !important;
+}
+
+.download-item p {
+  font-size: 16px !important;
+  color: #666 !important;
+  margin-bottom: 15px !important;
+}
+
+.btn-primary:hover, .btn-success:hover {
+  transform: translateY(-2px) !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+/* Citation page styling */
+.citation-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.citation-format {
+  transition: box-shadow 0.2s ease !important;
+}
+
+.citation-format:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.citation-text {
+  user-select: all !important;
+  cursor: text !important;
+}
+
+.btn-outline-secondary {
+  transition: all 0.2s ease !important;
+}
+
+.btn-outline-secondary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+
+/* DGE Analysis section styling */
+.analysis-section {
+  background-color: #fafafa !important;
+  border-radius: 8px !important;
+  padding: 15px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.analysis-section:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  transition: box-shadow 0.2s ease !important;
+}
+
+/* Color coding for different analysis types */
+.analysis-section h5 {
+  margin-top: 0 !important;
+  margin-bottom: 15px !important;
+  font-size: 16px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Improve readability for documentation content */
+.tab-pane p {
+  line-height: 1.7 !important;
+  margin-bottom: 15px !important;
+}
+
+.tab-pane strong {
+  color: darkred !important;
+}
+
+.tab-pane em {
+  color: darkgreen !important;
 }
