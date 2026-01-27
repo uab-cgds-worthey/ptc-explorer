@@ -66,9 +66,11 @@ enrichr_ptc_vs_ftc <- app_data_main$ptc_vs_ftc_er
 enrichr_dbs <- app_data_main$enrichr_dbs
 
 sample_meta_display <- sample_meta
-colnames(sample_meta_display) <- str_replace_all(colnames(sample_meta_display),
-                                                 "_",
-                                                 " ")
+colnames(sample_meta_display) <- str_replace_all(
+  colnames(sample_meta_display),
+  "_",
+  " "
+)
 
 # Load oncoplot data using latest date file
 onco_result <- load_latest_onco_data()

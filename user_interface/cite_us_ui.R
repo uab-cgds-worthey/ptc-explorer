@@ -1,14 +1,14 @@
 cite_us_page <- fluidPage(
   fluidRow(
-    column(12,
+    column(
+      12,
       div(
         class = "citation-container",
         style = "max-width: 800px; margin: 0 auto; padding: 20px;",
-
         h2("How to Cite PTCE", style = "color: darkred; text-align: center; margin-bottom: 30px;"),
-
         p("If you use the Pediatric Thyroid Cancer Explorer (PTCE) in your research, please cite our work using one of the formats below:",
-          style = "text-align: center; font-size: 18px; margin-bottom: 40px;"),
+          style = "text-align: center; font-size: 18px; margin-bottom: 40px;"
+        ),
 
         # Journal Citation
         div(
@@ -90,4 +90,3 @@ cite_us_page <- fluidPage(
     )
   )
 )
-

@@ -1,11 +1,12 @@
 rna_downstream_page <- fluidPage(
-  fluidRow(class = "text-center",
-           column(2, ),
-           column(
-             8,
-             h3("Prinical Component Analysis (PCA)"),
-             tags$p(
-               "An unsupervised linear transformation technique, for
+  fluidRow(
+    class = "text-center",
+    column(2, ),
+    column(
+      8,
+      h3("Prinical Component Analysis (PCA)"),
+      tags$p(
+        "An unsupervised linear transformation technique, for
                dimensionality reduction to uncover interesting patterns and
                find any technical biases while preserving the biological
                variation in the dataset. First, we used phenotype (tumor
@@ -15,9 +16,10 @@ rna_downstream_page <- fluidPage(
                phenotype_subtypes, batch and sex as factors showing
                clustering of normal and tumor samples by
                subtypes (right PCA plot)."
-             ),
-             column(2, )
-           )),
+      ),
+      column(2, )
+    )
+  ),
   hr(),
   fluidRow(
     class = "text-center",
@@ -25,8 +27,10 @@ rna_downstream_page <- fluidPage(
       6,
       add_busy_bar(),
       h4("Sample-wise PCA", style = "font-weight: 600;"),
-      tags$img(src = "img/pca_label_batch-corr_b&w_pid_col.png",
-               style = "width: 90%; height: auto;"),
+      tags$img(
+        src = "img/pca_label_batch-corr_b&w_pid_col.png",
+        style = "width: 90%; height: auto;"
+      ),
       br(),
       tags$p(
         style = "font-style: italic; color: #666; font-size: 14px; margin-top: 10px;",
@@ -36,8 +40,10 @@ rna_downstream_page <- fluidPage(
     column(
       6,
       h4("Subtype-wise PCA", style = "font-weight: 600;"),
-      tags$img(src = "img/pca_label_batch-corr_subtypes_pid_font.png",
-               style = "width: 90%; height: auto;"),
+      tags$img(
+        src = "img/pca_label_batch-corr_subtypes_pid_font.png",
+        style = "width: 90%; height: auto;"
+      ),
       br(),
       tags$p(
         style = "font-style: italic; color: #666; font-size: 14px; margin-top: 10px;",
@@ -47,16 +53,18 @@ rna_downstream_page <- fluidPage(
   ),
   br(),
   hr(),
-  fluidRow(class = "text-center",
-           column(
-             12,
-             h3("Differential Genes Expression Analysis"),
-             tags$p(
-               "List of differentially expressed genes (DEGs) for the
+  fluidRow(
+    class = "text-center",
+    column(
+      12,
+      h3("Differential Genes Expression Analysis"),
+      tags$p(
+        "List of differentially expressed genes (DEGs) for the
                following two contrasts:"
-             ),
-             tags$p(style = "color:darkred;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
-           )),
+      ),
+      tags$p(style = "color:darkred;", "Click on the row in the table to display gene information and highlight gene in the volcano plot.")
+    )
+  ),
   hr(),
 
   # Analysis type headers with colored backgrounds
@@ -129,11 +137,13 @@ rna_downstream_page <- fluidPage(
   ),
   br(),
   hr(),
-  fluidRow(class = "text-center",
-           column(
-             12,
-             h3("Enrichment Analysis")
-           )),
+  fluidRow(
+    class = "text-center",
+    column(
+      12,
+      h3("Enrichment Analysis")
+    )
+  ),
   hr(),
 
   # Enrichment Analysis Section
@@ -161,4 +171,3 @@ rna_downstream_page <- fluidPage(
   hr(),
   br()
 )
-
