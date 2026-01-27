@@ -203,4 +203,3 @@ We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
 ## Author
 
 Samuel Bharti [:email:](mailto:sbharti@uab.edu) | Graduate Research Assistant
-
