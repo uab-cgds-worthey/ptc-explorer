@@ -220,7 +220,7 @@ $ tree -a ptc-explorer/
 │   ├── LINTING_GUIDE.md <- Code linting and formatting guide
 │   ├── MODULES_COMPONENTS.md <- Module and component reference
 │   ├── TECHNICAL_REFERENCE.md <- Developer technical reference
-│   └── USER_GUIDE_MERGED.md <- Comprehensive user guide
+│   └── USER_GUIDE.md <- Comprehensive user guide
 │
 ├── www/                <-  Static web assets
 │   ├── css/            <- Stylesheets
