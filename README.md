@@ -119,6 +119,24 @@ shiny::runApp()
 
 Or open global.R in R Studio and click "Run App" selecting "Run External"
 
+## Build and run with Docker
+
+You can also run the app in a container without installing R packages locally.
+
+Build the image from the project root:
+
+``` bash
+docker build -t ptc-explorer .
+```
+
+Run the container and expose the app on localhost:3838:
+
+``` bash
+docker run --rm -p 3838:3838 ptc-explorer
+```
+
+Then open <http://localhost:3838> in your browser.
+
 ## Application Features
 
 The PTCE application provides an intuitive interface with the following main sections:
