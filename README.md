@@ -15,7 +15,7 @@ years).
 
 - R (4.4.2)
 - R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
-- R Packages listed in global.R
+- R packages used in `global.R` and listed in the installation instructions below
 - Minimum 1GB RAM
 
 ## How to install
@@ -74,10 +74,31 @@ R
 Step 3: Install R packages
 
 ``` r
-install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2",
-"scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
-devtools::install_github("wjawaid/enrichR")
-BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+
+pak::pkg_install(c(
+  "shiny",
+  "shinybusy",
+  "shinycssloaders",
+  "shinyWidgets",
+  "markdown",
+  "dplyr",
+  "reshape2",
+  "scales",
+  "stringr",
+  "RColorBrewer",
+  "plotly",
+  "DT",
+  "reactable",
+  "httr",
+  "jsonlite",
+  "EnhancedVolcano",
+  "ComplexHeatmap",
+  "InteractiveComplexHeatmap",
+  "wjawaid/enrichR"
+))
 ```
 
 Step 4: Run the app
