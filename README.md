@@ -169,6 +169,8 @@ $ tree -a ptc-explorer/
 │
 ├── .gitignore        <- Specifies intentionally untracked files to ignore by git
 │
+├── .dockerignore     <- Excludes files from the Docker build context
+│
 ├── .markdownlint.json  <- Markdown linting config
 │
 ├── assets/             <-  Media files and resources
@@ -230,6 +232,11 @@ $ tree -a ptc-explorer/
 ├── dev/                <-  Development scripts and utilities
 │
 ├── supplementary/      <-  Additional project materials
+│
+├── docker/             <- Docker build helper scripts
+│   ├── install_bioc.R  <- Installs Bioconductor packages
+│   ├── install_cran.R  <- Installs CRAN packages
+│   └── install_github.R <- Installs GitHub packages
 │
 └── Dockerfile          <-  For containerization
 ```
