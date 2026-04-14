@@ -1,8 +1,8 @@
 # Excluding directories
 dev
-docs
+#docs
 /archive
-data/
+#data/
 dev/
 .github/
 .git
