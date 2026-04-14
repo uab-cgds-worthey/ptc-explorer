@@ -209,7 +209,7 @@ $ tree -a ptc-explorer/
 │
 ├── data/               <-  Sample datasets
 │   ├── app_data_pack_*.rds <- Main application datasets
-│   └── oncoplot_boxplot_*.rds <- Visualization data
+│   └── ptc_onco_obj_list_*.rds <- Oncoplot object data
 │
 ├── R/                  <-  Utility functions
 │   ├── load_components.R <- Component loading functions
@@ -226,12 +226,6 @@ $ tree -a ptc-explorer/
 │   ├── css/            <- Stylesheets
 │   ├── img/            <- Images and figures
 │   └── js/             <- JavaScript files
-│
-├── archive/            <-  Archived data and analysis files
-│
-├── dev/                <-  Development scripts and utilities
-│
-├── supplementary/      <-  Additional project materials
 │
 ├── docker/             <- Docker build helper scripts
 │   ├── install_bioc.R  <- Installs Bioconductor packages
