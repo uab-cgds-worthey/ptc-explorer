@@ -1,4 +1,5 @@
 packages <- c(
+  "markdown",
   "shinybusy",
   "shinycssloaders",
   "shinyWidgets",

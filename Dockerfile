@@ -25,8 +25,6 @@ RUN Rscript /tmp/install_github.R
 COPY docker/install_bioc.R /tmp/install_bioc.R
 RUN Rscript /tmp/install_bioc.R
 
-RUN Rscript -e "pak::pkg_install('markdown')"
-
 # Copy the Shiny app code
 COPY . /home/PTC
 
