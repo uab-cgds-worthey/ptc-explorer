@@ -120,17 +120,17 @@ docs_page <- fluidPage(
             ),
             
             # Testing Guide
-            tabPanel(
-              "Testing Guide",
-              icon = icon("flask"),
-              fluidRow(
-                column(1, ),
-                column(10,
-                  includeMarkdown("docs/TESTING_GUIDE.md")
-                ),
-                column(1, )
-              )
-            )
+            # tabPanel(
+            #  "Testing Guide",
+            #  icon = icon("flask"),
+            # fluidRow(
+            #    column(1, ),
+            #    column(10,
+            #      includeMarkdown("docs/TESTING_GUIDE.md")
+            #    ),
+            #    column(1, )
+            #  )
+            # )
           )
         )
       )

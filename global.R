@@ -1,3 +1,4 @@
+# options(bitmapType = "cairo") # Enable for oncoprint when deploying to shiny-server 
 # Load libraries/ Source Files
 library(shiny)
 library(shinybusy)
@@ -5,6 +6,7 @@ library(shinycssloaders)
 library(shinyWidgets)
 library(markdown)
 ## Plots and data manipulation
+
 library(dplyr)
 library(reshape2)
 library(scales)
@@ -85,7 +87,8 @@ oncoplot <- rlang::exec(
   !!!onco_obj_list$params
 )
 
-
+# Use null device to prevent Rplots.pdf creation during app startup
+# pdf(NULL) # when deploying to shiny-server 
 invisible(grid::grid.grabExpr({
   ptc_oncoprint_draw <- draw(
     oncoplot,
@@ -94,3 +97,4 @@ invisible(grid::grid.grabExpr({
     legend_gap = unit(0.75, "cm")
   )
 }))
+# dev.off()  # when deploying to shiny-server 

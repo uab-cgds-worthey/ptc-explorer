@@ -2,9 +2,11 @@
 
 <!-- markdown-link-check-disable -->
 
-[![Perform linting -
-Markdown](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml)
+[![Perform linting - Markdown][linting-badge]][linting-workflow]
 <!-- markdown-link-check-enable -->
+
+[linting-badge]: https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml/badge.svg
+[linting-workflow]: https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml
 
 Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric
 differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed
@@ -15,7 +17,7 @@ years).
 
 - R (4.4.2)
 - R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
-- R Packages listed in global.R
+- R packages used in `global.R` and listed in the installation instructions below
 - Minimum 1GB RAM
 
 ## How to install
@@ -74,10 +76,31 @@ R
 Step 3: Install R packages
 
 ``` r
-install.packages(c("shinybusy","shinycssloaders","shinyWidgets","BiocManager","dplyr","reshape2",
-"scales","stringr","RColorBrewer","plotly","DT","reactable","httr","jsonlite", "devtools"))
-devtools::install_github("wjawaid/enrichR")
-BiocManager::install(c("EnhancedVolcano","gprofiler2","ComplexHeatmap","InteractiveComplexHeatmap"))
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+
+pak::pkg_install(c(
+  "shiny",
+  "shinybusy",
+  "shinycssloaders",
+  "shinyWidgets",
+  "markdown",
+  "dplyr",
+  "reshape2",
+  "scales",
+  "stringr",
+  "RColorBrewer",
+  "plotly",
+  "DT",
+  "reactable",
+  "httr",
+  "jsonlite",
+  "EnhancedVolcano",
+  "ComplexHeatmap",
+  "InteractiveComplexHeatmap",
+  "wjawaid/enrichR"
+))
 ```
 
 Step 4: Run the app
@@ -97,6 +120,26 @@ shiny::runApp()
 ```
 
 Or open global.R in R Studio and click "Run App" selecting "Run External"
+
+## Build and run with Docker
+
+You can also run the app in a container without installing R packages locally.
+The Docker build now restores dependencies directly from `renv.lock`, so the
+container uses the same package versions as the project lockfile.
+
+Build the image from the project root:
+
+``` bash
+docker build -t ptc-explorer .
+```
+
+Run the container and expose the app on localhost:3838:
+
+``` bash
+docker run --rm -p 3838:3838 ptc-explorer
+```
+
+Then open <http://localhost:3838> in your browser.
 
 ## Application Features
 
@@ -122,78 +165,73 @@ The directory structure below shows the nature of files/directories used in this
 
 ``` sh
 $ tree -a ptc-explorer/
-├── CONTRIBUTING.md   <- Contribution guidelines
+├── CONTRIBUTING.md              <- Contribution guidelines
 │
-├── LICENSE.md        <- License for the repo
+├── LICENSE.md                   <- License for the repo
 │
 ├── README.md
 │
-├── .gitignore        <- Specifies intentionally untracked files to ignore by git
+├── .gitignore                   <- Specifies intentionally untracked files to ignore by git
 │
-├── .markdownlint.json  <- Markdown linting config
+├── .dockerignore                <- Excludes files from the Docker build context
 │
-├── assets/             <-  Media files and resources
-│   └── ptc-explorer-walkthrough.mp4 <- Application walkthrough video
+├── .markdownlint.json           <- Markdown linting config
 │
-├── global.R            <-  Load libraries, datasets
+├── assets/                      <- Media files and resources
+│   └── ptc-explorer-walkthrough.mp4  <- Application walkthrough video
 │
-├── server.R            <-  Backend functions for shiny components
+├── global.R                     <- Load libraries, datasets
 │
-├── ui.R                <-  Frontend functions for shiny components
+├── server.R                     <- Backend functions for shiny components
 │
-├── user_interface/     <-  UI components for each page
-│   ├── cite_us_ui.R    <- Citation information page layout
-│   ├── contact_ui.R    <- Team information page layout
-│   ├── developer_guide_ui.R <- Developer documentation page layout
-│   ├── download_ui.R   <- Data download page layout
-│   ├── gene_search_ui.R <- Gene search page layout
-│   ├── home_ui.R       <- Home/landing page layout
-│   ├── rna_downstream_ui.R <- RNA downstream analysis page layout
-│   ├── rna_fusion_ui.R <- RNA fusion analysis page layout
-│   ├── user_guide_ui.R <- User documentation page layout
-│   ├── wes_additional_ui.R <- Additional WES analysis page layout
-│   └── wes_variant_ui.R <- WES variant analysis page layout
+├── ui.R                         <- Frontend functions for shiny components
 │
-├── modules/            <-  Reusable UI and server modules
-│   ├── dt_mod.R        <- Enhanced DataTable components
-│   ├── enrichr_mod.R   <- Pathway enrichment analysis
-│   ├── fusion_filter_mod.R <- RNA fusion filtering
-│   ├── gene_info_mod.R <- Gene annotation services
-│   ├── gene_search_mod.R <- Gene search functionality
-│   ├── meta_plots_mod.R <- Clinical metadata visualization
-│   ├── profile_mod.R   <- Team photo and social media display
-│   ├── reactable_mod.R <- Modern interactive tables
-│   ├── variant_filter_mod.R <- Genomic variant filtering
-│   └── volcano_mod.R   <- Interactive volcano plots
+├── user_interface/              <- UI components for each page
+│   ├── cite_us_ui.R             <- Citation information page layout
+│   ├── contact_ui.R             <- Team information page layout
+│   ├── developer_guide_ui.R     <- Developer documentation page layout
+│   ├── download_ui.R            <- Data download page layout
+│   ├── gene_search_ui.R         <- Gene search page layout
+│   ├── home_ui.R                <- Home/landing page layout
+│   ├── rna_downstream_ui.R      <- RNA downstream analysis page layout
+│   ├── rna_fusion_ui.R          <- RNA fusion analysis page layout
+│   ├── user_guide_ui.R          <- User documentation page layout
+│   ├── wes_additional_ui.R      <- Additional WES analysis page layout
+│   └── wes_variant_ui.R         <- WES variant analysis page layout
 │
-├── data/               <-  Sample datasets
-│   ├── app_data_pack_*.rds <- Main application datasets
-│   └── oncoplot_boxplot_*.rds <- Visualization data
+├── modules/                     <- Reusable UI and server modules
+│   ├── dt_mod.R                 <- Enhanced DataTable components
+│   ├── enrichr_mod.R            <- Pathway enrichment analysis
+│   ├── fusion_filter_mod.R      <- RNA fusion filtering
+│   ├── gene_info_mod.R          <- Gene annotation services
+│   ├── gene_search_mod.R        <- Gene search functionality
+│   ├── meta_plots_mod.R         <- Clinical metadata visualization
+│   ├── profile_mod.R            <- Team photo and social media display
+│   ├── reactable_mod.R          <- Modern interactive tables
+│   ├── variant_filter_mod.R     <- Genomic variant filtering
+│   └── volcano_mod.R            <- Interactive volcano plots
 │
-├── R/                  <-  Utility functions
-│   ├── load_components.R <- Component loading functions
-│   └── utils.R         <- General utility functions
+├── data/                        <- Sample datasets
+│   ├── app_data_pack_*.rds      <- Main application datasets
+│   └── ptc_onco_obj_list_*.rds  <- Oncoplot object data
 │
-├── docs/               <-  Documentation files
-│   ├── DYNAMIC_DATA_LOADING.md <- Dynamic data loading guide
-│   ├── LINTING_GUIDE.md <- Code linting and formatting guide
-│   ├── MODULES_COMPONENTS.md <- Module and component reference
-│   ├── TECHNICAL_REFERENCE.md <- Developer technical reference
-│   ├── TESTING_GUIDE.md <- Testing framework documentation
-│   └── USER_GUIDE_MERGED.md <- Comprehensive user guide
+├── R/                           <- Utility functions
+│   ├── load_components.R        <- Component loading functions
+│   └── utils.R                  <- General utility functions
 │
-├── www/                <-  Static web assets
-│   ├── css/            <- Stylesheets
-│   ├── img/            <- Images and figures
-│   └── js/             <- JavaScript files
+├── docs/                        <- Documentation files
+│   ├── DYNAMIC_DATA_LOADING.md  <- Dynamic data loading guide
+│   ├── LINTING_GUIDE.md         <- Code linting and formatting guide
+│   ├── MODULES_COMPONENTS.md    <- Module and component reference
+│   ├── TECHNICAL_REFERENCE.md   <- Developer technical reference
+│   └── USER_GUIDE.md            <- Comprehensive user guide
 │
-├── archive/            <-  Archived data and analysis files
+├── www/                         <- Static web assets
+│   ├── css/                     <- Stylesheets
+│   ├── img/                     <- Images and figures
+│   └── js/                      <- JavaScript files
 │
-├── dev/                <-  Development scripts and utilities
-│
-├── supplementary/      <-  Additional project materials
-│
-└── Dockerfile          <-  For containerization
+└── Dockerfile                   <- For containerization
 ```
 
 ## Contributing

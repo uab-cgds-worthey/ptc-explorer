@@ -1,0 +1,27 @@
+# Normalize line endings across all platforms
+# Text files: always use LF (Unix line endings) in the repository
+* text=auto
+*.R text eol=lf
+*.r text eol=lf
+*.Rmd text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Binary files: never convert line endings
+*.rds binary
+*.RData binary
+*.gz binary
+*.tar binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.mp4 binary

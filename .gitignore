@@ -12,7 +12,7 @@
 *.tar.gz
 
 #### Private directories
-data
+#data
 dev
 /archive
 /supplementary

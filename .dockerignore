@@ -1,11 +1,12 @@
 # Excluding directories
 dev
-docs
+#docs
 /archive
-data/
+#data/
 dev/
 .github/
 .git
+renv/library/
 
 # Excluding files
 *.Rproj
@@ -24,3 +25,24 @@ dev/
 README.md
 trash.R
 
+# Additional local-only / non-runtime files
+.Rprofile
+.lintr
+.markdownlint.json
+.markdownlintignore
+.rscignore
+.conda/
+.posit/
+CONTRIBUTING.md
+docs/TESTING_GUIDE.md
+docs/USER_GUIDE_old.md
+fix_linting.R
+run_tests.R
+test_data_loading.R
+tests/
+rsconnect/
+supplementary/
+ptc-app-*.Rproj
+*-Samuel's MacBook Pro.RData
+*-Samuel's MacBook Pro.Rhistory
+.github/workflows/test.yml
