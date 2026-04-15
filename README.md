@@ -5,7 +5,7 @@
 [![Perform linting - Markdown][linting-badge]][linting-workflow]
 <!-- markdown-link-check-enable -->
 
-[linting-badge]: https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml/badge.svg
+[linting-badge]: https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml/badge.svg
 [linting-workflow]: https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml
 
 Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric
