@@ -121,7 +121,7 @@ Or open global.R in R Studio and click "Run App" selecting "Run External"
 
 ## Build and run with Docker
 
-You can also run the app in a container without installing R packages locally.
+You can also run the app in a container without installing R packages locally. The Docker build now restores dependencies directly from `renv.lock`, so the container uses the same package versions as the project lockfile.
 
 Build the image from the project root:
 

@@ -6,6 +6,7 @@ dev
 dev/
 .github/
 .git
+renv/library/
 
 # Excluding files
 *.Rproj
@@ -23,4 +24,3 @@ dev/
 .DS_Store
 README.md
 trash.R
-
