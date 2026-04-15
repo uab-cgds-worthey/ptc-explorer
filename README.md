@@ -2,9 +2,11 @@
 
 <!-- markdown-link-check-disable -->
 
-[![Perform linting -
-Markdown](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml/badge.svg)](https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml)
+[![Perform linting - Markdown][linting-badge]][linting-workflow]
 <!-- markdown-link-check-enable -->
+
+[linting-badge]: https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml/badge.svg
+[linting-workflow]: https://github.com/uab-cgds-worthey/ptc-explorer-data-prep/actions/workflows/linting.yml
 
 Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric
 differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed
@@ -121,7 +123,9 @@ Or open global.R in R Studio and click "Run App" selecting "Run External"
 
 ## Build and run with Docker
 
-You can also run the app in a container without installing R packages locally. The Docker build now restores dependencies directly from `renv.lock`, so the container uses the same package versions as the project lockfile.
+You can also run the app in a container without installing R packages locally.
+The Docker build now restores dependencies directly from `renv.lock`, so the
+container uses the same package versions as the project lockfile.
 
 Build the image from the project root:
 
