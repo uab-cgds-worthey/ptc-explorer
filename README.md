@@ -227,11 +227,6 @@ $ tree -a ptc-explorer/
 │   ├── img/                     <- Images and figures
 │   └── js/                      <- JavaScript files
 │
-├── docker/                      <- Docker build helper scripts
-│   ├── install_bioc.R           <- Installs Bioconductor packages
-│   ├── install_cran.R           <- Installs CRAN packages
-│   └── install_github.R         <- Installs GitHub packages
-│
 └── Dockerfile                   <- For containerization
 ```
 
