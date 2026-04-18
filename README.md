@@ -17,7 +17,7 @@ years).
 
 ## Requirements
 
-- R (4.4.2)
+- R (4.5.3)
 - R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
 - R packages used in `global.R` and listed in the installation instructions below
 - Minimum 1GB RAM
