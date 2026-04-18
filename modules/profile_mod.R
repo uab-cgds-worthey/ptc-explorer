@@ -12,6 +12,8 @@ profile_server <- function(id,
                            email = NULL,
                            linkedin_url = NULL,
                            x_url = NULL,
+                           show_linkedin = TRUE,
+                           show_x = FALSE,
                            web_url = NULL,
                            github_url = NULL,
                            img_style = NULL,
@@ -46,16 +48,22 @@ profile_server <- function(id,
               icon("square-envelope", "fa-2x"),
               target = "_blank"
             ),
-            # tags$a(
-            #   href = linkedin_url,
-            #   target = "_blank"
-            # ),
-            tags$a(
-              style = "color:black;",
-              href = x_url,
-              icon("square-x-twitter", "fa-2x"),
-              target = "_blank"
-            ),
+            if (isTRUE(show_linkedin) && !is.null(linkedin_url) && nzchar(linkedin_url)) {
+              tags$a(
+                style = "color:#0A66C2; margin-left: 8px;",
+                href = linkedin_url,
+                icon("linkedin", "fa-2x"),
+                target = "_blank"
+              )
+            },
+            if (isTRUE(show_x) && !is.null(x_url) && nzchar(x_url) && x_url != "#") {
+              tags$a(
+                style = "color:black; margin-left: 8px;",
+                href = x_url,
+                icon("square-x-twitter", "fa-2x"),
+                target = "_blank"
+              )
+            },
           )
         )
       })
