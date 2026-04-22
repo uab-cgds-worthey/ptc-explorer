@@ -1,5 +1,5 @@
 # Base R Shiny image (R 4.5+)
-FROM rocker/shiny:4.5.2
+FROM rocker/shiny:4.5.3
 
 ARG CRAN_MIRROR=https://cloud.r-project.org
 ENV CRAN_MIRROR=${CRAN_MIRROR}

@@ -8,6 +8,8 @@
 [linting-badge]: https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml/badge.svg
 [linting-workflow]: https://github.com/uab-cgds-worthey/ptc-explorer/actions/workflows/linting.yml
 
+Current app version: **v1.0.0**
+
 Pediatric Thyroid Cancer Explorer is an open-access resource for interactive exploration of rare pediatric
 differentiated thyroid cancer. It characterizes the whole-exome and transcriptome from 45 formalin-fixed
 paraffin-embedded (FFPE) surgical samples (tumor-normal) from pediatric patients with female predominance (<19
@@ -15,7 +17,7 @@ years).
 
 ## Requirements
 
-- R (4.4.2)
+- R (4.5.3)
 - R Studio (optional) "<https://posit.co/download/rstudio-desktop/>"
 - R packages used in `global.R` and listed in the installation instructions below
 - Minimum 1GB RAM
