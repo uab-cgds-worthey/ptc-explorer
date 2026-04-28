@@ -43,6 +43,9 @@ function(input, output, session) {
       Sex = colDef(show = FALSE),
       Subtypes = colDef(
         style = function(value) {
+          if (is.null(value) || is.na(value)) {
+            return(NULL)
+          }
           color <- if (value == "FA") {
             "#E31A1C"
           } else if (value == "FTC") {
@@ -78,6 +81,9 @@ function(input, output, session) {
       ),
       `ATA Pediatric Risk Level` = colDef(
         style = function(value) {
+          if (is.null(value) || is.na(value)) {
+            return(NULL)
+          }
           color <- if (value == "High risk") {
             "#FF0000"
           } else if (value == "Intermediate risk") {
