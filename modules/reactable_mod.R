@@ -12,6 +12,7 @@ reactable_server <- function(id,
                              tbl,
                              reactive_tbl = TRUE,
                              null_msg = "No data available for this.",
+                             show_rownames = FALSE,
                              ...) {
   moduleServer(
     id,
@@ -22,6 +23,7 @@ reactable_server <- function(id,
         if (reactive_tbl) {
           reactable(
             tbl(),
+            rownames = show_rownames,
             showPageSizeOptions = TRUE,
             searchable = TRUE,
             compact = TRUE,
@@ -33,6 +35,7 @@ reactable_server <- function(id,
         } else {
           reactable(
             tbl,
+            rownames = show_rownames,
             showPageSizeOptions = TRUE,
             searchable = TRUE,
             compact = TRUE,
