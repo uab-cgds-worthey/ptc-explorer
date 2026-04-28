@@ -152,7 +152,7 @@ variant_filter_server <- function(id, variant_table) {
         ),
         defaultPageSize = 15,
         columns = list(
-          `Participant id` = colDef(
+          `Case id` = colDef(
             minWidth = 85,
           ),
           # Phenotype  = colDef(
