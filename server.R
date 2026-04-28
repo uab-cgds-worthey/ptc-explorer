@@ -14,7 +14,7 @@ function(input, output, session) {
     #    sample_meta_display,
     defaultColDef = colDef(na = "NA", minWidth = 95, align = "left"),
     columns = list(
-      `Participant id` = colDef(
+      `Case id` = colDef(
         minWidth = 85,
       ),
       `TI RADS Score` = colDef(
