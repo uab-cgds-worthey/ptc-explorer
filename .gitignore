@@ -45,3 +45,4 @@ docs/USER_GUIDE_old.md
 /tests/testthat
 tests/testthat.R
 tests/testthat/test-utils.R
+.positai
