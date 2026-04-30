@@ -46,3 +46,6 @@ docs/USER_GUIDE_old.md
 tests/testthat.R
 tests/testthat/test-utils.R
 .positai
+data/Additional-file-4.pdf
+/data/clonal
+data/PTC-msi-results.xlsx
