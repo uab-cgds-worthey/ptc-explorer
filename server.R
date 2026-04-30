@@ -169,7 +169,26 @@ function(input, output, session) {
   )
 
   #### Genomics Analysis / WES page
+  # Clonal Analysis - populate case ID selector with all case IDs 1-24
+  observe({
+    all_case_ids <- 1:24
+    updateSelectizeInput(
+      session,
+      "clonal_case_select",
+      choices = all_case_ids,
+      selected = 1
+    )
+  })
 
+  # Clonal Analysis server
+  clonal_analysis_server(
+    "clonal_analysis_tab",
+    case_id = reactive({
+      req(input$clonal_case_select)
+      as.numeric(input$clonal_case_select)
+    }),
+    clonal_mapping = clonal_res_mapping
+  )
 
   #### Gene search page
   gene_search_server(
