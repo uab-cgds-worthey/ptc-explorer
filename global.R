@@ -58,6 +58,9 @@ if ("User_Classification" %in% colnames(sample_variants) && !("Germline Class" %
 
 sample_variants_n <- nrow(sample_variants)
 
+# Load clonal analysis mapping
+clonal_res_mapping <- read.csv("data/clonal_res_mapping.csv")
+
 rna_fusion_df <- app_data_main$fusion
 
 res_t_vs_n <- app_data_main$t_vs_n
