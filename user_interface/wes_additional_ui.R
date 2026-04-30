@@ -53,9 +53,7 @@ wes_additional_page <- fluidPage(
       tags$h3("Tumor Clonal Evolution Analysis"),
       tags$p(
         style = "color:darkred;",
-        "Clonal analysis of somatic variation identified
-               signatures of mutational processes in tumors from
-               participant 2, 17 and 18."
+        "Select a case ID to view the clonal analysis of somatic variation identified in tumors."
       )
     )
   ),
@@ -63,13 +61,24 @@ wes_additional_page <- fluidPage(
   fluidRow(
     column(4, ),
     column(
-      6,
+      4,
+      selectizeInput(
+        "clonal_case_select",
+        "Select Case ID:",
+        choices = NULL,
+        width = "100%"
+      )
+    ),
+    column(4, )
+  ),
+  br(),
+  fluidRow(
+    column(2, ),
+    column(
+      8,
       div(
         class = "d-flex justify-content-center align-items-center",
-        tags$img(
-          src = "img/clonal_analysis.png",
-          style = "width: 75%; height: auto;"
-        )
+        clonal_analysis_ui("clonal_analysis_tab")
       )
     ),
     column(2, )
