@@ -14,7 +14,7 @@ function(input, output, session) {
     #    sample_meta_display,
     defaultColDef = colDef(na = "NA", minWidth = 95, align = "left"),
     columns = list(
-      `Participant id` = colDef(
+      `Case id` = colDef(
         minWidth = 85,
       ),
       `TI RADS Score` = colDef(
@@ -43,6 +43,9 @@ function(input, output, session) {
       Sex = colDef(show = FALSE),
       Subtypes = colDef(
         style = function(value) {
+          if (is.null(value) || is.na(value)) {
+            return(NULL)
+          }
           color <- if (value == "FA") {
             "#E31A1C"
           } else if (value == "FTC") {
@@ -78,6 +81,9 @@ function(input, output, session) {
       ),
       `ATA Pediatric Risk Level` = colDef(
         style = function(value) {
+          if (is.null(value) || is.na(value)) {
+            return(NULL)
+          }
           color <- if (value == "High risk") {
             "#FF0000"
           } else if (value == "Intermediate risk") {
@@ -163,7 +169,26 @@ function(input, output, session) {
   )
 
   #### Genomics Analysis / WES page
+  # Clonal Analysis - populate case ID selector with all case IDs 1-24
+  observe({
+    all_case_ids <- 1:24
+    updateSelectizeInput(
+      session,
+      "clonal_case_select",
+      choices = all_case_ids,
+      selected = 1
+    )
+  })
 
+  # Clonal Analysis server
+  clonal_analysis_server(
+    "clonal_analysis_tab",
+    case_id = reactive({
+      req(input$clonal_case_select)
+      as.numeric(input$clonal_case_select)
+    }),
+    clonal_mapping = clonal_res_mapping
+  )
 
   #### Gene search page
   gene_search_server(

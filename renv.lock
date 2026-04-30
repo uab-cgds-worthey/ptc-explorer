@@ -4,23 +4,23 @@
     "Repositories": [
       {
         "Name": "BioCsoft",
-        "URL": "https://bioconductor.posit.co//packages/3.22/bioc"
+        "URL": "https://bioconductor.org/packages/3.22/bioc"
       },
       {
         "Name": "BioCann",
-        "URL": "https://bioconductor.posit.co//packages/3.22/data/annotation"
+        "URL": "https://bioconductor.org/packages/3.22/data/annotation"
       },
       {
         "Name": "BioCexp",
-        "URL": "https://bioconductor.posit.co//packages/3.22/data/experiment"
+        "URL": "https://bioconductor.org/packages/3.22/data/experiment"
       },
       {
         "Name": "BioCworkflows",
-        "URL": "https://bioconductor.posit.co//packages/3.22/workflows"
+        "URL": "https://bioconductor.org/packages/3.22/workflows"
       },
       {
         "Name": "BioCbooks",
-        "URL": "https://bioconductor.posit.co//packages/3.22/books"
+        "URL": "https://bioconductor.org/packages/3.22/books"
       },
       {
         "Name": "CRAN",
@@ -83,7 +83,11 @@
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "no",
       "Author": "The Bioconductor Dev Team [aut], Hervé Pagès [aut, cre] (ORCID: <https://orcid.org/0009-0002-8272-4522>), Laurent Gatto [ctb] (ORCID: <https://orcid.org/0000-0002-1520-2268>), Nathaniel Hayden [ctb], James Hester [ctb], Wolfgang Huber [ctb], Michael Lawrence [ctb], Martin Morgan [ctb] (ORCID: <https://orcid.org/0000-0002-5874-8148>), Valerie Obenchain [ctb]",
-      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>"
+      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/BiocGenerics",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "16cf16df6e7c4a0f76e959bf858c5c0990543522"
     },
     "BiocManager": {
       "Package": "BiocManager",
@@ -115,6 +119,28 @@
       "Author": "Martin Morgan [aut] (ORCID: <https://orcid.org/0000-0002-5874-8148>), Marcel Ramos [aut, cre] (ORCID: <https://orcid.org/0000-0002-3242-0582>)",
       "Maintainer": "Marcel Ramos <marcel.ramos@sph.cuny.edu>",
       "Repository": "CRAN"
+    },
+    "BiocVersion": {
+      "Package": "BiocVersion",
+      "Version": "3.22.0",
+      "Source": "Bioconductor",
+      "Title": "Set the appropriate version of Bioconductor packages",
+      "Description": "This package provides repository information for the appropriate version of Bioconductor.",
+      "Authors@R": "c( person(\"Martin\", \"Morgan\", email = \"martin.morgan@roswellpark.org\", role = \"aut\"), person(\"Marcel\", \"Ramos\", email = \"marcel.ramos@sph.cuny.edu\", role = \"ctb\"), person(\"Bioconductor\", \"Package Maintainer\", email  = \"maintainer@bioconductor.org\", role = c(\"ctb\", \"cre\")))",
+      "biocViews": "Infrastructure",
+      "Depends": [
+        "R (>= 4.4.0)"
+      ],
+      "License": "Artistic-2.0",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "6.0.1",
+      "Repository": "https://bioc-release.r-universe.dev",
+      "RemoteUrl": "https://github.com/bioc/BiocVersion",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "fea53ac938311018c7513d2339cdd5f928cd72c5",
+      "NeedsCompilation": "no",
+      "Author": "Martin Morgan [aut], Marcel Ramos [ctb], Bioconductor Package Maintainer [ctb, cre]",
+      "Maintainer": "Bioconductor Package Maintainer <maintainer@bioconductor.org>"
     },
     "ComplexHeatmap": {
       "Package": "ComplexHeatmap",
@@ -179,7 +205,11 @@
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "no",
       "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
-      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>"
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/ComplexHeatmap",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "880562b42a0cf2c190b461c045198463232a6305"
     },
     "DT": {
       "Package": "DT",
@@ -259,7 +289,11 @@
       "RoxygenNote": "7.3.2",
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "no",
-      "Author": "Kevin Blighe [aut], Jared Andrews [cre, ctb] (ORCID: <https://orcid.org/0000-0002-0780-6248>), Sharmila Rana [aut], Emir Turkes [ctb], Benjamin Ostendorf [ctb], Andrea Grioni [ctb], Myles Lewis [aut]"
+      "Author": "Kevin Blighe [aut], Jared Andrews [cre, ctb] (ORCID: <https://orcid.org/0000-0002-0780-6248>), Sharmila Rana [aut], Emir Turkes [ctb], Benjamin Ostendorf [ctb], Andrea Grioni [ctb], Myles Lewis [aut]",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/EnhancedVolcano",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "dae20c75382d8a65a781bc9ae5fbe6a756401e86"
     },
     "GetoptLong": {
       "Package": "GetoptLong",
@@ -292,7 +326,8 @@
       "NeedsCompilation": "no",
       "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
       "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "GlobalOptions": {
       "Package": "GlobalOptions",
@@ -368,7 +403,11 @@
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "yes",
       "Author": "Hervé Pagès [aut, cre], Patrick Aboyoun [aut], Michael Lawrence [aut]",
-      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>"
+      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/IRanges",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "964a2904e15d5352da6bcb1e0f55fcf62a09ce59"
     },
     "InteractiveComplexHeatmap": {
       "Package": "InteractiveComplexHeatmap",
@@ -439,11 +478,15 @@
       "URL": "https://github.com/jokergoo/InteractiveComplexHeatmap",
       "BugReports": "https://github.com/jokergoo/InteractiveComplexHeatmap/issues",
       "License": "MIT + file LICENSE",
-      "Config/pak/sysreqs": "libfontconfig1-dev libfreetype6-dev libfribidi-dev make libharfbuzz-dev libicu-dev libpng-dev libxml2-dev perl zlib1g-dev",
+      "Config/pak/sysreqs": "cmake libfontconfig1-dev libfreetype6-dev libfribidi-dev make libharfbuzz-dev libicu-dev libpng-dev libuv1-dev libxml2-dev perl zlib1g-dev",
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "no",
       "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
-      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>"
+      "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/InteractiveComplexHeatmap",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "ef9965da8caf9dee3874dad6d48d13c44a8993ea"
     },
     "PKI": {
       "Package": "PKI",
@@ -465,7 +508,8 @@
       "SystemRequirements": "OpenSSL library and headers (openssl-dev or similar)",
       "NeedsCompilation": "yes",
       "Author": "Simon Urbanek [aut, cre, cph] (https://urbanek.nz, ORCID: <https://orcid.org/0000-0003-2297-1732>)",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "R6": {
       "Package": "R6",
@@ -508,7 +552,8 @@
       "Description": "Provides color schemes for maps (and other graphics) designed by Cynthia Brewer as described at http://colorbrewer2.org.",
       "License": "Apache License 2.0",
       "NeedsCompilation": "no",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "Rcpp": {
       "Package": "Rcpp",
@@ -571,7 +616,8 @@
       "NeedsCompilation": "yes",
       "Author": "Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>), Mark Gillard [aut] (Author of 'toml++' header library)",
       "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "S4Vectors": {
       "Package": "S4Vectors",
@@ -611,11 +657,15 @@
       "Repository": "https://bioc-release.r-universe.dev",
       "NeedsCompilation": "yes",
       "Author": "Hervé Pagès [aut, cre], Michael Lawrence [aut], Patrick Aboyoun [aut], Aaron Lun [ctb], Beryl Kanali [ctb] (Converted vignettes from Sweave to RMarkdown)",
-      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>"
+      "Maintainer": "Hervé Pagès <hpages.on.github@gmail.com>",
+      "RemoteType": "repository",
+      "RemoteUrl": "https://github.com/bioc/S4Vectors",
+      "RemoteRef": "RELEASE_3_22",
+      "RemoteSha": "ae25d08aa5b02dca895179b5b6ac52656c4547f3"
     },
     "S7": {
       "Package": "S7",
-      "Version": "0.2.1-1",
+      "Version": "0.2.2",
       "Source": "Repository",
       "Title": "An Object Oriented System Meant to Become a Successor to S3 and S4",
       "Authors@R": "c( person(\"Object-Oriented Programming Working Group\", role = \"cph\"), person(\"Davis\", \"Vaughan\", role = \"aut\"), person(\"Jim\", \"Hester\", role = \"aut\", comment = c(ORCID = \"0000-0002-2739-7082\")), person(\"Tomasz\", \"Kalinowski\", role = \"aut\"), person(\"Will\", \"Landau\", role = \"aut\"), person(\"Michael\", \"Lawrence\", role = \"aut\"), person(\"Martin\", \"Maechler\", role = \"aut\", comment = c(ORCID = \"0000-0002-8685-9910\")), person(\"Luke\", \"Tierney\", role = \"aut\"), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-4757-117X\")) )",
@@ -671,7 +721,8 @@
       "NeedsCompilation": "no",
       "Author": "Marc Schwartz [aut, cre], Various authors for Perl modules listed in each .pm file. [aut]",
       "Maintainer": "Marc Schwartz <marc_schwartz@me.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "askpass": {
       "Package": "askpass",
@@ -717,7 +768,8 @@
       "URL": "https://www.rforge.net/base64enc",
       "BugReports": "https://github.com/s-u/base64enc/issues",
       "NeedsCompilation": "yes",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "bslib": {
       "Package": "bslib",
@@ -846,7 +898,8 @@
       "NeedsCompilation": "no",
       "Author": "Zuguang Gu [aut, cre] (ORCID: <https://orcid.org/0000-0002-7395-8709>)",
       "Maintainer": "Zuguang Gu <guzuguang@suat-sz.edu.cn>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "cli": {
       "Package": "cli",
@@ -1329,7 +1382,8 @@
       "NeedsCompilation": "no",
       "Author": "Folashade Daniel [cre], Microsoft Corporation [aut, cph], Steve Weston [aut], Dan Tenenbaum [ctb]",
       "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -1416,16 +1470,15 @@
         "rmarkdown"
       ],
       "VignetteBuilder": "knitr",
+      "Author": "Wajid Jawaid [aut, cre]",
+      "Maintainer": "Wajid Jawaid <wajid.jawaid@gmail.com>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "enrichR",
       "RemoteUsername": "wjawaid",
       "RemotePkgRef": "wjawaid/enrichR",
       "RemoteRef": "HEAD",
-      "RemoteSha": "79fad70a8c1c1ae2150025d616de434aa2bef05b",
-      "NeedsCompilation": "no",
-      "Author": "Wajid Jawaid [aut, cre]",
-      "Maintainer": "Wajid Jawaid <wajid.jawaid@gmail.com>"
+      "RemoteSha": "79fad70a8c1c1ae2150025d616de434aa2bef05b"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -1574,7 +1627,8 @@
       "NeedsCompilation": "no",
       "Author": "Folashade Daniel [cre], Hong Ooi [ctb], Rich Calaway [ctb], Microsoft [aut, cph], Steve Weston [aut]",
       "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "fs": {
       "Package": "fs",
@@ -2170,7 +2224,8 @@
       "NeedsCompilation": "no",
       "Author": "Folashade Daniel [cre], Revolution Analytics [aut, cph], Steve Weston [aut]",
       "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "jose": {
       "Package": "jose",
@@ -2387,7 +2442,8 @@
         "stats",
         "graphics"
       ],
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "later": {
       "Package": "later",
@@ -2455,7 +2511,8 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut, cre], RStudio [cph]",
       "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -2622,7 +2679,8 @@
       "URL": "https://github.com/HenrikBengtsson/matrixStats",
       "BugReports": "https://github.com/HenrikBengtsson/matrixStats/issues",
       "RoxygenNote": "7.3.2",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "memoise": {
       "Package": "memoise",
@@ -2992,7 +3050,8 @@
       "URL": "https://www.rforge.net/png/",
       "BugReports": "https://github.com/s-u/png/issues/",
       "NeedsCompilation": "yes",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "promises": {
       "Package": "promises",
@@ -3302,7 +3361,8 @@
       "URL": "https://github.com/alexcb/rjson",
       "License": "GPL-2",
       "Repository": "CRAN",
-      "NeedsCompilation": "yes"
+      "NeedsCompilation": "yes",
+      "Encoding": "UTF-8"
     },
     "rlang": {
       "Package": "rlang",
@@ -3596,7 +3656,8 @@
       "Description": "Functions for plotting graphical shapes such as ellipses, circles, cylinders, arrows, ...",
       "License": "GPL (>= 3)",
       "NeedsCompilation": "no",
-      "Repository": "CRAN"
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "shiny": {
       "Package": "shiny",
@@ -4514,7 +4575,8 @@
       "License": "GPL (>= 2)",
       "Repository": "CRAN",
       "NeedsCompilation": "no",
-      "Author": "David B. Dahl [aut], David Scott [aut, cre], Charles Roosen [aut], Arni Magnusson [aut], Jonathan Swinton [aut], Ajay Shah [ctb], Arne Henningsen [ctb], Benno Puetz [ctb], Bernhard Pfaff [ctb], Claudio Agostinelli [ctb], Claudius Loehnert [ctb], David Mitchell [ctb], David Whiting [ctb], Fernando da Rosa [ctb], Guido Gay [ctb], Guido Schulz [ctb], Ian Fellows [ctb], Jeff Laake [ctb], John Walker [ctb], Jun Yan [ctb], Liviu Andronic [ctb], Markus Loecher [ctb], Martin Gubri [ctb], Matthieu Stigler [ctb], Robert Castelo [ctb], Seth Falcon [ctb], Stefan Edwards [ctb], Sven Garbade [ctb], Uwe Ligges [ctb]"
+      "Author": "David B. Dahl [aut], David Scott [aut, cre], Charles Roosen [aut], Arni Magnusson [aut], Jonathan Swinton [aut], Ajay Shah [ctb], Arne Henningsen [ctb], Benno Puetz [ctb], Bernhard Pfaff [ctb], Claudio Agostinelli [ctb], Claudius Loehnert [ctb], David Mitchell [ctb], David Whiting [ctb], Fernando da Rosa [ctb], Guido Gay [ctb], Guido Schulz [ctb], Ian Fellows [ctb], Jeff Laake [ctb], John Walker [ctb], Jun Yan [ctb], Liviu Andronic [ctb], Markus Loecher [ctb], Martin Gubri [ctb], Matthieu Stigler [ctb], Robert Castelo [ctb], Seth Falcon [ctb], Stefan Edwards [ctb], Sven Garbade [ctb], Uwe Ligges [ctb]",
+      "Encoding": "UTF-8"
     },
     "yaml": {
       "Package": "yaml",

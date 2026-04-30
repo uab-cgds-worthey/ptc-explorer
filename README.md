@@ -141,6 +141,7 @@ Run the container and expose the app on localhost:3838:
 docker run --rm -p 3838:3838 ptc-explorer
 ```
 
+<!-- markdown-link-check-disable-next-line -->
 Then open <http://localhost:3838> in your browser.
 
 ## Application Features
